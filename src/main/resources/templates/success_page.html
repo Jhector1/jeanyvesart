@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Successful Checkout | Jean Yves</title>
+    <link rel="stylesheet" href="/scss/stylesheet/style.css" type="text/css">
+
+</head>
+<body>
+
+<img style="background-color: forestgreen; position: fixed; display: block; height: 100vh; margin: auto" src="/images/jeanyves_logo.png" alt="jeanyves-logo"/>
+<div style="display: flex; background-color: rgba(0,0,0,0.51)" class="mask-background purchase-success-cover">
+    <div class="purchase-success">
+        <h1><i class="fa-solid fa-check"></i></h1>
+        <i class="fa-solid fa-check"></i><h3>Thank you for your purchase, your payment was successful.</h3>
+        <p>Your receipt has been sent to the email you provided</p>
+        <small>“the true collector’s only home is his own museum.”<br>
+            <strong>_Orhan Pamuk, The Museum of Innocence</strong></small>
+        <a style="text-decoration: none" href="/artworks">
+            <div class="purchase-thank-you">Thank you</div>
+        </a></div>
+
+</div>
+<script type="module">
+    // import {clearCookieBasket} from "/js_file/helperMethod.js";
+    // import {CookieClient} from "/js_file/allcookies.js";
+    // const array = [];
+    // new CookieClient().distributedCheckoutArtwork("C", array);
+    // console.log(array);
+    // fetch('/api/artworks/artwork_purchased', {
+    //     method: 'PUT',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         cartArtworkList: array
+    //
+    //     })
+    // }).then(function (response) {
+    //         console.log(response);
+    //         if(!response.ok){
+    //             throw new Error("An unexpected error happened, we will reach out to you foe an update!")
+    //         }
+    //         return response.text();
+    // }).then((data)=>{
+    //         console.log(data);
+    //     clearCookieBasket("C", false);
+    // }).catch((error)=>alert(error));
+
+</script>
+</body>
+</html>

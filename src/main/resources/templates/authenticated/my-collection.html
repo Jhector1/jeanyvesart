@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Collections </title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script th:src="@{/js_file/footer.js}" type="module" defer></script>
+    <script th:src="@{/js_file/header.js}" type="module" defer></script>
+
+    <!--    <script th:src="@{/js_file/artwork_like.js}" type="module" defer></script>-->
+    <script th:src="@{/js_file/reset_all_parent_to_wrap.js}" type="module" defer></script>
+    <script th:src="@{/js_file/my_collection.js}" type="module" defer></script>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
+    <script th:src="@{/js_file/authenticated/authenticated_header.js}" type="module" defer></script>
+
+
+</head>
+<body>
+<header th:replace="~{header.html :: header-component}"></header>
+
+
+<section th:replace="~{authenticated/authenticated_nav.html :: auth-nav}">
+</section>
+<!--<a href="/artworks">Continue browsing here to find a piece you love</a>-->
+<section class="no-orders" th:if="${myOrders==null}"><h1>You currently have no orders! </h1></section>
+
+<article th:unless="${myOrders==null}">
+    <div  th:insert="~{artworks/artworkTemplate.html :: artworksMainTemplate(category='My Orders')}"
+         th:with="object=${myOrders}"></div>
+</article>
+<section class="related-items-grand-parent favorite-component">
+    <h1 class="items-liked">Items you liked</h1>
+    <input class="uniqueness" type="hidden">
+
+    <div class="arrow-wrapper">
+        <button class="parent-previous2"><i class="previous2 fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="artworks allArtParent related-items-parent">
+
+            <div style="display: none;" class="frame related-items-frame">
+                <p style="display:none;" class="image-id"></p>
+                <div class="image-wrapper"><img class="artwork-data-img" src="" alt="title"/>
+                </div>
+                <input type="hidden" class="cart-image-id">
+                <input class="uniqueness" type="hidden">
+                <section th:replace="~{dryTemplate.html :: inventory-data}"></section>
+
+                <div class="description">
+                    <div class="sub-title">
+                        <p class="ellipsisText titre artwork-data related-items-common-op">title</p>
+                        <!--                        <div>-->
+                        <!--                            <button class="liked-icon heart-circle-liked-heart"><i style="color: blue;" id="liked-heart"-->
+                        <!--                                                                                   class="liked-art fa-solid fa-heart"></i>-->
+                        <!--                            </button>-->
+                        <!--                            <button class="not-liked-icon heart-circle-not-liked-heart"><i id="not-liked-heart"-->
+                        <!--                                                                                           class="liked-art fa-regular fa-heart"></i>-->
+                        <!--                            </button>-->
+                        <!--                        </div>-->
+
+                    </div>
+                    <div class="sub-title">
+                        <div class="description-sub-title">
+                            <h4 class="ellipsisText medium artwork-data related-items-common-op .common-color">Oil on
+                                Canvas</h4>
+                            <h4 class="ellipsisText size artwork-data related-items-common-op .common-color">
+                                30x30inch</h4>
+                            <div style="display: flex;">
+                                <small style="display: inline;" class="currency">$US</small>
+                                <h4 class="price ellipsisText smallFont artwork-data related-items-common-op">$1000</h4>
+                            </div>
+                            <h4 style="display: none" class="describe-artwork"></h4>
+                        </div>
+                        <!--                        <div style="align-self: flex-end" class="touch-mode">-->
+                        <!--                            <button class="cart-icon cart-remove-box"><i style="color: cornflowerblue; font-size: 1.5rem"-->
+                        <!--                                                                         class="fa-sharp fa-solid fa-cart-plus"></i>-->
+                        <!--                            </button>-->
+                        <!--                            <button class="cart-icon cart-add-box"><i style="font-size: 1.5rem"-->
+                        <!--                                                                      class="fa-sharp fa-solid fa-cart-plus"></i></button>-->
+                        <!--                        </div>-->
+                    </div>
+                    <h3 class="sold-item">Sold</h3>
+
+                    <aside class="hover-mode">
+                        <button class="cart-add cart-add-action">Add to Cart</button>
+                        <button class="cart-remove cart-remove-action">Remove From Cart</button>
+                    </aside>
+                </div>
+            </div>
+
+
+        </div>
+        <button class="parent-next2"><i class="next2 nxt fa-solid fa-chevron-right"></i></button>
+    </div>
+</section>
+<footer-component></footer-component>
+
+</body>
+</html>

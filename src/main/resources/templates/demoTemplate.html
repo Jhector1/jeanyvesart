@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="showContent()">Show hidden content</button>
+
+<template>
+    <h2>Flower</h2>
+    <img src="img_white_flower.jpg" width="214" height="204">
+</template>
+
+<script>
+    function showContent() {
+        let temp = document.getElementsByTagName("template")[0];
+        let clon = temp.content.cloneNode(true);
+        document.body.appendChild(clon);
+    }
+</script>
+</body>
+</html>

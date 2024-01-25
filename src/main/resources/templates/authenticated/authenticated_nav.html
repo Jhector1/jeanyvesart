@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<article th:fragment="auth-nav" class="nav-profile-parent">
+    <article class="nav-profile-child" id="user-profile">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas-title user-name" th:text="${fullName}">Jean Yves Hector</h1>
+<!--            <p>United States</p>-->
+
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+
+            <nav class="nav-authenticated navbar navbar-expand-sm bg-light navbar-light">
+                <div class="container-fluid">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{'/account/' + ${sessionId} + '/profile'}">My
+                                Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{'/account/' + ${sessionId} + '/collections'}">My
+                                Collection</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" th:href="@{'/account/' + ${sessionId} + '/payment-settings'}">Payment
+                                Setting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" th:href="@{'/account/' + ${sessionId} + '/myReviews'}">My
+                                Reviews</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </nav>
+            <ul class="artwork-menu">
+                <li><a class="active-button" href="/artworks">Shop</a></li>
+                <li><a class="unavailable-link">Virtual Exhibition</a></li>
+                <li><a class="active-button" href="/about">About</a></li>
+                <li><a class="unavailable-link">My Story</a></li>
+                <li><a class="active-button" href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!--    <article  class="user-profile nav nav-tabs navbar navbar-expand-sm bg-light navbar-light" >-->
+        <!--        <section class="user-info-header nav-item">-->
+        <!--            <a th:href="@{'/account/' + ${sessionId} + '/profile'}">-->
+        <!--                <a aria-current="page" class="nav-link active">My Information</a></a>-->
+
+        <!--        </section>-->
+        <!--        <section class="nav-item">-->
+        <!--            <a th:href="@{'/account/' + ${sessionId} + '/collections'}"><h3 class="nav-item">My Collection</h3></a>-->
+        <!--            <img src="" alt=""/>-->
+
+
+        <!--        </section>-->
+        <!--        <section class="nav-item payment-setting">-->
+        <!--            <a th:href="@{'/account/' + ${sessionId} + '/payment-setttings'}">-->
+        <!--                <h3 class="nav-item">Payment Setting</h3></a>-->
+
+
+        <!--        </section>-->
+        <!--        <section class="nav-item">-->
+        <!--            <a th:href="@{'/account/' + ${sessionId} + '/myReviews'}">-->
+        <!--                <h3 class="nav-item">My Reviews</h3></a>-->
+
+
+        <!--        </section>-->
+
+        <!--        &lt;!&ndash;    <form th:action="@{/logout}" method="post">&ndash;&gt;-->
+        <!--        &lt;!&ndash;        <input type="submit" value="Logout">&ndash;&gt;-->
+        <!--        &lt;!&ndash;    </form>&ndash;&gt;-->
+        <!--    </article>-->
+    </article>
+    <div class="container-fluid mt-3 bar-nav-parent">
+        <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#user-profile"><i
+                class="fas fa-bars"></i>
+        </button>
+    </div>
+
+</article>
+</body>
+<script>
+
+</script>
+</html>

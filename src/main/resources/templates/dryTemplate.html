@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section th:fragment="quantity-list">
+  <label class="quantity-lbl" for="quantity">quantity:
+    <select  name="quantity" id="quantity">
+      <option ></option>
+
+    </select>
+  </label>
+  <p style="color: red" class="quantity-error"></p>
+</section  >
+<section style="display: none" th:fragment="inventory-data"> <input type="hidden" class="inventory-data"/> </section>
+<div th:fragment="spinner" class="loading loader">
+    <div class="container mt-3">
+
+        <div class="spinner-grow text-muted"></div>
+        <div class="spinner-grow text-primary"></div>
+        <div class="spinner-grow text-success"></div>
+        <div class="spinner-grow text-info"></div>
+        <div class="spinner-grow text-warning"></div>
+        <div class="spinner-grow text-danger"></div>
+        <div class="spinner-grow text-secondary"></div>
+        <div class="spinner-grow text-dark"></div>
+        <div class="spinner-grow text-light"></div>
+    </div>
+    <!--    <p class="while-waiting">One second...</p>-->
+</div>
+
+</body>
+
+
+</html>

@@ -1,0 +1,179 @@
+.grand-parent-wishlist {
+  @include flex_display($justify_content: space-evenly);
+
+  .parent-wishlist {
+    width: 60%;
+
+    .wish-list {
+      position: relative;
+
+      padding: 0.5rem;
+      @include flex_display($justify_content: space-between);
+      box-shadow: 1px 1px 10px 1px rgba(112, 128, 144, 0.14);
+      border-radius: 1.25rem;
+      margin: 3rem;
+      border: $border-less-opacity;
+
+      .wish-list-img-wrapper {
+        width: 12.5rem;
+
+        img {
+          width: inherit;
+          display: block;
+        }
+
+      }
+
+      .parent-details-wish-list {
+        @include parent-detail-common;
+
+        .details {
+          justify-content: space-between;
+          display: flex;
+          height: inherit;
+          width: 100%;
+          align-self: flex-start;
+
+          #a {
+            width: 50%;
+            padding: 0 0.6rem;
+
+            li {
+              list-style-type: none;
+              padding: 0.3rem 0;
+            }
+          }
+
+          #b {
+            width: 70%;
+            @include flex_display($align-items: end, $flex-direction: column,
+            $align-content: space-between, $justify-content: space-between);
+            position: relative;
+
+            .make-an-offer {
+              @include ellipsisText;
+
+              cursor: pointer;
+              background-color: $main-color;
+              color: white;
+              margin-bottom: 5%;
+              @include offer_cart_common; //border-radius: 1.875rem;
+
+            }
+
+            .parent-remove-add-cart {
+              position: relative;
+              width: 100%;
+              .add-to-cart {
+                @include offer_cart_common;
+                visibility: hidden;
+                left: 0;
+                bottom: 0;
+              }
+              .remove-from-cart {
+                @extend .add-to-cart;
+                position: absolute;
+
+              }
+              .favorite-sold-item {
+                display: none;
+
+                @include offer_cart_common;
+              }
+
+
+
+            }
+          }
+
+        }
+
+        .other-op {
+          padding: 1rem 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+
+          li {
+            list-style-type: none;
+
+            font-size: $font-size-0875
+          }
+        }
+      }
+
+    }
+    .display-favorite-total-items {
+      @include display_item_total;
+      .title-heading {
+        display: flex;
+        align-items: center;
+      }
+      .clear-favorite {
+        @extend .clear-cart;
+      }
+    }
+    .empty-favorite-alert {
+      margin: auto;
+      @include flex_display($flex: none,$align-content: center,
+      $justify_content:center ,$flex_direction:column);    }
+
+
+  }
+@include contact-form-design(fixed);
+
+}
+
+.quick-message-parent {
+
+  background-color: $main-color;
+  border-radius: 20px;
+  width: 20%;
+  padding: 2%;
+  margin: 3% 0;
+  position: sticky;
+  top: 5rem;
+  bottom: 5rem;
+
+  .quick-message {
+
+    gap: 10px;
+    @include flex_display($justify_content: center,
+    $align_content: center, $flex_direction: column);
+    padding: 2%;
+    border: 1px #575757 solid;
+
+    .profile-wrapper {
+      width: 5rem;
+      height: 5rem;
+      border: 1px solid blue;
+      border-right-color: magenta;
+      border-bottom-color: black;
+      border-left-color: green;
+
+
+      position: relative;
+      overflow: hidden;
+
+      border-radius: 50%;
+
+      img {
+        display: block;
+        margin: auto;
+
+        position: absolute;
+        width: inherit;
+      }
+
+      .contact-me {
+        padding: 2%;
+        border: 1px #575757 solid;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0.3rem;
+        background-color: cornflowerblue;
+      }
+    }
+  }
+
+}

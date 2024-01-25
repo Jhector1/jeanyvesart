@@ -1,0 +1,71 @@
+
+
+.profile-info {
+  width: 80%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+
+  gap: 3rem;
+
+
+  form {
+    position: relative;
+    display: flex;
+    padding: 1.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgba(0, 100, 0, 0.06);
+
+    section {
+      display: flex;
+      //justify-content: space-between;
+      //width: 40%;
+      margin: 1rem 0;
+      gap: 2rem;
+
+      // @include label-input-common;
+      .form-floating {
+        width: 100%;
+      }
+
+      #card-details-label {
+
+        display: flex;
+        justify-content: space-between;
+
+        #card-details-label-inner {
+          display: flex;
+          justify-content: space-between;
+
+        }
+
+      }
+    }
+
+    .btn-secondary {
+      float: right;
+
+      width: max-content;
+      height: 3rem;
+      justify-self: flex-end;
+      align-self: flex-end;
+
+    }
+
+  }
+}
+
+.card-update {
+
+  display: none;
+}
+
+@media only screen and (max-width: 1000px) {
+
+  form {
+    section {
+      flex-direction: column;
+    }
+  }
+}

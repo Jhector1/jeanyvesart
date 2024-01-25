@@ -1,0 +1,253 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Checkout | Jean Yves</title>-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">-->
+<!--    <link rel="icon" th:href=-->
+<!--            "@{/images/jeanicon.jpg}"-->
+<!--          type="image/x-icon">-->
+<!--    <script src="/js_file/checkout.js" type="module" defer></script>-->
+<!--    <script src="https://js.stripe.com/v3/"></script>-->
+<!--    <script src="/js_file/payment_process.js" type="module" defer></script>-->
+<!--    <script th:src="@{/js_file/model/sendEmail.js}" type="module" defer></script>-->
+
+<!--    <link rel="stylesheet" href="/style.css" type="text/css">-->
+<!--    <script th:inline="javascript">-->
+<!--        const stripePublicKey =/*[[${stripePublicKey}]]*/ null;-->
+<!--    </script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="loading"></div>-->
+
+<!--<header class="header-checkout">-->
+<!--    <nav class="nav-checkout"><a href="/" class="home">-->
+<!--        <img class="logo" src="/images/jeanyves_logo.png" alt="Jean Yves Logo"/>-->
+<!--        <div>JEAN YVES HECTOR</div>-->
+<!--    </a>-->
+<!--    </nav>-->
+<!--</header>-->
+<!--<ul class="current-location">-->
+<!--    <li class="location-info">Shipping</li>-->
+<!--    <li class="location-info">Billing</li>-->
+<!--    <li class="location-info">Review</li>-->
+<!--</ul>-->
+
+
+<!--<div style="width:50%; margin: auto;" class="backend-invalidation-alert"><p style="color: red; display: inline"-->
+<!--                                                                            th:text="${errorAlert}">-->
+<!--</p>-->
+<!--</div>-->
+<!--<section th:insert="~{contactform.html :: contact-form}"></section>-->
+<!--<form id="payment-form" novalidate method="post" class="form-payment" th:object="${checkout}">-->
+<!--    <article class="grand-parent-checkout-data">-->
+<!--        <div class="parent-checkout-data">-->
+<!--            <div class="parent-review-address">-->
+<!--                <h1 class="heading-title">1 Shipping Address</h1><span class="checkout-cancel-button">&#x2715;</span>-->
+<!--                <div class="review-address shipping-review-address check-field-completed">-->
+<!--                    <div class="address-content-summary">-->
+<!--                        <h5 class="user-name">Jean Yves Hector</h5>-->
+<!--                        <h4 class="dynamic-shipping-address smallFont">4407 S Berkeley Ave<br>Chicago IL 60653</h4>-->
+<!--                    </div>-->
+<!--                    <h4 class="edit-address">Edit</h4>-->
+<!--                    <i class="fa-regular fa-circle-check"></i>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--            <section class="s_section s-section-parent-input checkout-box-data">-->
+<!--                <div class="email-phoneNumber-wrapper"><label class="email-label" for="email">Email <span-->
+<!--                        class="required">*</span><br>-->
+<!--                    <input class="shipping-address-input" type="email" id="email" required/>-->
+<!--                    <ul>-->
+<!--                        <li class="email-errorMessage errorMessage"></li>-->
+<!--                        <li class=""></li>-->
+
+<!--                    </ul>-->
+<!--                </label>-->
+<!--                    <label class="phone-number-label" for="phone-number">Phone Number (optional)<br>-->
+<!--                        <input type="text"-->
+<!--                               id="phone-number" maxlength="14" required/>-->
+<!--                        <ul>-->
+<!--                            <li class="phone-errorMessage"></li>-->
+<!--                            <li class=""></li>-->
+
+<!--                        </ul>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div-->
+<!--                        th:insert="~{all_countries.html :: address-form(field_countries='s_countries', country_id='s_country', field_fullname='s_fullname', field_street='s_street', field_apt='s_apt', field_zipcode='s_zipcode',field_city='s_city', field_state='s_state')}"></div>-->
+<!--                <h2 class="save-button">Save change</h2>-->
+<!--            </section>-->
+<!--            <div class="parent-review-address">-->
+<!--                <h1 class="heading-title payment-method">2 Billing</h1>-->
+<!--                <span class="checkout-cancel-button">&#x2715;</span>-->
+<!--                <div class="review-address billing-review-address check-field-completed">-->
+<!--                    <ul class="address-content-summary">-->
+<!--                        <li><strong>debit </strong>ending in <span class="card-ending">0533</span></li>-->
+<!--                        <li><strong>billing address: </strong><span-->
+<!--                                class="smallFont dynamic-billing-address">4407 S Berkeley Ave<br>Chicago IL 60653</span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                    <h4 class="edit-address">Edit</h4>-->
+<!--                    <i class="fa-regular fa-circle-check"></i>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--            <section class="payment-info checkout-box-data">-->
+
+<!--                <div class="card-accept">-->
+<!--                    <i class="fa-brands fa-cc-visa"></i>-->
+<!--                    <i class="fa-brands fa-cc-mastercard"></i>-->
+<!--                    <i class="fa-brands fa-cc-discover"></i>-->
+<!--                    <i class="fa-brands fa-cc-amex"></i>-->
+<!--                    <i class="fas fa-credit-card"></i>-->
+<!--                </div>-->
+
+<!--                <section class="card-info">-->
+<!--                    <label class="card-holder-name" for="card-name">Name of card holder <span-->
+<!--                            class="required">*</span><br>-->
+<!--                        <input class="shipping-address-input" type="text" th:field="*{ccName}"-->
+<!--                               placeholder="Name of card holder" id="card-name" required/>-->
+<!--                        <ul>-->
+<!--                            <li class="errorMessage"></li>-->
+<!--                            <li th:errorclass="errorMessage" th:if="${#fields.hasErrors('ccName')}"-->
+<!--                                th:errors="${checkout.ccName}"></li>-->
+<!--                        </ul>-->
+<!--                    </label>-->
+
+<!--                    <label class="card-digit">Credit/Debit card <span class="required">*</span><br>-->
+<!--                        <div class="card-number-wrapper"><i class="fa-solid fa-credit-card"></i>-->
+<!--                            <div id="card-number-element"></div>-->
+
+<!--                            <i class="fa-solid fa-lock"></i></div>-->
+<!--                        <ul>-->
+<!--                            <li class="card-errorMessage card-number-error errorMessage"></li>-->
+
+<!--                        </ul>-->
+<!--                    </label>-->
+
+
+<!--                    <label class="expiration-card-label">Expiration Date <span class="required">*</span><br>-->
+<!--                        <div id="card-expiry-element"></div>-->
+
+
+<!--                    </label>-->
+
+
+<!--                    <label class="security-code-label">Security Code <span class="required">*</span><br>-->
+<!--                       <div class="security-info">-->
+<!--                           <div id="card-cvc-element"></div>-->
+
+<!--                            <i-->
+<!--                                    class="fa-solid fa-lock"></i>-->
+<!--                        </div>-->
+<!--                      </label>-->
+
+<!--                </section>-->
+<!--                <label for="same-address" class="address-label same-address-label"><input type="checkbox" checked-->
+<!--                                                                                          id="same-address"><span-->
+<!--                        class="checkmark checkmark-same"></span>My billing address is the same as my shipping-->
+<!--                    address<span class="smallFont display-address">4407 S Berkeley Ave 60653</span></label><br>-->
+<!--                <label for="default-address" class="default-address-label address-label"><input id="default-address" checked-->
+<!--                                                                          name="default-address" type="checkbox"><span-->
+<!--                        class="checkmark"></span>Set as-->
+<!--                    default-->
+<!--                </label>-->
+
+<!--                <h1 class="d_section">Billing Address</h1>-->
+<!--                <section class="d_section d-section-parent-input"-->
+<!--                         th:insert="~{all_countries.html :: address-form(field_countries='d_countries', country_id='d_country', field_fullname='d_fullname', field_street='d_street', field_apt='d_street', field_apt='d_apt', field_zipcode='d_zipcode',field_city='d_city', field_state='d_state')}"></section>-->
+<!--                <h2 class="save-button">Save change</h2>-->
+<!--            </section>-->
+
+<!--            &lt;!&ndash;    d prefix means delivery&ndash;&gt;-->
+<!--            <h1 class="heading-title review-heading-title billing-address">3 Review items and shipping <i-->
+<!--                    class="check-field-completed fa-regular fa-circle-check"></i></h1>-->
+<!--            <section class="checkout-box-data">-->
+<!--                <h3 class="support-thanks">Thank you for your support!!!</h3>-->
+<!--                <h3 class="delivery-time">Estimated delivery: <span class="shipping-date">March, 20, 2023</span></h3>-->
+
+<!--                <div class="parent-checkout-artwork-data">-->
+<!--                    <div style="display: none" class="checkout-artwork-data">-->
+<!--                        <div class="checkout-art-img"><img src="" alt="image.jpg"/></div>-->
+<!--                        <p style="display: none;" class="image-id"></p>-->
+<!--                        <div class="checkout-art-description">-->
+<!--                            <h4 class="checkout-common-op">Title</h4>-->
+<!--                            <p class="checkout-common-op">Medium</p>-->
+<!--                            <p class="checkout-common-op">Size</p>-->
+<!--                            <div style="display: flex;">-->
+<!--                                <small style="display: inline;" class="currency">$US</small>-->
+<!--                                <p class=" item-price checkout-common-op">price</p>-->
+<!--                            </div>-->
+
+<!--                            <p>Description:</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </section>-->
+
+<!--        </div>-->
+
+<!--        <aside class="checkout-price-calculation price-calculation">-->
+<!--            <h3 style="text-align: center">Order Summary</h3>-->
+<!--            <ul class="checkout-out-info">-->
+<!--                <li>-->
+<!--                    <p>Total Items (<span class="checkout-total-items">2</span>)</p>-->
+<!--                    <span class="item-total">$5678</span>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <span>Shipping</span>-->
+<!--                    <span class="shipping-price">$5</span>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <span>Tax</span>-->
+<!--                    <span class="taxes">$58</span>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <span>Total Price</span>-->
+<!--                    <span class="total-price">$78990</span>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--            <div>-->
+<!--                <div class="safety-info">-->
+<!--                    <h4>Satisfaction Guaranteed</h4>-->
+<!--                    <p>buy with assurance that if you are not pleased with your purchase, you may return it within 15 days</p>-->
+<!--                </div>-->
+<!--                <div class="safety-info">-->
+<!--                    <h4>Safe And Secure</h4>-->
+<!--                    <p>Every payment and transaction is encrypted and safeguarded.</p>-->
+<!--                </div>-->
+<!--                <div><input type="submit" id="purchase-button" class="checkout" value="Submit payment"></div>-->
+<!--            </div>-->
+<!--        </aside>-->
+
+<!--    </article>-->
+<!--    <div style="background-color: rgba(0,0,0,0.51)" class="purchase-error-cover">-->
+<!--        <div class="purchase-error">-->
+<!--            <h1><i style="font-size:4rem; color: red" class="fas fa-exclamation-triangle"></i></h1>-->
+<!--            <h3>Sorry an internal error occurs.</h3>-->
+<!--            <p style="color: red;" class="error-details"></p>-->
+<!--            <p>If the error persist Please <span class="contact-me1"-->
+<!--                                                 style="background-color: #aabff3; padding:2px;  cursor:pointer;">contact me</span>-->
+<!--            </p>-->
+
+<!--            <div class="purchase-retry">Retry</div>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--    <div class="continue-back-parent">-->
+<!--        <div class="continue-back-parent-cover"></div>-->
+<!--        <div class="continue-back-wrapper">-->
+<!--            <div class="back-turn-grey back button-slide">-->
+<!--                <i id="previous-button" class="back-turn-grey back-left-arrow fa-solid fa-chevron-left"></i>back-->
+<!--            </div>-->
+<!--            <div class="continue-turn-grey continue button-slide">Continue<i id="continue-button"-->
+<!--                                                                             class="continue-turn-grey continue-right-arrow fa-solid fa-chevron-right"></i>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->

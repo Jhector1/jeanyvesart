@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
+    <script src="/js_file/registration.js" type="module" defer></script>
+    <!--    <script th:src="@{/js_file/header.js}" type="module" defer></script>-->
+    <script th:src="@{/js_file/footer.js}" type="module" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--    <link rel="stylesheet" href="/stylesheet/style.css" type="text/css">-->
+
+</head>
+<body>
+
+<header th:replace="~{header.html :: header-component}"></header>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel">Reset your password</h4>
+                <button type="button" class="btn-reset-close btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div style="display: none" class="card card-success">
+                    <div class="card-body card-success-body">Basic card</div>
+                </div>
+                <div class="card-to-send"><p>Enter your email address and we'll send you a link to reset your
+                    password.</p>
+                    <h5>Your email address</h5>
+                    <form class="form-reset-email">
+                        <div class="form-floating mb-3 mt-3">
+
+                            <input type="email" class="form-control" id="email-reset" placeholder="Enter email"
+                                   name="email-reset" required>
+                            <label for="email-reset">Email</label>
+                        </div>
+                        <p class="reset-email-error"></p>
+                        <button style="position: relative" type="submit" class="btn btn-reset btn-primary">Reset
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn-reset-close btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<article th:fragment="sign-form" class="sign-up-in-body">
+    <article class="sign-parent">
+
+        <article class="sign-up-form">
+            <div class="container mt-3">
+                <h3>Create your account</h3>
+                <p>Registration is easy.</p>
+
+                <form class="form-to-sign-up">
+                    <input type="hidden" class="form-control global-error" id="hidden">
+                    <div class="invalid-feedback">invalid.</div>
+
+                    <div class="form-floating mb-3 mt-3">
+                        <input type="email" class="form-control email-registration" id="username"
+                               placeholder="Enter email" name="email-register"
+                               required>
+                        <label for="username" class="form-label">Email:</label>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="email-invalid invalid-feedback">Invalid.</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control full-name-registration" id="fullName"
+                               placeholder="Enter Full Name" name="email-register"
+                               required>
+                        <label for="fullName" class="form-label">Full Name:</label>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Invalid.</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control password-registration" id="password"
+                               placeholder="Enter password"
+                               name="password" required>
+
+                        <label for="password" class="form-label">Password:</label>
+                        <!--                        <span class="validationError"-->
+                        <!--                              th:if="${#fields.hasErrors('password')}"-->
+                        <!--                              th:errors="*{password}">CC Num Error</span>-->
+
+                        <div class="password-valid valid-feedback">Valid.</div>
+                        <div class="password-invalid invalid-feedback">Invalid.</div>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="myCheck2" name="remember" required>
+                        <label class="form-check-label" for="myCheck2">I agree on <a class="form-check-label" href="#">
+                            Jean Yves Art Terms and Conditions of
+                            use.</a></label>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Check this checkbox to continue.</div>
+                    </div>
+
+                    <p>Password must be at least 8 characters
+                        and include a lowercase letter, uppercase
+                        letter, and digit.</p>
+                    <input href="#email" type="submit" value="Sign UP"
+                           class="btn btn-secondary btn-lg signup-button"/>
+
+                    <span>or</span>
+
+
+                </form>
+                <section>
+                    <a class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/facebook}"><i style="color:#0d6efd"
+                                                                                                   class="fa-brands fa-facebook"></i>Continue
+                        with
+                        Facebook
+                    </a>
+                    <a class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/google}"><i style="
+  background: -webkit-linear-gradient(red,yellow, green, blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;"
+                                                                                                 class="fa-brands fa-google"></i>Continue
+                        with
+                        Google
+                    </a>
+                    <a class="btn btn-light btn-lg disabled"><i
+                            class="fa-brands fa-apple"></i>Continue with Apple
+                    </a>
+                </section>
+                <section><p>Already have an account? <span href="#" class="sign-in">Log in.</span></p>
+                    <p>By clicking Sign Up or Continue with Apple,
+                        Google, or Facebook, you agree to Jean Yves Art’s Terms of Use
+                        and Privacy Policy and to receiving emails from Jean Yves Art.</p>
+                    <p>This site is protected by reCAPTCHA and the Google Privacy
+                        Policy and Terms of Service apply.</p>
+
+                </section>
+
+            </div>
+        </article>
+        <article class="sign-in-form">
+
+            <div class="container mt-3">
+                <h3>Sign In</h3>
+                <p>purchase confidently.</p>
+
+                <form method="POST" action="/login"
+                      class="form-to-login">
+                    <div class="form-floating mb-3 mt-3">
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="username"
+                               required>
+                        <label for="email" class="form-label">Username:</label>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="current-password" placeholder="Enter password"
+                               name="password" required>
+                        <label for="current-password" class="form-label">Password:</label>
+                        <div class=" valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="">
+                        <input class="t" type="checkbox" id="myCheck" name="remember">
+                        <label class="form-check-label" for="myCheck">Stay signed in</label>
+
+                    </div>
+                    <!--                        <button type="submit" class="btn btn-primary">Submit</button>-->
+                    <p></p>
+                    <div class="container mt-3">
+                        <p data-bs-toggle="modal"  data-bs-target="#myModal">
+                            Forgot Password?
+                        </p>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary btn-lg ">
+                        Log In
+                    </button>
+                    <span>or</span>
+                </form>
+
+                <section>
+                    <a class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/facebook}">
+                        <i style="color:#0d6efd" class="fa-brands fa-facebook"></i>Continue with
+                        Facebook
+                    </a>
+                    <a class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/google}" id="google-sign-in">
+                        <i style=" background: -webkit-linear-gradient(red,yellow, green, blue);
+                                              -webkit-background-clip: text;
+                                              -webkit-text-fill-color: transparent;"
+                           class="fa-brands fa-google"></i>Continue with Google
+                    </a>
+                    <button class="btn btn-light btn-lg disabled"><i
+                            class="fa-brands fa-apple"></i>Continue with Apple
+                    </button>
+                </section>
+            </div>
+
+            <section>
+                <p>Don't have an account? <span href="#username" class="sign-up">Sign up.</span></p>
+
+
+            </section>
+
+
+        </article>
+
+        <!--<span id="sign-cancel-button">&#x2715;</span>-->
+    </article>
+</article>
+<footer-component></footer-component>
+
+</body>
+
+
+</html>

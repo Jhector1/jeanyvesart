@@ -1,0 +1,129 @@
+//.artwork-details-info-popup {
+//  background-color: black;
+//  display: none;
+//  position: sticky;
+//  top: 0;
+//  justify-content: space-between;
+//  align-items: center;
+//  transition: width 2s linear 1s;
+//  height: 100vh;
+//  gap: 2%;
+//  padding: 2%;
+//
+//  .slideshow {
+//    display: flex;
+//    width: max-content;
+//    align-items: center;
+//
+//    #previous, #next {
+//      max-font-size: 5rem;
+//      font-size: 5vw;
+//      min-font-size: 1.5rem;
+//
+//      color: rgba(112, 128, 144, 0.3);
+//      transition: color ease-in 500ms;
+//
+//      &:hover {
+//        @include common_element_hover;
+//      }
+//    }
+//
+//    .parent-artwork-img {
+//      display: flex;
+//
+//      width: 50vw;
+//      justify-content: center;
+//      align-items: center;
+//      overflow: hidden;
+//
+//
+//      .popup-image-wrapper {
+//        height: auto;
+//        border: var(--border-less-opacity);
+//        border-radius: 0.125rem;
+//        position: relative;
+//        width: max-content;
+//
+//        .artwork-image {
+//          display: block;
+//          height: 70vh;
+//          max-height: 80vh;
+//
+//          cursor: pointer;
+//        }
+//
+//        .popup-like {
+//          position: absolute;
+//          top: 0.625rem;
+//          right: 0.625rem;
+//
+//
+//          .popup-not-liked-heart, .popup-liked-heart {
+//            display: none;
+//            width: 2.5rem;
+//            height: 2.5rem;
+//
+//            &.liked-art:hover {
+//              background-color: blue;
+//              color: white;
+//
+//            }
+//
+//            .liked-art {
+//              max-font-size: 1.5rem;
+//              border: $main-color 1px solid;
+//
+//              min-height: 1rem;
+//              border-radius: 50%;
+//              padding: 0.438rem;
+//              color: blue;
+//              background-color: white;
+//
+//              :hover {
+//                background-color: rgba(255, 26, 26, 0.3);
+//              }
+//            }
+//          }
+//        }
+//
+//        }
+//      }
+//    }
+//  .artwork-purchase-info {
+//    padding: 1rem;
+//    display: flex;
+//    position: relative;
+//    flex-direction: column;
+//    align-content: space-between;
+//    align-items: center;
+//    justify-content: flex-start;
+//    gap: 1.875rem;
+//    max-height: 70vh;
+//    color: white;
+//    .popup-artwork-description {
+//    font-family: proxima-nova, sans-serif;
+//    line-height: 1.6rem;
+//  }
+//    .description-and-cart {
+//      width: 100%;
+//      display: flex;
+//      justify-content: space-between;
+//      .parent-popup-price-info {
+//      justify-self: flex-start;
+//      align-self: flex-start;
+//        .display-common{
+//        color: white;
+//          //@extend  .common-sibling;
+//
+//      }
+//        .r{
+//          @extend .price-wrapper;
+//        }
+//    }
+//    }
+//  }
+//  .artwork-purchase-info#x {
+//    overflow-y: auto;
+//    padding-bottom: 2.5rem;
+//  }
+//}

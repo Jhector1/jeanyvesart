@@ -1,0 +1,19 @@
+.purchase-success-cover{
+  top: 0;
+  left: 0;
+  @extend .mask-background; .purchase-success {
+   background-color: white;
+  padding: 5rem;
+  margin: 0 1rem;
+  @include flex_display( $justify_content:center, $gap:1rem, $align_content:center,$flex_direction:column ) ;
+  .purchase-thank-you {
+    width: max-content;
+    padding: 0.5rem;
+    cursor: pointer;
+    background-color: green;
+    border-radius: 5px;
+    color: white;
+  }
+
+}
+}

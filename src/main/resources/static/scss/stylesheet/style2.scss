@@ -1,0 +1,99 @@
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  background: rgb(255, 255, 255);
+  transition: opacity 0.75s, visibility 0.75s;
+  .container{
+    width: fit-content;
+  }
+}
+.loading-checkout{
+  display: none;
+}
+
+.while-waiting {
+  padding: 1rem;
+}
+
+
+.loader-visible{
+
+}
+.loader--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+#quantity {
+  width: 5rem;
+
+
+}
+
+.quantity-lbl {
+  padding: .5rem;
+}
+
+* {
+  font-family: ocr-b-std, sans-serif;//Helvetica, arial, sans-serif;
+li{
+  list-style-type: none;
+}
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-color: #575757;
+  //border: 1px red solid;
+  color: #575757;
+  scroll-behavior: smooth;
+ // border: red 1px solid;
+  //line-height: 2rem;
+
+}@import "myModule/variables";
+@import "myModule/mixin";
+
+@import "myModule/sign-up";
+@import "myModule/user_profile";
+@import "../style/utilities";
+.active-button{
+  color: black !important;
+}
+input, textarea{
+  text-transform: none;
+}
+.sorry-message {
+  background-image: url("/images/404.jpg");
+  height: 100vh;
+  padding: 2rem 1rem;
+  margin: auto;
+  *{
+    font-size: 2rem;
+    margin: auto;
+    padding: 1rem 0;
+  }
+}
+
+.not-found {
+  display: none;
+  padding: 19rem;
+  background-color: $main-color;
+
+  a {
+
+    text-decoration: none;
+    h1 {
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+.sign-up-in-body {
+  @include mask-background-mixin;
+
+  .sign-parent {
+    display: flex;
+    align-items: flex-start;
+    width: 100vw;
+    gap: 2rem;
+    justify-content: center;
+    height: max-content;
+
+    #sign-cancel-button {
+      width: 2rem;
+      height: 2rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: flex-start;
+
+      &:hover {
+        cursor: pointer;
+        background-color: white;
+        border-radius: 50%;
+        border: $border-less-opacity;
+      }
+
+    }
+
+    .sign-up-form {
+      @include sign-up-in-common($display: none);
+    }
+
+    .sign-in-form {
+      @include sign-up-in-common;
+
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .sign-up-in-body {
+
+    .sign-parent {
+      .sign-up-form, .sign-in-form {
+        min-width: 0;
+        width: 90%;
+      }
+    }
+  }
+}

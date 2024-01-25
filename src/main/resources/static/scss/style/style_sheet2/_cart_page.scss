@@ -1,0 +1,222 @@
+.loading-checkout {
+  display: none;
+}
+
+.main-parent {
+  display: flex;
+  padding: 2%;
+  width: inherit;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .parent-cart-list {
+    width: 70%;
+    background-color: white;
+    align-self: flex-start;
+    justify-self: flex-start;
+    padding: 2%;
+
+    .cart-list {
+      position: relative;
+      padding: 5% 2%;
+      background-color: white;
+      @include flex_display($justify_content: space-between);
+      width: 100%;
+      margin: auto;
+      border: $border-less-opacity;
+      border-right: none;
+      border-left: none;
+
+      img {
+        width: 12.5rem;
+
+      }
+
+      .parent-details-cart-list {
+        @include parent-detail-common;
+
+        .cart-details {
+
+          display: flex;
+          justify-content: space-between;
+
+          padding: 2% 0;
+
+          width: 60%;
+
+          #a, #b {
+            .cart-common-op {
+              padding: 1rem 0;
+              margin-bottom: 2%;
+              list-style-type: none;
+            }
+
+          }
+        }
+
+        .remove-and-share {
+          @include flex_display($justify_content: space-between);
+
+          button {
+            font-size: 0.8rem;
+            @include button-override;
+          }
+        }
+      }
+    }
+
+    .display-cart-total-items {
+      @include display_item_total;
+
+      .title-heading {
+        display: flex;
+        align-items: center;
+      }
+
+      .clear-cart {
+        cursor: pointer;
+        width: max-content;
+        background-color: $main-color;
+        padding: 1rem 0.5rem;
+        color: white;
+      }
+    }
+
+    .empty-cart-alert {
+      margin: auto;
+      @include flex_display($flex: none, $align-content: center,
+      $justify_content: center, $flex_direction: column);
+
+    }
+
+  }
+
+  .price-calculation {
+    position: -webkit-sticky;
+    position: sticky;
+    right: 0;
+    display: none;
+    bottom: 6.25rem;
+    top: 6.25rem;
+    width: 30%;
+    background-color: white;
+    height: 80%;
+    border: 1px $border-color-less-opacity solid;
+    padding: 2%;
+    margin-left: 2%;
+
+    .card-logo {
+      border: 2px solid limegreen;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      justify-items: center;
+      background-color: cornflowerblue;
+
+      img {
+        height: 12.5rem;
+      }
+    }
+
+    .checkout-out-info {
+      padding: 1%;
+
+      li {
+        padding: 1%;
+        @include flex_display($justify_content: space-between);
+      }
+    }
+
+    .safety-info {
+      padding: 1%;
+
+      & > * {
+        color: #575757;
+        font-family: proxima-nova, sans-serif;
+      }
+    }
+
+    .free-shipping {
+      padding: 0.5rem 0;
+      font-size: $font-size-0625;
+    }
+
+    .checkout {
+      text-align: center;
+      margin: 2% 0;
+      padding: 3%;
+      color: white;
+      @include button-override($background_color: blue);
+      border-radius: 2.5rem;
+
+      .fa-arrow-right {
+        padding-left: 5px;
+        color: white
+      }
+
+    }
+  }
+}
+
+
+.related-items-grand-parent {
+  @extend .artworks-grandparent;
+  background-color: white;
+  padding: 2%;
+  display: none;
+
+
+  .items-liked {
+    text-align: center;
+    padding: 2rem 2%;
+  }
+
+  .arrow-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .parent-previous2 {
+      //left: 0.625rem;
+      //visibility: hidden;
+      //@include parent-arrow-state;
+      //
+      //.previous2 {
+      //  @include arrow-state;
+      //
+      //  &:hover {
+      //    @include arrow-hover;
+      //  }
+      //
+      //
+      //}
+      @include arrowNavigation(hidden, previous2);
+
+
+    }
+
+    .related-items-parent {
+      display: flex;
+      width: 100vw;
+    }
+
+    .parent-next2 {
+      @include arrowNavigation(visible, next2);
+
+      //left: 0.625rem;
+      //visibility: visible;
+      //@include parent-arrow-state;
+      //
+      //.next2 {
+      //  @include arrow-state;
+      //
+      //  &:hover {
+      //    @include arrow-hover;
+      //  }
+      //
+      //
+      //}
+
+    }
+  }
+}
+

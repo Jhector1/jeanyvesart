@@ -1,0 +1,487 @@
+//@media only screen and (max-width: 1015px) {
+//  .artwork-details-info-popup {
+//    position: fixed;
+//    z-index: 6;
+//    width: 100vw;
+//    height: 100vh;
+//    flex-direction: column;
+//    justify-content: flex-start;
+//    overflow: auto;
+//  }
+//
+//  .parent-artwork-img {
+//    width: max-content;
+//  }
+//
+//  .popup-purchase, .popup-cart {
+//    width: 50vw;
+//  }
+//
+//
+//  .parent-artwork-img {
+//    height: auto;
+//    position: static;
+//    background-color: lime;
+//
+//  }
+//
+//
+//  .slideshow {
+//    margin-left: auto;
+//    margin-right: auto;
+//    margin-top: 5rem;
+//
+//  }
+//
+//  #next, #previous {
+//    min-font-size: 1rem;
+//  }
+//
+//  .parent-popup-cart-purchase {
+//    width: max-content;
+//  }
+//
+//  .popup-image-wrapper {
+//    margin: auto;
+//  }
+//
+//  .artworks-category {
+//    padding-top: 2%;
+//    padding-bottom: 5%;
+//  }
+//
+//  .artwork-image {
+//    width: 50vw;
+//    max-height: none;
+//    height: auto;
+//  }
+//
+//  .artwork-purchase-info {
+//    padding: 0 3%;
+//    max-height: none;
+//  }
+//  .artwork-purchase-info#x {
+//    overflow: unset;
+//
+//  }
+//}
+
+@media only screen and (max-width: 1000px) {
+  .security-info {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .offer-wrap {
+    width: 90%;
+  }
+
+  .painting-offer {
+    width: 40%;
+  }
+
+  .offer-info {
+    width: 55%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .artworks-grandparent {
+    margin: 8% auto 0 auto;
+
+    .artworks-category {
+      padding-top: 2%;
+      padding-bottom: 7%;
+      font-size: 1rem;
+
+    }
+
+    .allArtParent {
+      gap: 10%;
+
+      .frame {
+        min-width: 14.125rem;
+        min-height: 13.125rem;
+
+        .see-more {
+          h1 {
+            display: flex;
+            justify-content: center;
+            width: max-content;
+            font-size: 1rem;
+
+          }
+        }
+      }
+    }
+  }
+  .about-content {
+    padding: 1rem;
+    margin: 0;
+
+  }
+
+
+  #slideshow-cancel-button {
+    font-size: 1rem;
+  }
+
+  .artwork-details-info-popup {
+    padding-bottom: 3%;
+  }
+
+
+}
+
+@media only screen and (min-width: 800px) {
+
+  .title-heading, .clear-favorite, .clear-cart {
+    font-size: $font-size-1-75;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .about-content {
+    padding: 1rem;
+    margin: 0;
+
+  }
+  .artworks-category {
+    padding-top: 2%;
+    padding-bottom: 7%;
+  }
+
+
+  #slideshow-cancel-button {
+    font-size: 1rem;
+  }
+
+
+  /*.popup-purchase, .popup-cart {*/
+  /*    font-size: 1rem;*/
+  /*    padding: 1% 0;*/
+  /*}*/
+
+  .artwork-details-info-popup {
+    padding-bottom: 3%;
+  }
+
+
+  .allArtParent {
+    gap: 10%;
+  }
+
+  .see-more h1 {
+    display: flex;
+    justify-content: center;
+    width: max-content;
+  }
+
+  .see-more h1, .artworks-category {
+    font-size: 1rem;
+  }
+
+  .artworks-grandparent {
+    margin: 8% auto 0 auto;
+
+  }
+
+  .frame {
+    min-width: 14.125rem;
+    min-height: 13.125rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+
+  .grand-parent-wishlist {
+    display: block;
+
+    .parent-wishlist {
+      width: 100vw;
+      margin: auto;
+
+      .wish-list {
+        min-height: 15rem;
+        width: inherit;
+        display: block;
+
+        .wish-list-img-wrapper {
+          width: 50vw;
+        }
+
+        .parent-details-wish-list {
+          position: absolute;
+          top: 2%;
+          right: 2%;
+          width: 45vw;
+          margin: 0;
+
+          .details {
+            display: block;
+
+            #b, #a {
+              width: 100%;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+}
+
+
+/*Media query for cartlist page*/
+@media only screen and (max-width: 800px) {
+
+
+  .parent-cart-list {
+    width: 50vw;
+
+   // .parent-details-cart-list {
+      .cart-list {
+        img {
+          position: absolute;
+          right: 7px;
+          top: 20px;
+          width: 15vw;
+          max-height: 17vw;
+        }
+
+        .cart-details {
+          //display: block;
+          flex-direction: column;
+          //background-color: #2121ff;
+        }
+     // }
+    }
+  }
+
+  .price-calculation {
+    width: 40vw;
+
+    .card-logo {
+      img {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .more-design {
+    grid-template: repeat(3, 1fr)/repeat(2, 1fr);
+  }
+
+  .grid-image-items {
+    width: 45vw;
+    height: 45vw;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .parent-checkout-data {
+
+    width: 70%;
+  }
+
+  .grand-parent-checkout-data {
+    flex-direction: column-reverse;
+    margin: auto;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .checkout-price-calculation {
+    position: static;
+    margin-top: 2%;
+  }
+}
+
+
+@media only screen and (max-width: 610px) {
+  .checkout-artwork-data {
+    padding: 2%;
+    flex-direction: column;
+  }
+}
+
+
+/*Media query for whishlist page*/
+
+@media only screen and (max-width: 600px) {
+
+
+  .main-parent {
+    display: block;
+
+    .parent-cart-list {
+      width: 90vw;
+      margin: auto;
+
+      .cart-list {
+        img {
+          width: 25vw;
+          max-height: 27vw;
+        }
+      }
+    }
+
+    .price-calculation {
+      position: static;
+      width: 90vw;
+      margin-top: 2%;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+  }
+
+
+}
+
+@media only screen and (max-width: 560px) {
+  .parent-checkout-data {
+    width: 100%;
+  }
+
+
+}
+
+
+@media only screen and (max-width: 500px) {
+
+
+  .price, .medium, .titre, .common-op, .cart-common-op, .display-common, .related-items-common-op {
+    font-size: $font-size-0875;
+  }
+  .artworks-grandparent {
+    margin: 15% auto 0 auto;
+
+    .allArtParent {
+      gap: 20%;
+      padding: 0 10%;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .grand-parent-wishlist {
+
+    .parent-wishlist {
+      width: 90vw;
+      margin: auto;
+
+      .wish-list {
+        margin: 1rem auto;
+        display: block;
+
+        .wish-list-img-wrapper {
+          width: 100%;
+          margin: auto;
+        }
+
+        .parent-details-wish-list {
+          position: static;
+          width: 100%;
+          padding: 2% 0;
+
+          .details {
+            display: flex;
+          }
+
+        }
+      }
+    }
+  }
+}
+
+.unavailable-link {
+  color: rgba(0, 0, 0, 0.35);
+  cursor: not-allowed;
+}
+
+.unavailable-link-background-color {
+  cursor: not-allowed;
+  background-color: rgba(0, 0, 0, 0.35);
+  border-color: rgba(0, 0, 0, 0.35);
+}
+
+.unavailable-cover {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.65);
+  width: 100%;
+  height: 100%;
+  cursor: not-allowed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+
+.ellipsisText {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative
+}
+
+.smallFont {
+  font-size: 0.7rem;
+
+}
+
+
+.welcome-message {
+  background-color: black;
+  text-align: center;
+
+  color: green;
+  font-family: "Brush Script MT", serif;
+  font-size: 14vw;
+  width: 100%;
+  padding: 2%;
+  letter-spacing: 2vw;
+}
+
+hr {
+  border-color: rgba(171, 171, 171, 0.06);
+  background-color: rgba(87, 87, 87, 0.06);
+}
+
+@media (hover: none) {
+  .allArtParent {
+    overflow: scroll;
+    padding: 0 5%;
+
+    .parent-next2, .parent-previous2, .hover-mode {
+      display: none;
+    }
+
+    .touch-mode {
+      display: inline-block;
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 0;
+    color: white;
+  }
+
+
+}
+
+@media only screen and (max-width: 500px) {
+  .social-media-link {
+    width: 95vw;
+  }
+
+  .artwork-image {
+    width: 80vw;
+  }
+}
+
+

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamoc | Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <script src="/js_file/checkout.js" type="module" defer></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/js_file/payment_process.js" type="module" defer></script>
+
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <script th:inline= "javascript">
+        const stripePublicKey =/*[[${stripePublicKey}]]*/ null;
+    </script>
+</head>
+<body>
+<div class="loading"></div>
+
+<header class="header-checkout">
+    <nav class="nav-checkout"><a href="/" class="home">
+        <img class="logo" src="/images/HAMOC_WITH-SLOGAN.webp" alt="Jean Yves Logo"/>
+        <div>Haitian American Museum of chicago</div>
+    </a>
+    </nav>
+</header>
+<ul class="current-location">
+    <li class="location-info">Shipping</li>
+    <li class="location-info">Billing</li>
+    <li class="location-info">Review</li>
+</ul>
+
+
+<div style="width:50%; margin: auto;" class="backend-invalidation-alert"><p style="color: red; display: inline"
+                                                                            th:text="${errorAlert}">
+</p>
+    <span class="contact-me1"
+          style="background-color: #aabff3; padding:2px; display:none; cursor:pointer;">contact me</span></div>
+<section th:insert="~{contactform.html :: contact-form}"></section>
+<form id="payment-form" novalidate method="post" class="form-payment" th:object="${checkout}">
+    <article class="grand-parent-checkout-data">
+        <div class="parent-checkout-data">
+            <div class="parent-review-address">
+                <h1 class="heading-title">1 Shipping Address</h1><span class="checkout-cancel-button">&#x2715;</span>
+                <div class="review-address shipping-review-address check-field-completed">
+                    <div class="address-content-summary">
+                        <h5 class="user-name">Jean Yves Hector</h5>
+                        <h4 class="dynamic-shipping-address">4407 S Berkeley Ave<br>Chicago IL 60653</h4>
+                    </div>
+                    <h4 class="edit-address">Edit</h4>
+                    <i class="fa-regular fa-circle-check"></i>
+                </div>
+
+            </div>
+            <section class="s_section s-section-parent-input checkout-box-data">
+                <div class="email-phoneNumber-wrapper"><label class="email-label" for="email">Email <span
+                        class="required">*</span><br>
+                    <input class="shipping-address-input" type="email" id="email" required/>
+                    <ul>
+                        <li class="email-errorMessage errorMessage"></li>
+                        <li class=""></li>
+
+                    </ul>
+                </label>
+                    <label class="phone-number-label" for="phone-number">Phone Number <span
+                            class="required">*</span><br>
+                        <input class="shipping-address-input" type="text"
+                               id="phone-number" maxlength="14" required/>
+                        <ul>
+                            <li class="phone-errorMessage errorMessage"></li>
+                            <li class=""></li>
+
+                        </ul>
+                    </label>
+                </div>
+                <div
+                        th:insert="~{all_countries.html :: address-form(field_countries='s_countries', country_id='s_country', field_fullname='s_fullname', field_street='s_street', field_apt='s_apt', field_zipcode='s_zipcode',field_city='s_city', field_state='s_state')}"></div>
+                <h2 class="save-button">Save change</h2>
+            </section>
+            <div class="parent-review-address">
+                <h1 class="heading-title payment-method">2 Billing</h1>
+                <span class="checkout-cancel-button">&#x2715;</span>
+                <div class="review-address billing-review-address check-field-completed">
+                    <ul class="address-content-summary">
+                        <li><strong>debit </strong>ending in <span class="card-ending">0533</span></li>
+                        <li><strong>billing address: </strong><span
+                                class="dynamic-billing-address">4407 S Berkeley Ave<br>Chicago IL 60653</span>
+                        </li>
+                    </ul>
+                    <h4 class="edit-address">Edit</h4>
+                    <i class="fa-regular fa-circle-check"></i>
+                </div>
+
+            </div>
+            <section class="payment-info checkout-box-data">
+                <!--            <h1>Choose a payment method </h1>-->
+
+
+                <div class="card-accept">
+                    <!--                <input type="radio" id="credit-card" name="payment" value="credit card">Card-->
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-brands fa-cc-discover"></i>
+                    <i class="fa-brands fa-cc-amex"></i>
+                    <i class="fa-brands fa-cc-paypal"></i>
+                </div>
+                <!--        <div><label for="monthly-payment">-->
+                <!--            <input type="radio" id="monthly-payment" name="payment" value="monthly payment">Monthly Payment with Affirm-->
+
+                <!--        </label></div>-->
+                <!--        <div><label for="paypal">-->
+                <!--            <input type="radio" id="paypal" name="payment" value="paypal">Paypal-->
+
+                <!--        </label></div>-->
+                <div class="card-info">
+                    <label class="card-holder-name" for="card-name">Name of card holder <span
+                            class="required">*</span><br>
+                        <input class="shipping-address-input" type="text" th:field="*{ccName}"
+                               placeholder="Name of card holder" id="card-name" required/>
+                        <ul>
+                            <li class="errorMessage"></li>
+                            <li th:errorclass="errorMessage" th:if="${#fields.hasErrors('ccName')}"
+                                th:errors="${checkout.ccName}"></li>
+                        </ul>
+                    </label>
+                    <!--                    <div id="custom-form"></div>-->
+
+                    <label class="card-digit">Credit/Debit card <span class="required">*</span><br>
+                        <div class="card-number-wrapper"><i class="fa-solid fa-credit-card"></i>
+                            <div id="card-number-element"></div>
+
+                            <!--                            <input class="shipping-address-input" type="text" placeholder="Card Number"-->
+                            <!--                                   th:field="*{ccNumber}" id="card-number" required min="13" max="16"/>-->
+
+                            <i class="fa-solid fa-lock"></i></div>
+                        <ul>
+                            <li class="card-errorMessage errorMessage"></li>
+                            <!--                            <li th:if="${#fields.hasErrors('ccNumber')}"-->
+                            <!--                                th:errors="*{ccNumber}" th:errorclass="errorMessage"></li>-->
+
+                        </ul>
+                    </label>
+
+
+                    <label class="expiration-card-label">Expiration Date <span class="required">*</span><br>
+                        <div class="shipping-address-input" id="card-expiry-element"></div>
+
+                        <!--                        <div class="expiration-card-info">-->
+                        <!--                            <div> -->
+                        <!--<input th:field="*{ccExpirationMonth}" class="shipping-address-input" list="months"&ndash;&gt;-->
+                        <!--                                        placeholder="Month" name="month"-->
+                        <!--                                        id="month" required/>-->
+                        <!--                                <datalist id="months">-->
+                        <!--                                    <option value="1">-->
+                        <!--                                    <option value="2">-->
+                        <!--                                    <option value="2">-->
+                        <!--                                    <option value="3">-->
+                        <!--                                    <option value="4">-->
+                        <!--                                    <option value="5">-->
+                        <!--                                    <option value="6">-->
+                        <!--                                    <option value="7">-->
+                        <!--                                    <option value="8">-->
+                        <!--                                    <option value="9">-->
+                        <!--                                    <option value="10">-->
+                        <!--                                    <option value="11">-->
+                        <!--                                    <option value="12">-->
+                        <!--                                </datalist>-->
+                        <!--                                <ul>-->
+                        <!--                                    <li class="errorMessage"></li>-->
+                        <!--                                    <li th:if="${#fields.hasErrors('ccExpirationMonth')}"-->
+                        <!--                                        th:errors="*{ccExpirationMonth}" th:errorclass="errorMessage"></li>-->
+                        <!--                                </ul>-->
+                        <!--                            </div>-->
+                        <!--                            <div>-->
+                        <!--                                <input th:field="*{ccExpirationYear}" class="shipping-address-input" list="years"-->
+                        <!--                                       placeholder="Year" name="year"-->
+                        <!--                                       id="year" required/>-->
+                        <!--                                <datalist id="years">-->
+                        <!--                                    <option class="year-expiration" value="2023">-->
+                        <!--                                    <option class="year-expiration" value="2024">-->
+                        <!--                                    <option class="year-expiration" value="2025">-->
+                        <!--                                    <option class="year-expiration" value="2026">-->
+                        <!--                                    <option class="year-expiration" value="2027">-->
+                        <!--                                    <option class="year-expiration" value="2028">-->
+                        <!--                                    <option class="year-expiration" value="2025">-->
+                        <!--                                    <option class="year-expiration" value="2026">-->
+                        <!--                                    <option class="year-expiration" value="2027">-->
+                        <!--                                    <option class="year-expiration" value="2028">-->
+                        <!--                                </datalist>-->
+                        <!--                                <br>-->
+                        <!--                                <ul>-->
+                        <!--                                    <li class="errorMessage"></li>-->
+                        <!--                                    <li th:if="${#fields.hasErrors('ccExpirationYear')}"-->
+                        <!--                                        th:errors="*{ccExpirationYear}" th:errorclass="errorMessage"></li>-->
+                        <!--                                </ul>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                    </label>
+
+
+                    <label class="security-code-label">Security Code <span class="required">*</span><br>
+                        <!--                        <div>-->
+                        <!--                            <div class="parent-security-info">-->
+                        <div class="security-info">
+                            <!--                                    <input th:field="*{ccCVV}" class="shipping-address-input" type="text" maxlength="4"-->
+                            <!--                                           name="security-code"-->
+                            <!--                                           placeholder="CVV" id="security-code" required/>-->
+                            <div id="card-cvc-element"></div>
+
+                            <i
+                                    class="fa-solid fa-lock"></i>
+                        </div>
+                        <!--                                <ul>-->
+                        <!--                                    <li class="errorMessage cvv-errorMessage security-info-errorMessage"></li>-->
+
+
+                        <!--                                    <li th:if="${#fields.hasErrors('ccCVV')}"-->
+                        <!--                                        th:errors="*{ccCVV}" th:errorclass="errorMessage"></li>-->
+
+
+                        <!--                                </ul>-->
+
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                    </label>
+
+                </div>
+                <label for="same-address" class="address-label same-address-label"><input type="checkbox" checked
+                                                                                          id="same-address"><span
+                        class="checkmark checkmark-same"></span>My billing address is the same as my shipping
+                    address<span class="display-address">4407 S Berkeley Ave 60653</span></label><br>
+                <label for="default-address" class="address-label"><input id="default-address" checked
+                                                                          name="default-address" type="checkbox"><span
+                        class="checkmark"></span>Set ass
+                    default
+                </label>
+
+                <h1 class="d_section">Billing Address</h1>
+                <section class="d_section d-section-parent-input"
+                         th:insert="~{all_countries.html :: address-form(field_countries='d_countries', country_id='d_country', field_fullname='d_fullname', field_street='d_street', field_apt='d_street', field_apt='d_apt', field_zipcode='d_zipcode',field_city='d_city', field_state='d_state')}"></section>
+                <h2 class="save-button">Save change</h2>
+            </section>
+
+            <!--    d prefix means delivery-->
+            <h1 class="heading-title review-heading-title billing-address">3 Review items and shipping <i
+                    class="check-field-completed fa-regular fa-circle-check"></i></h1>
+            <section class="checkout-box-data">
+                <h3 class="support-thanks">Thank you for your support!!!</h3>
+                <h3 class="delivery-time">Delivery: March, 20, 2023</h3>
+
+                <div class="parent-checkout-artwork-data">
+                    <div style="display: none" class="checkout-artwork-data">
+                        <div class="checkout-art-img"><img src="/images/download1.jpg" alt="image.jpg"/></div>
+                        <p style="display: none;" class="image-id"></p>
+                        <div class="checkout-art-description">
+                            <h4 class="checkout-common-op">Title</h4>
+                            <p class="checkout-common-op">Medium</p>
+                            <p class="checkout-common-op">Size</p>
+                            <p class=" item-price checkout-common-op">price</p>
+
+                            <p>Description: When it comes to selling your art,
+                                the more information that you provide in your artwork
+                                description the better! After all, this is where your myCustomer
+                                will turn to learn more about your piece. The best artwork descriptions
+                                on Artfinder comprise two sections: one detailing the inspiration behind the
+                                piece and another presenting the bare facts. The inspirational bit This component
+                                of the description will need to refer directly to the artwork at hand</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <aside class="checkout-price-calculation price-calculation">
+            <h3 style="text-align: center">Order Summary</h3>
+            <!--        //<h4>Checkout(<p class="checkout-total-items">2<span> item(s)</span></p>)</h4>-->
+            <ul class="checkout-out-info">
+                <li>
+                    <p>Total Items (<span class="checkout-total-items">2</span>)</p>
+                    <span class="item-total">$5678</span>
+                </li>
+                <li>
+                    <span>Shipping</span>
+                    <span class="shipping-price">$5</span>
+                </li>
+                <li>
+                    <span>Tax</span>
+                    <span class="taxes">$58</span>
+                </li>
+                <li>
+                    <span>Total Price</span>
+                    <span class="total-price">$78990</span>
+                </li>
+            </ul>
+            <div>
+                <div class="safety-info">
+                    <h4>Satisfaction Guaranteed</h4>
+                    <p>Trust us, and purchase with confidence if you don't satisfy of your myProduct can return it back in
+                        15 days</p></div>
+                <div class="safety-info">
+                    <h4>Safe And Secure</h4>
+                    <p>All payments ad transactions are secure and encrypted</p>
+                </div>
+                <div><input type="submit" id="purchase-button" class="checkout" value="Submit payment"></div>
+            </div>
+        </aside>
+        <div class="mask-background purchase-success-cover">
+            <div class="purchase-success">
+                <h1><i style="font-size:4rem; color: forestgreen" class="fa-solid fa-check"></i></h1>
+                <h3>Thank you for your purchase, your payment was successful.</h3>
+                <p>Your receipt has been sent to the email you provided</p>
+                <small>“the true collector’s only home is his own museum.”<br>
+                    <strong>_Orhan Pamuk, The Museum of Innocence</strong></small>
+                <a href="/artworks">
+                    <div class="purchase-thank-you">Thank you</div>
+                </a></div>
+            <div class="purchase-error">
+                <h1><i style="font-size:4rem; color: red" class="fas fa-exclamation-triangle"></i></h1>
+                <h3>Sorry an error happened, please the error description below, and try again.</h3>
+                <!--/*@thymesVar id="cardexception" type=""*/-->
+                <p th:text="${cardexception}"></p>
+
+               <div class="purchase-retry">Okay</div>
+                </div>
+        </div>
+    </article>
+
+    <div class="continue-back-parent">
+        <div class="continue-back-parent-cover"></div>
+        <div class="continue-back-wrapper">
+            <div class="back-turn-grey back button-slide">
+                <i id="previous-button" class="back-turn-grey back-left-arrow fa-solid fa-chevron-left"></i>back
+            </div>
+            <div class="continue-turn-grey continue button-slide">Continue<i id="continue-button"
+                                                                             class="continue-turn-grey continue-right-arrow fa-solid fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>

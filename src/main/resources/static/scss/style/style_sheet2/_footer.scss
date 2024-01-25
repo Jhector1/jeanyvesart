@@ -1,0 +1,87 @@
+footer {
+  position: relative;
+  z-index: 1;
+  row-gap: 5%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $main-color;
+
+  .credit-card {
+    padding: 1% 0;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+
+    li {
+      i {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .base {
+    padding: 2% 0;
+    display: flex;
+    //justify-content: space-between;
+    width: 80%;
+    align-items: center;
+
+    .parent-logo2 {
+      width:max-content;
+      justify-self: center;
+      margin: auto;
+
+    }
+
+    .contact {
+      li {
+        padding: 2% 0;
+        text-align: center;
+
+      }
+    }
+
+    .follow-us {
+      width: max-content;
+
+      & > * {
+        padding: 1rem 0;
+      }
+
+      .title {
+        text-align: center;
+      }
+
+      .social-media {
+        display: flex;
+        margin: auto;
+        gap: 1rem;
+        justify-content: space-between;
+
+        a {
+          color: black;
+        }
+      }
+    }
+
+  }
+}
+
+
+@media only screen and (max-width: 800px) {
+  .base {
+    flex-direction: column;
+
+    .logo2 {
+      width: 40%;
+    }
+
+    .follow-us {
+      width: 50%;
+    }
+  }
+
+
+}

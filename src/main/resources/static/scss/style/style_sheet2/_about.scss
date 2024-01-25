@@ -1,0 +1,30 @@
+.about-content, .terms-and-service {
+  padding: 2rem 1.5rem;
+  margin: 1.5rem;
+
+}
+
+.about-content *, .terms-and-service * {
+  color: #575757;
+  font-family: proxima-nova, sans-serif;
+  padding: .5rem;
+  line-height: 2rem;
+
+}
+
+.bio {
+  img {
+    width: 30rem;
+    float: left;
+    clear: bottom;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .bio {
+    img {
+      width: 100%;
+
+    }
+  }
+}

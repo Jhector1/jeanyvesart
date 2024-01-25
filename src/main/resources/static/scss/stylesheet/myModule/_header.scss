@@ -1,0 +1,168 @@
+//
+//.header-wrapper {
+//  z-index: 2;
+//  display: flex;
+//  flex-direction: column;
+//  align-items: center;
+//  justify-content: center;
+//  background-color: #eeeeee;
+//  border: var(--border-less-opacity);
+//  width: 100vw;
+//  position: sticky;
+//  top: 0;
+//
+//  Header {
+//
+//    padding: 1% 0;
+//    display: flex;
+//    width: inherit;
+//    background-color: $main-color;
+//    align-items: center;
+//
+//    border-bottom: 3px red solid;
+//    justify-content: space-around;
+//
+//    .bar-nav {
+//      display: none;
+//      width: max-content;
+//    }
+//
+//    .home {
+//      @include flex_display($justify_content: space-between);
+//
+//      width: max-content;
+//      justify-self: center;
+//
+//
+//      .logo {
+//        /*previously 30px with Sygma logo*/
+//        width: 30px;
+//        height: auto;
+//      }
+//    }
+//
+//    %nav-nav-link-common {
+//      width: max-content;
+//      gap: 2rem;
+//    }
+//
+//    nav {
+//      @include flex_display($justify_content: space-between, $gap: 1rem);
+//
+//      li {
+//        list-style-type: none;
+//        a{
+//          text-decoration: none;
+//
+//        }
+//      }
+//
+//      @media only screen and (max-width: 800px) {
+//        display: none;
+//
+//
+//      }
+//    }
+//
+//    .repo-icon {
+//
+//      width: max-content;
+//
+//      @include flex_display($justify_content: space-between, $gap: 1rem);
+//
+//
+//      li {
+//        list-style-type: none;
+//        a{
+//          text-decoration: none;
+//
+//        }
+//      }
+//    }
+//  }
+//
+//  .nav-link {
+//    @extend .repo-icon;
+//    @extend %nav-nav-link-common;
+//    @extend %nav-link-artwork-menu;
+//    margin: auto;
+//    padding-top: 1rem;
+//
+//
+//    .artwork-menu {
+//      width: 100%;
+//      flex-direction: column;
+//      align-items: center;
+//      justify-content: center;
+//
+//      display: none;
+//      margin: auto;
+//      gap: 1rem;
+//      @media only screen and (min-width: 501px) and (max-width: 800px) {
+//
+//        justify-content: space-evenly;
+//        width: max-content;
+//        flex-direction: row;
+//        padding: 2%;
+//        display: flex;
+//
+//
+//      }
+//
+//      li {
+//        list-style-type: none;
+//        @media only screen and (max-width: 500px) {
+//          padding-bottom: 4%;
+//          a{
+//            text-decoration: none;
+//
+//          }
+//        }
+//      }
+//
+//
+//
+//    }  .menu {
+//         display: none;
+//         list-style-type: none;
+//             padding: 0.5rem ;
+//             width: max-content;
+//             margin: 1rem auto auto;
+//             @media only screen and (max-width: 500px) {
+//           display: block;
+//           cursor: pointer;
+//           border-top: 1px slategray solid;
+//         }
+//       }
+//  }
+//}
+//
+//
+//nav li, .repo-icon li, .credit-card li, .contact li {
+//  list-style-type: none;
+//
+//}
+//
+//
+//li a, a {
+//  text-decoration: none;
+//
+//}
+//
+//
+//.fa-bars {
+//  font-size: 2rem;
+//}
+//%nav-link-artwork-menu {
+//  width: 100%;
+//  flex-direction: column;
+//  align-items: center;
+//  justify-content: center;
+//}
+//
+//%no_list_decoration {
+//  list-style-type: none;
+//
+//}
+//
+//

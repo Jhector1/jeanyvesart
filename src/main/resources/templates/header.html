@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<article th:fragment="header-component" class="header-wrapper">
+    <header>
+        <div class="bar-nav"><i class="bar-nav fa-solid fa-bars"></i></div>
+        <a href="/" class="home">
+
+            <div class="active-button">Jean Yves</div>
+            <img class="logo" th:src="@{/images/jeanyves_logo.svg}" alt="Jean Yves Logo"/>
+            <div class="active-button">Hector</div>
+        </a>
+
+        <nav>
+            <li><a class="active-button" href="/artworks">Shop</a></li>
+            <li><a class="unavailable-link">Virtual Exhibition</a></li>
+            <li><a class="active-button" href="/about">About</a></li>
+            <li><a class="unavailable-link">My Story</a></li>
+            <li><a class="active-button" href="/contact">Contact</a></li>
+        </nav>
+
+        <ul class="repo-icon">
+
+            <ul class="user-icon-box">
+
+                <div class="dropdown">
+                    <button style="width: 4rem; display:  flex; align-items: center; justify-content: space-between;"
+                            type="button"
+                            class="active-button sign-user fa-regular fa-circle-user  btn btn-secondary dropdown-toggle"
+                            data-bs-toggle="dropdown">
+
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="active-user">
+                        <li><a class="dropdown-item item1 profile-nav" th:href="@{'/account/' + ${sessionId} + '/profile'}">My
+                            Information</a></li>
+                        <li><a class="dropdown-item item2" th:href="@{'/account/' + ${sessionId} + '/collections'}">My Collection</a></li>
+                        <li><a class="dropdown-item unavailable-link item3" >Payment Settings</a></li>
+                        <li><a class="dropdown-item unavailable-link item4" >My Reviews</a></li>
+
+
+                        <li>
+                            <form action="/logout" method="post">
+                                <button class="log-user-out btn btn-light dropdown-item" type="submit">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </ul>
+
+            <li class="anonymous-user">
+                <a th:href="@{'/account/' + ${sessionId} + '/profile'}"
+                   class="sign-user  active-button fa-regular fa-user"></a>
+            </li>
+
+
+            <!--                <li class="user-icon-box"><a  href="/login/account" class="sign-user active-button fa-regular fa-circle-user"></a><i class="fa-solid fa-caret-down"></i></li>-->
+            <li>
+                <a href="/wishlists" class=" active-button fa-regular fa-heart"></a><i style="color: #a10404;"
+                                                                                       class="count-favorite-list favorite-count"></i>
+            </li>
+            <li>
+                <a href="/cart" class="active-button fa fa-cart-arrow-down"></a><i style="color: #a10404;"
+                                                                                   class="cart-add-list cart-count"></i>
+            </li>
+
+        </ul>
+
+    </header>
+    <div class="nav-link  header-menu" style="position:relative;">
+
+        <div class="card">
+            <div id="collapseOne" class="collapse menu-to-show" data-bs-parent="#accordion">
+                <ul class="card-body artwork-menu">
+<!--                    <ul class="artwork-menu">-->
+                    <li><a class="active-button" href="/artworks">Shop</a></li>
+                    <li><a class="unavailable-link">Virtual Exhibition</a></li>
+                    <li><a class="active-button" href="/about">About</a></li>
+                    <li><a class="unavailable-link">My Story</a></li>
+                    <li><a class="active-button" href="/contact">Contact</a></li>
+<!--                </ul>-->
+                </ul>
+            </div>
+            <div class="card-header">
+                <a class="btn menu"  style="width: 100%; height: 100%" data-bs-toggle="collapse" href="#collapseOne">
+<!--                    <li class="menu">Menu</li>-->
+                    menu
+                </a>
+            </div>
+
+        </div>
+
+
+
+    </div>
+<!--    <div class="nav-link  header-menu" style="position:relative;">-->
+<!--        <ul class="artwork-menu">-->
+<!--            <li><a class="active-button" href="/artworks">Shop</a></li>-->
+<!--            <li><a class="unavailable-link">Virtual Exhibition</a></li>-->
+<!--            <li><a class="active-button" href="/about">About</a></li>-->
+<!--            <li><a class="unavailable-link">My Story</a></li>-->
+<!--            <li><a class="active-button" href="/contact">Contact</a></li>-->
+<!--        </ul>-->
+<!--        <li class="menu">Menu</li>-->
+
+<!--    </div>-->
+</article>
+
+</body>
+</html>

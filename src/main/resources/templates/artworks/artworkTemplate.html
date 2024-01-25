@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main th:fragment="artworksMainTemplate(category)">
+    <div class="link-directive"><a href="/artworks" class="directive directive-artworks">artworks</a><i
+            class="directive fa-solid fa-arrow-right-long"></i>
+        <p class="directive directive-category" th:text="${category}"></p></div>
+
+    <h1 class="artworks-category" th:text="${#strings.toUpperCase(category)}">Artwork</h1>
+
+    <article class="allArtParent" th:class="${#strings.toLowerCase(category)}" th:classappend="${allArtParent}">
+        <button class="parent-previous2">
+            <i class="previous2 fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="frame" th:each="artwork : ${object}">
+
+            <input type="hidden" class="image-id" style="display:none;" th:value="${artwork.getId()}">
+            <section class="image-wrapper"><img class="artwork-data-img" th:src="@{${artwork.getImageUrl()}}"
+                                                th:alt="${artwork.getTitle()}"/>
+            </section>
+            <section class="description">
+                <div class="sub-title">
+                    <p th:text="${artwork.getTitle()}" class="ellipsisText titre artwork-data">
+                        title</p>
+                    <div class="parent-heart">
+                        <button class="liked-icon heart-circle-liked-heart"><i style="color: blue;" id="liked-heart1"
+                                                                               class="liked-art fa-solid fa-heart"></i>
+                        </button>
+                        <button class="not-liked-icon heart-circle-not-liked-heart"><i id="not-liked-heart1"
+                                                                                       class="liked-art fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+
+                </div>
+                <section class="sub-title">
+                    <div class="description-sub-title">
+                        <!--                        <input class="uniqueness" type="hidden" th:value="${artwork.isUnique()}">-->
+                        <!--                        <input class="inventory-data" type="hidden" th:value="${artwork.getInventory()}">-->
+
+                        <p th:text="${artwork.getMedium()}" class="ellipsisText medium artwork-data">Oil on Canvas</p>
+                        <p th:text="${artwork.getSize()}" class="ellipsisText size artwork-data">30x30inch</p>
+                        <div class="price-wrapper"><small class="currency">$US</small><small
+                                th:text="${artwork.getPrice()}" class="ellipsisText price artwork-data">$1000</small>
+                        </div>
+                        <p style="display: none" th:text="${artwork.getDescription()}" class="describe-artwork"></p>
+                    </div>
+                    <div style="align-self: flex-end" class="touch-mode">
+                        <div class="cart-icon cart-remove-box"><i style="color: cornflowerblue; font-size: 1.5rem"
+                                                                  class="fa-sharp fa-solid fa-cart-plus"></i>
+                        </div>
+                        <div class="cart-icon cart-add-box"><i style="font-size: 1.5rem"
+                                                               class="fa-sharp fa-solid fa-cart-plus"></i></div>
+                    </div>
+                </section>
+                <h3 class="sold-item">Sold</h3>
+
+                <section class="hover-mode">
+                    <button class="cart-add cart-add-action">Add to Cart</button>
+                    <button class="cart-remove cart-remove-action">Remove From Cart</button>
+                </section>
+            </section>
+        </div>
+        <button class="parent-next2"><i class="next2 fa-solid fa-chevron-right"></i></button>
+
+    </article>
+</main>
+
+<div class="artworks-grandparent" th:fragment="artworksTemplateData(field_artwork_category)">
+
+    <section th:replace="~{:: artworksMainTemplate(${field_artwork_category})}"></section>
+    <div class="see-more">
+        <div class="see-in-details-wrapper">
+            <hr>
+            <h1 class="see-in-details" href="#">See More</h1>
+            <!--                <div class="touch-mode"><i style="font-size: 2rem;" class="see-in-details fa-solid fa-expand"></i>-->
+            <!--                </div>-->
+            <hr>
+        </div>
+        <i style="display: none" id="down-id" class="down fa-solid fa-chevron-down"></i>
+    </div>
+</div>
+</body>
+</html>
