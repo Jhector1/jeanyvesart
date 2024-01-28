@@ -52,39 +52,43 @@
 <body>
 
 <header th:replace="~{header.html :: header-component}"></header>
+<div th:replace="~{dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>
 
-<div class="loading loader">
-    <div class="container mt-3">
+<!--<div class="loading loader">-->
+<!--    <div class="container mt-3">-->
 
-        <div class="spinner-grow text-muted"></div>
-        <div class="spinner-grow text-primary"></div>
-        <div class="spinner-grow text-success"></div>
-        <div class="spinner-grow text-info"></div>
-        <div class="spinner-grow text-warning"></div>
-        <div class="spinner-grow text-danger"></div>
-        <div class="spinner-grow text-secondary"></div>
-        <div class="spinner-grow text-dark"></div>
-        <div class="spinner-grow text-light"></div>
-    </div>
-    <p class="while-waiting">One second...</p>
-</div>
-<div class="loading loading-checkout"><p class="while-waiting">Getting ready for checkout...</p>
+<!--        <div class="spinner-grow text-muted"></div>-->
+<!--        <div class="spinner-grow text-primary"></div>-->
+<!--        <div class="spinner-grow text-success"></div>-->
+<!--        <div class="spinner-grow text-info"></div>-->
+<!--        <div class="spinner-grow text-warning"></div>-->
+<!--        <div class="spinner-grow text-danger"></div>-->
+<!--        <div class="spinner-grow text-secondary"></div>-->
+<!--        <div class="spinner-grow text-dark"></div>-->
+<!--        <div class="spinner-grow text-light"></div>-->
+<!--    </div>-->
+<!--    <p class="while-waiting">One second...</p>-->
+<!--</div>-->
+<div th:replace="~{dryTemplate.html :: spinner(message='Getting ready for checkout...', dynamicClass='loading-checkout')}"></div>
 
-    <div class="container mt-3">
-
-        <div class="spinner-grow text-muted"></div>
-        <div class="spinner-grow text-primary"></div>
-        <div class="spinner-grow text-success"></div>
-        <div class="spinner-grow text-info"></div>
-        <div class="spinner-grow text-warning"></div>
-        <div class="spinner-grow text-danger"></div>
-        <div class="spinner-grow text-secondary"></div>
-        <div class="spinner-grow text-dark"></div>
-        <div class="spinner-grow text-light"></div>
-    </div>
+<!--<div class="loading loading-checkout">-->
 
 
-</div>
+<!--    <div class="container mt-3">-->
+
+<!--        <div class="spinner-grow text-muted"></div>-->
+<!--        <div class="spinner-grow text-primary"></div>-->
+<!--        <div class="spinner-grow text-success"></div>-->
+<!--        <div class="spinner-grow text-info"></div>-->
+<!--        <div class="spinner-grow text-warning"></div>-->
+<!--        <div class="spinner-grow text-danger"></div>-->
+<!--        <div class="spinner-grow text-secondary"></div>-->
+<!--        <div class="spinner-grow text-dark"></div>-->
+<!--        <div class="spinner-grow text-light"></div>-->
+<!--    </div>-->
+<!--    <p class="while-waiting">Getting ready for checkout...</p>-->
+
+<!--</div>-->
 <main style="position: static; background-color: white" class="artwork-details-info-popup">
 
     <article class="slideshow">

@@ -6,6 +6,11 @@
 </head>
 <body>
 <article th:fragment="header-component" class="header-wrapper">
+    <script th:inline="javascript">
+        const apiBaseUrl = /*[[${apiBaseUrl}]]*/ 'null';
+        console.log(apiBaseUrl)
+
+    </script>
     <header>
         <div class="bar-nav"><i class="bar-nav fa-solid fa-bars"></i></div>
         <a href="/" class="home">

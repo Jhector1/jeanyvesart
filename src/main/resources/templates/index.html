@@ -29,7 +29,7 @@
 
 </head>
 <body>
-<div th:replace="~{dryTemplate.html :: spinner}"></div>
+<div th:replace="~{dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>
 
 <article  th:replace="~{header.html :: header-component}" ></article>
 <p class="w3-animate-fading quotes hirst-quote">"Buy art, build a museum, put your name on it, let people in for free.

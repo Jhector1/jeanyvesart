@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -74,7 +75,9 @@ public class MyCustomer implements Serializable, MyUser {
     @Setter
     @Getter
     private CustomerCart customerCart;
-
+    @Setter
+    @Getter
+    private Set<Address> addressList;
     @Setter
     @Getter
     private List<MyOrder> myOrders;

@@ -21,7 +21,7 @@ class CookieManager {
 
     static async deleteUserItem(cookie) {
         try {
-            return await fetch(`http://localhost:9090/${cookie.type}/artworks/delete-artwork/${cookie.id}`, {
+            return await fetch(`${apiBaseUrl}/${cookie.type}/artworks/delete-artwork/${cookie.id}`, {
                 method: 'DELETE'
             });
         } catch (error) {
@@ -47,7 +47,7 @@ class CookieManager {
             //const artwork = ElementManager.createArtWorkObject(cookieValue, cookie.type);
 
 
-            const response = await new JsonRequest().post(`http://localhost:9090/${cookie.type}/artworks/save`, {
+            const response = await new JsonRequest().post(`${apiBaseUrl}/${cookie.type}/artworks/save`, {
                 productId: cookie.id,
                 quantity: quantity,
                 customerId: checkCookie(userId),
@@ -79,7 +79,7 @@ class CookieManager {
         try {
             const artworkId = cookie.id; // ID of the resource to be deleted
             const userId = checkCookie("user12345");
-            const response = await fetch(`http://localhost:9090/${cookie.type}/artworks/${userId}/${artworkId}`, {
+            const response = await fetch(`${apiBaseUrl}/${cookie.type}/artworks/${userId}/${artworkId}`, {
                 method: 'DELETE'
             });
 
@@ -134,7 +134,7 @@ class CookieClient {
     }
 
     displayNumberLike(numAdd, type) {
-        fetch(`http://localhost:9090/${type}/artworks/${checkCookie("user12345")}`).then(response => {
+        fetch(`${apiBaseUrl}/${type}/artworks/${checkCookie("user12345")}`).then(response => {
             if (!response.ok) {
                 throw new Error("Buyer cart is empty");
             } else {
@@ -162,7 +162,7 @@ class CookieClient {
 
     async displayArtworkDataFromDB(parent_element, list, common_op, type) {
         try {
-            const response = await fetch(`http://localhost:9090/${type}/artworks/${checkCookie("user12345")}`);
+            const response = await fetch(`${apiBaseUrl}/${type}/artworks/${checkCookie("user12345")}`);
             const data = await response.json();
 
             if (window.location.pathname === "/cart") {
@@ -252,7 +252,7 @@ class ElementManager {
 
     async displayElementStatusFromDB(imageUrl, operation, cookie) {
         try {
-            const response = await fetch(`http://localhost:9090/${cookie.type}/artworks/${checkCookie("user12345")}/${cookie.id}`);
+            const response = await fetch(`${apiBaseUrl}/${cookie.type}/artworks/${checkCookie("user12345")}/${cookie.id}`);
 
             const data = await response.json();
             this.checkVisibilityOrDisplay(operation, this.element1);
@@ -269,7 +269,7 @@ class ElementManager {
 
     async displayElementStatusOrPurchase(imageUrl, cookie, operation, element4 = null) {
         try {
-            const response = await fetch("http://localhost:9090/api/artworks/purchase/" + cookie.id);
+            const response = await fetch(`${apiBaseUrl}/api/artworks/purchase/${cookie.id}`);
 
             const purchaseArtwork = await response.json();
             this.element1.style.display = "none";

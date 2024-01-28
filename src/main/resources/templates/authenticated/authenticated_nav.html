@@ -9,7 +9,7 @@
 <article th:fragment="auth-nav" class="nav-profile-parent">
     <article class="nav-profile-child" id="user-profile">
         <div class="offcanvas-header">
-            <h1 class="offcanvas-title user-name" th:text="${fullName}">Jean Yves Hector</h1>
+            <h1 class="offcanvas-title user-name" th:text="${customerDto.getFullName()}">Jean Yves Hector</h1>
 <!--            <p>United States</p>-->
 
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>

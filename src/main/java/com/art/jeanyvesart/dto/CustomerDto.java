@@ -1,5 +1,6 @@
 package com.art.jeanyvesart.dto;
 
+import com.art.jeanyvesart.model.Address;
 import com.art.jeanyvesart.validation.PasswordMatches;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,4 +22,6 @@ public class CustomerDto implements MyCurrentUser {
     private String matchingPassword;
    // @ValidEmail(message ="Email is Invalid")
     private String email;
+    private Address address;
+    private String telephone;
 }

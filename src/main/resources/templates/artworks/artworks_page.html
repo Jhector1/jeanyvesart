@@ -47,7 +47,7 @@
 <header  th:replace="~{header.html :: header-component}" >
 </header>
 <!--<artwork-header-tab></artwork-header-tab>-->
-<div th:replace="~{dryTemplate.html :: spinner}"></div>
+<div th:replace="~{dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>
 
 <div>
 

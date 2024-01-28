@@ -1,5 +1,4 @@
 
-
 .profile-info {
   width: 80%;
   margin: 1rem auto;
@@ -18,11 +17,19 @@
     background-color: rgba(0, 100, 0, 0.06);
 
     section {
+
       display: flex;
       //justify-content: space-between;
       //width: 40%;
       margin: 1rem 0;
       gap: 2rem;
+
+      .sibling-field {
+        gap: 2rem;
+        width: 100%;
+        display: flex;
+
+      }
 
       // @include label-input-common;
       .form-floating {
@@ -66,6 +73,12 @@
   form {
     section {
       flex-direction: column;
+
+      .sibling-field {
+        flex-direction: column;
+
+
+      }
     }
   }
 }

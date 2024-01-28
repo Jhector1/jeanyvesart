@@ -1,8 +1,10 @@
 package com.art.jeanyvesart.controller;
 
 
+import com.art.jeanyvesart.dto.CustomerDto;
 import com.art.jeanyvesart.helper.Helper;
 import com.art.jeanyvesart.helper.api.Consumer;
+import com.art.jeanyvesart.model.Address;
 import com.art.jeanyvesart.model.CustomerFavorite;
 import com.art.jeanyvesart.model.MyCustomer;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
+
 @Slf4j
 @ControllerAdvice
 @Controller
@@ -34,9 +38,18 @@ public class ProfileController {
 
         Optional<MyCustomer> customer = consumer.getResourceById("/customer/account/{email}", Objects.requireNonNull(Helper.getAuthenticatedEmail()),MyCustomer.class);
        customer.ifPresent(myCustomer ->{
+
+           CustomerDto customerDto = new CustomerDto();
+           customerDto.setEmail(myCustomer.getEmail());
+           customerDto.setFullName(myCustomer.getFullName());
+           customerDto.setTelephone(myCustomer.getTelephone());
+           Set<Address> addressSet = myCustomer.getAddressList();
+           customerDto.setAddress(!addressSet.isEmpty()? (Address) addressSet.toArray()[0] : null);
+
            model.addAttribute("secret", myCustomer.getId());
-           model.addAttribute("fullName", (customer.get().getFullName()==null)?"Anonymous": customer.get().getFullName());
+           model.addAttribute("customerDto", customerDto);
        });
+
 
 
 

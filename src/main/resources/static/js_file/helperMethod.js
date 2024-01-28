@@ -33,7 +33,7 @@ class SlideshowIndex {
 function clearCookieBasket(basketType, reload = true) {
     const userId = checkCookie("user12345");
 
-    fetch(`http://localhost:9090/${basketType}/artworks/deleteAll/${userId}`, {
+    fetch(`${apiBaseUrl}/${basketType}/artworks/deleteAll/${userId}`, {
         method: 'DELETE'
     })
         .then(response => {

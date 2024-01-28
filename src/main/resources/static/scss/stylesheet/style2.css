@@ -7823,6 +7823,10 @@ textarea.form-control-lg {
       display: flex;
       margin: 1rem 0;
       gap: 2rem; }
+      .profile-info form section .sibling-field {
+        gap: 2rem;
+        width: 100%;
+        display: flex; }
       .profile-info form section .form-floating {
         width: 100%; }
       .profile-info form section #card-details-label {
@@ -7843,7 +7847,9 @@ textarea.form-control-lg {
 
 @media only screen and (max-width: 1000px) {
   form section {
-    flex-direction: column; } }
+    flex-direction: column; }
+    form section .sibling-field {
+      flex-direction: column; } }
 .header-wrapper {
   z-index: 4;
   display: flex;
