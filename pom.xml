@@ -20,14 +20,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>RELEASE</version>
+            <version>3.2.3</version>
 
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>RELEASE</version>
-
+            <version>3.2.3</version>
 
         </dependency>
         <dependency>
@@ -37,7 +36,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-jose</artifactId>
-            <version>RELEASE</version>
+            <version>6.2.2</version>
 
         </dependency>
         <dependency>
@@ -49,7 +48,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <version>RELEASE</version>
+            <version>3.2.3</version>
 
         </dependency>
         <dependency>
@@ -62,7 +61,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
-            <version>RELEASE</version>
+            <version>3.2.3</version>
 
         </dependency>
         <dependency>
@@ -73,33 +72,32 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>RELEASE</version>
+            <version>6.1.4</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>RELEASE</version>
-
+            <version>6.2.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>RELEASE</version>
+            <version>6.2.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>RELEASE</version>
+            <version>6.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-client</artifactId>
-            <version>RELEASE</version>
+            <version>6.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>RELEASE</version>
+            <version>6.1.2</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.angus</groupId>
@@ -130,7 +128,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>RELEASE</version> <!-- Use the appropriate version -->
+                <version>3.12.1</version> <!-- Use the appropriate version -->
                 <configuration>
                     <source>21</source>
                     <target>21</target>
