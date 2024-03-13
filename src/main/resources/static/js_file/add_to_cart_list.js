@@ -94,15 +94,19 @@ proceed_to_checkout.addEventListener('submit', async (event) => {
     loader.classList.remove("loading-checkout");
     loader.classList.add("loader");
     event.preventDefault();
-    const customerId =checkCookie("user12345");
-    const response = await fetch(`http://localhost:9090/cart/artworks/${customerId}`);
+    const customerId = checkCookie("user12345");
+    const response = await fetch(`${apiBaseUrl}/cart/artworks/${customerId}`);
     const data = await response.json();
 
     console.log(data);
-    fetch('http://localhost:9090/cart/checkout/create-checkout-session', {
+    fetch(`${apiBaseUrl}/cart/checkout/create-checkout-session`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            //'Content-Type': 'application/json' ,// Set the content type based on your API requirements
+            'X-IDENTIFIER': customerId.substring(customerId.length/2),
+            //[csrfHeader]: csrfToken
+            'X-CSRF-TOKEN': document.querySelector(".csrf-token").value, //csrfToken,
         },
         body: JSON.stringify({
             cartProductList: data,
@@ -115,7 +119,7 @@ proceed_to_checkout.addEventListener('submit', async (event) => {
             // console.log(response.text())
 
             if (!response.ok) {
-                throw (new Error("Sorry something is wrong,please try again later"));
+                throw new Error("Sorry something is wrong,please try again later");
             }
             return response.text();
             // Handle the response from the server
@@ -133,8 +137,7 @@ proceed_to_checkout.addEventListener('submit', async (event) => {
             });
             alert(error);
         }
-
-    ).finally(()=>loader.remove())
+    ).finally(() => loader.remove())
     ;
 });
 artwork_template_visitor_manager();

@@ -59,7 +59,7 @@ public class WebAuthorizationConfig {
                 .permitAll());
 
         http.authenticationProvider(authenticationProvider);
-        http.csrf(AbstractHttpConfigurer::disable).headers(h->h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
+       http.csrf(AbstractHttpConfigurer::disable);//.headers(h->h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
         return http.build();
     }
 

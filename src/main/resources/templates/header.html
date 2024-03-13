@@ -14,6 +14,7 @@
     <header>
         <div class="bar-nav"><i class="bar-nav fa-solid fa-bars"></i></div>
         <a href="/" class="home">
+            <input class="csrf-token" type="hidden"  th:value="${token}"/>
 
             <div class="active-button">Jean Yves</div>
             <img class="logo" th:src="@{/images/jeanyves_logo.svg}" alt="Jean Yves Logo"/>

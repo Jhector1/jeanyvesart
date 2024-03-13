@@ -18,6 +18,8 @@ cancel_button.onclick = () => {
 }
 import {CookieClient} from "./allcookies.js";
 import {sharing} from "./social_media_share.js";
+import {getCookie} from "./anonymous_user_cookie.js";
+import {JsonRequest} from "./json_request.js";
 
 
 (async () => {
@@ -51,7 +53,7 @@ import {sharing} from "./social_media_share.js";
         all_artwork_data.set("inventory", getAllElement(".inventory-data")[i + 1]);
         all_artwork_data.set("description", data[i].myProduct.description);
 
-        cartAddRemoveDesign(data[i].myProduct.id, cart_remove[i + 1], cart_add[i + 1], data[i].myProduct.imageUrl, all_artwork_data, elementSold[i + 1], make_an_offer[i]);
+        cartAddRemoveDesign(data[i].myProduct.id, cart_remove[i + 1], cart_add[i + 1], all_artwork_data, elementSold[i + 1], make_an_offer[i]);
 
 
     }
@@ -106,9 +108,9 @@ import {sharing} from "./social_media_share.js";
 
     CookieClient.displayDataLength(".favorite-total-items", data);
 
-    for(let o =0; o<data.length;  o++) {
+    for (let o = 0; o < data.length; o++) {
 
-        sharing(data[o].myProduct.title, data[o].myProduct.id, shareButton[o+1]);
+        sharing(data[o].myProduct.title, data[o].myProduct.id, shareButton[o + 1]);
     }
 });
 const offerForm = getElement(".offer-form");
@@ -116,16 +118,18 @@ const loader = document.querySelector(".loading");
 
 offerForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    loader.classList.add("loader");
+    let textM = "submitting Your offer...";
 
-    fetch('http://localhost:9090/sendemail', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+    getElement("#offer-submit").innerHTML = `<span style=" position: absolute; top:50%; right: 50%" class='spinner-grow spinner-grow-sm'></span> ${textM}`
+    getElement("#offer-submit").disabled = true;
+    getAllElement(".cancel").forEach(btn => btn.disabled = true);
+    loader.classList.remove("loading");
+    loader.classList.add("loader");
+    const customerId = getCookie("user12345");
+    setTimeout(() => {
+        JsonRequest.post(`${apiBaseUrl}/sendemail`, {
             emailFrom: "jeanyveshector@gmail.com",
-            emailTo: "Sygmalink@gmail.com",
+            emailTo: "myart@jeanyveshector.com",
             subject: "Offer for " + getElement(".offer-titre").innerHTML,
             message: "Client Email: " + getElement("#email").value
                 + "\nClient Phone Number: " + getElement("#phone-number").value
@@ -138,20 +142,54 @@ offerForm.addEventListener('submit', async (event) => {
                 + "\nPrice: US$" + getElement(".offer-price").innerHTML
 
         })
-    })
-        .then(function (response) {
-            loader.classList.add("loader--hidden");
-            loader.addEventListener("transitionend", () => {
-                loader.remove();
-            });
-            if (response.ok) {
-                getElement(".mask-background").style.display = "none";
-                alert("Your offer has been sent successfully, \nsomeone will contact you for negotiation");
-            } else {
-                alert("Fail to send request, please try again")
-            }
-            console.log(response);
-        })
+            // fetch(`${apiBaseUrl}/sendemail`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'X-IDENTIFIER': customerId.substring(customerId.length/2),
+            //         //[csrfHeader]: csrfToken
+            //         'X-CSRF-TOKEN': document.querySelector(".csrf-token").value, //csrfToken,
+            //
+            //     },
+            //     body: JSON.stringify({
+            //         emailFrom: "jeanyveshector@gmail.com",
+            //         emailTo: "Sygmalink@gmail.com",
+            //         subject: "Offer for " + getElement(".offer-titre").innerHTML,
+            //         message: "Client Email: " + getElement("#email").value
+            //             + "\nClient Phone Number: " + getElement("#phone-number").value
+            //             + "\nClient offer: US$" + getElement("#offer").value
+            //             + "\nClient Message: " + getElement("#message-input").value
+            //             + "\n\n\nOffer Description:\n"
+            //             + "Title: " + getElement(".offer-titre").innerHTML
+            //             + "\nMedium: " + getElement(".offer-medium").innerHTML
+            //             + "\nSize: " + getElement(".offer-size").innerHTML
+            //             + "\nPrice: US$" + getElement(".offer-price").innerHTML
+            //
+            //     })
+            // })
+            .then(function (response) {
+
+                if (response.ok) {
+                    getElement(".mask-background").style.display = "none";
+                    alert("Your offer has been sent successfully, \nsomeone will contact you for negotiation");
+                } else {
+                    alert("Fail to send request, please try again")
+                }
+                console.log(response);
+            }).catch(error => alert("Fail to send request, please try again"))
+            .finally(final => {
+                    loader.classList.add("loader--hidden");
+                    loader.addEventListener("transitionend", () => {
+                        loader.remove();
+                    });
+                    textM = "Submit your Offer";
+                    getAllElement(".cancel").forEach(btn => btn.disabled = false);
+                    getElement("#offer-submit").disabled = false;
+                    getElement("#offer-submit").innerHTML = `${textM}`;
+
+                    offerForm.reset();
+                }
+            )
+    }, 1000);
 });
 
 

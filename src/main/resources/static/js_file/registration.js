@@ -23,7 +23,7 @@ getElement(".sign-up-form").onsubmit = (event) => {
         alert("Check your input and make you respect the expected pattern")
     } else {
 
-        jsonRequest.post("/customer/register", {
+        JsonRequest.post("/customer/register", {
             email: email, password: password, fullName: fullName,
         })
             .then(response => {
@@ -120,7 +120,6 @@ function validateAllInput() {
 
 getElement(".form-reset-email").onsubmit = (event) => {
     event.preventDefault();
-    const jsonRequest = new JsonRequest();
     const email = getElement("#email-reset").value;
     let textM = "Emailing Reset Password Link...";
 
@@ -128,7 +127,7 @@ getElement(".form-reset-email").onsubmit = (event) => {
     getElement(".btn-reset").disabled = true;
     getAllElement(".btn-reset-close").forEach(btn=>btn.disabled=true);
     setTimeout(() => {
-        jsonRequest.post("http://localhost:9090/reset-password-email", {
+        JsonRequest.post(`${apiBaseUrl}/reset-password-email`, {
             emailTo: email,
         })
             .then(response => {

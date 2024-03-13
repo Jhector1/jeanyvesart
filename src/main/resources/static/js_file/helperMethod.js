@@ -56,30 +56,30 @@ function clearCookieBasket(basketType, reload = true) {
 
 }
 
-function cartAddRemoveDesign(cookieNum, cart_remove, cart_add, img_url, all_artwork_data, elementSold, element4 = null, mode='visibility') {
+function cartAddRemoveDesign(cookieNum, cart_remove, cart_add, all_artwork_data, elementSold, element4 = null, mode='visibility') {
     const cookieForCart = new Cookie("cart", cookieNum);
 
     const elementManagerCart = new ElementManager(cart_remove, cart_add, elementSold);
 
-    if (element4 !== null) elementManagerCart.switchAppearance(img_url, all_artwork_data, cookieForCart, mode, element4);
-    else elementManagerCart.switchAppearance(img_url, all_artwork_data, cookieForCart, mode );
+    if (element4 !== null) elementManagerCart.switchAppearance( all_artwork_data, cookieForCart, mode, element4);
+    else elementManagerCart.switchAppearance( all_artwork_data, cookieForCart, mode );
 
 }
 
-function cartAddRemoveDesignIcon(cookieNum, cart_remove, cart_add, img_url, all_artwork_data, elementSold) {
+function cartAddRemoveDesignIcon(cookieNum, cart_remove, cart_add, all_artwork_data, elementSold) {
     const cookieForCart = new Cookie("cart", cookieNum);
 
     const elementManagerCart = new ElementManager(cart_remove, cart_add, elementSold);
-    elementManagerCart.switchAppearance(img_url, all_artwork_data, cookieForCart, "display");
+    elementManagerCart.switchAppearance(all_artwork_data, cookieForCart, "display");
 
 }
 
-function likeOrNotDesign(cookieNum, not_liked_heart, liked_heart, img_url, all_artwork_data, elementSold) {
+function likeOrNotDesign(cookieNum, not_liked_heart, liked_heart, all_artwork_data, elementSold) {
     const favoriteCookie = new Cookie("favorite", cookieNum);
 
     const elementManager = new ElementManager(liked_heart, not_liked_heart, elementSold);
 
-    elementManager.switchAppearance(img_url, all_artwork_data, favoriteCookie, "display");
+    elementManager.switchAppearance(all_artwork_data, favoriteCookie, "display");
 
 }
 

@@ -7,6 +7,7 @@
 </head>
 <body>
 <main th:fragment="artworksMainTemplate(category)">
+<!--    <input class="csrf-token" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
 
     <div class="link-directive"><a href="/artworks" class="directive directive-artworks">artworks</a><i
             class="directive fa-solid fa-arrow-right-long"></i>
@@ -29,15 +30,21 @@
                     <p th:text="${artwork.getTitle()}" class="ellipsisText titre artwork-data">
                         title</p>
                     <div class="parent-heart">
-                        <button class="liked-icon heart-circle-liked-heart"><i style="color: blue;" id="liked-heart1"
-                                                                               class="liked-art fa-solid fa-heart"></i>
-                        </button>
-                        <button class="not-liked-icon heart-circle-not-liked-heart"><i id="not-liked-heart1"
-                                                                                       class="liked-art fa-regular fa-heart"></i>
-                        </button>
+                        <form class="liked-icon-form">
+                            <button type="submit" class="liked-icon heart-circle-liked-heart"><i style="color: blue;"
+                                                                                   id="liked-heart1"
+                                                                                   class="liked-art fa-solid fa-heart"></i>
+                            </button>
+                        </form>
+                        <form class="not-liked-icon-form">
+                            <button type="submit" class="not-liked-icon heart-circle-not-liked-heart"><i id="not-liked-heart1"
+                                                                                           class="liked-art fa-regular fa-heart"></i>
+                            </button>
+                        </form>
                     </div>
 
                 </div>
+
                 <section class="sub-title">
                     <div class="description-sub-title">
                         <!--                        <input class="uniqueness" type="hidden" th:value="${artwork.isUnique()}">-->

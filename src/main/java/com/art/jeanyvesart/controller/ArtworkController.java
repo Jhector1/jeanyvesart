@@ -135,7 +135,7 @@ public class ArtworkController {
         if(productInventory.isPresent()) {
 
             MyProduct artwork = productInventory.get().getMyProduct();
-            log.info("object product, {}", artwork);
+        //    log.info("object product, {}", artwork);
             String artworkImageUrl = artwork.getImageUrl().trim();
             ImageIO.scanForPlugins();
             ImageIO.getImageReadersByMIMEType("image/webp").next();

@@ -89,6 +89,9 @@
 <!--    <p class="while-waiting">Getting ready for checkout...</p>-->
 
 <!--</div>-->
+<!--<input class="csrf-token" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+<input class="csrf-token" type="hidden"  th:value="${token}"/>
+
 <main style="position: static; background-color: white" class="artwork-details-info-popup">
 
     <article class="slideshow">

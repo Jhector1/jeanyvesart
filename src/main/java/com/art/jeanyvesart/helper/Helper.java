@@ -28,6 +28,7 @@ public class Helper {
         if (cookies != null) {
             // Iterate through the cookies
             for (Cookie cookie : cookies) {
+
                 if (cookie.getName().trim().equals(cookieName)) {
                     // Found the desired cookie
                     return cookie.getValue();

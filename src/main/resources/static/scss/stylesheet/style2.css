@@ -8363,6 +8363,22 @@ li a, a {
           white-space: nowrap;
           overflow: hidden;
           position: relative; }
+        .allArtParent .frame .description .sub-title .parent-heart .heart-circle-liked-heart {
+          display: none;
+          justify-content: center;
+          align-items: center;
+          align-content: stretch;
+          flex-direction: row;
+          gap: 0;
+          flex-wrap: nowrap; }
+        .allArtParent .frame .description .sub-title .parent-heart .heart-circle-not-liked-heart {
+          display: none;
+          justify-content: center;
+          align-items: center;
+          align-content: stretch;
+          flex-direction: row;
+          gap: 0;
+          flex-wrap: nowrap; }
         .allArtParent .frame .description .sub-title .parent-heart .heart-circle-liked-heart, .allArtParent .frame .description .sub-title .parent-heart .heart-circle-not-liked-heart {
           border: none;
           text-decoration: none;
@@ -8370,13 +8386,6 @@ li a, a {
           background-color: transparent;
           width: max-content;
           height: max-content;
-          display: none;
-          justify-content: center;
-          align-items: center;
-          align-content: stretch;
-          flex-direction: row;
-          gap: 0;
-          flex-wrap: nowrap;
           text-align: center; }
           .allArtParent .frame .description .sub-title .parent-heart .heart-circle-liked-heart .liked-art, .allArtParent .frame .description .sub-title .parent-heart .heart-circle-not-liked-heart .liked-art {
             padding: 0.313rem;

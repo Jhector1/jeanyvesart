@@ -107,11 +107,18 @@
         }
 
         .parent-heart {
+          .heart-circle-liked-heart{
+            @include flex_display($flex: none, $justify_content: center);
+
+          }
+          .heart-circle-not-liked-heart{
+            @include flex_display($flex: none, $justify_content: center);
+
+          }
           .heart-circle-liked-heart, .heart-circle-not-liked-heart {
             @include button-override;
             width: max-content;
             height: max-content;
-            @include flex_display($flex: none, $justify_content: center);
 
             text-align: center;
             //border-radius: 50%;

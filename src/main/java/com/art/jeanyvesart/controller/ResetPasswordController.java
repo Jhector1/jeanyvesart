@@ -69,17 +69,17 @@ public class ResetPasswordController {
             MyCustomer customer = new MyCustomer();
             // Set new password
             customer.setPassword(passwordEncoder.encode(newPassword));
-
+log.info(newPassword);
 
             // Save the user
-            response = consumer.updateResourceWithPatch(passwordEncoder.encode(newPassword), "/customer/update/token/" + token);
+            response = consumer.updateResourceWithPatch(passwordEncoder.encode(newPassword), "/customer/update/info/" + token);
 
 
             return "redirect:/login";
 
         } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-
+            model.addAttribute("error", "An unexpected error occurred, please try again");
+            log.info("error" ,e);
             return "reset_password";
         }
 

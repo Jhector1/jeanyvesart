@@ -7,7 +7,7 @@ import {ProductAndInventory} from "./model/product_and_Inventory.js";
 console.log("hello world")
 async function makeFetchSynchronous() {
     try {
-        const url = `http://localhost:9090/data/artworks/${artworkID}`;
+        const url = `${apiBaseUrl}/data/artworks/${artworkID}`;
         console.log(url);
         const response = await fetch(url);
                const data = await response.json();
@@ -82,9 +82,9 @@ async function makeFetchSynchronous() {
         map.set("inventory", getElement(".inventory-data"));
 
 
-        likeOrNotDesign(cookieNum2, popup_not_liked_heart, popup_liked_heart, img_url.src, map, popup_element_sold);
+        likeOrNotDesign(cookieNum2, popup_not_liked_heart, popup_liked_heart,  map, popup_element_sold);
         //
-        cartAddRemoveDesign(cookieNum2, popup_cart_remove, popup_cart_add, img_url.src, map, popup_element_sold, popup_purchase, 'display');
+        cartAddRemoveDesign(cookieNum2, popup_cart_remove, popup_cart_add, map, popup_element_sold, popup_purchase, 'display');
         navigateArtwork("#next", "#previous");
         navigateArtwork("#previous", "#next");
 
@@ -121,6 +121,7 @@ async function makeFetchSynchronous() {
 
 const stripe = Stripe(stripePublicKey2);
 
+const customerId = checkCookie("user12345");
 
 makeFetchSynchronous().then((data) => {
     const proceed_to_checkout = document.querySelector(".popup-purchase");
@@ -146,13 +147,16 @@ makeFetchSynchronous().then((data) => {
             productAndInventory.myProduct = data.myProduct;
             productAndInventory.quantity = quantityItem;
 
-            const customerId = checkCookie("user12345");
 
             event.preventDefault();
-            fetch('http://localhost:9090/cart/checkout/create-checkout-session', {
+            fetch(`${apiBaseUrl}/cart/checkout/create-checkout-session`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    // 'X-IDENTIFIER': customerId.substring(customerId.length/2),
+                    // //[csrfHeader]: csrfToken
+                    // 'X-CSRF-TOKEN': document.querySelector(".csrf-token").value, //csrfToken,
+
                 },
                 body: JSON.stringify({cartProductList: [productAndInventory], customerId: customerId,})
             }).then(function (response) {
@@ -227,10 +231,14 @@ function myData(rate, imageData = null, imageName = null) {
         loader.classList.remove("loading-checkout");
         getElement(".while-waiting").style.display="none";
         loader.classList.add("loader");
-        fetch('http://localhost:9090/product/review/save', {
+        fetch(`${apiBaseUrl}/product/review/save`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-IDENTIFIER': customerId.substring(customerId.length/2),
+                //[csrfHeader]: csrfToken
+                'X-CSRF-TOKEN': document.querySelector(".csrf-token").value, //csrfToken,
+
             },
             body: JSON.stringify({
                 headline: headline,
@@ -305,7 +313,7 @@ async function displayReviews() {
     try {
         const product_id = artworkID.substring(5);
 
-        const response = await fetch(`http://localhost:9090/product/review/all/${product_id}`);
+        const response = await fetch(`${apiBaseUrl}/product/review/all/${product_id}`);
         //console.log(response)
 
         const listReviews = await response.json();

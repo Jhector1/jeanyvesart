@@ -38,6 +38,7 @@ public class ProfileController {
 
         Optional<MyCustomer> customer = consumer.getResourceById("/customer/account/{email}", Objects.requireNonNull(Helper.getAuthenticatedEmail()),MyCustomer.class);
        customer.ifPresent(myCustomer ->{
+           log.info("customer {}", customer.get().getMyOrders());
 
            CustomerDto customerDto = new CustomerDto();
            customerDto.setEmail(myCustomer.getEmail());

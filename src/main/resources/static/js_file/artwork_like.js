@@ -6,6 +6,7 @@ import {
     slideNextPrevious,
     SlideshowIndex, visitArtwork
 } from "./helperMethod.js";
+import {Cookie, ElementManager} from "./allcookies.js";
 
 
 const all_frame = getAllElement(".frame");
@@ -29,11 +30,12 @@ const elementSold = getAllElement(".sold-item");
 // const popup_purchase = getElement(".popup-purchase");
 // const unique = getAllElement(".uniqueness");
 const artworkID = getAllElement(".image-id");
+let all_artwork_data;
 for (let i = 0; i < all_frame.length; i++) {
     const all_artwork = all_frame[i].querySelectorAll(".artwork-data");
     const img_url = all_frame[i].querySelector(".artwork-data-img");
 
-    const all_artwork_data = new Map();
+     all_artwork_data = new Map();
     all_artwork_data.set("id", artworkID[i].value);
     all_artwork_data.set("date", img_url.src);
 
@@ -47,7 +49,7 @@ for (let i = 0; i < all_frame.length; i++) {
     all_artwork_data.set("description", getAllElement(".describe-artwork")[i].innerHTML);
 
     (() => {
-        likeOrNotDesign(cookieNum[i].value, not_liked_heart[i], liked_heart[i], img_url.src, all_artwork_data, elementSold[i]);
+       likeOrNotDesign(cookieNum[i].value, not_liked_heart[i], liked_heart[i], all_artwork_data, elementSold[i]);
     })();
 
     (() => {
@@ -62,10 +64,10 @@ for (let i = 0; i < all_frame.length; i++) {
 
 }
 
-
-
-
-
+//
+// const manager = new ElementManager(liked_heart[0], not_liked_heart[0],elementSold[0]);
+//
+// manager.displayElementStatusOrPurchase2(new Cookie("favorite", 1), liked_heart, not_liked_heart, elementSold, all_artwork_data, "display");
 
 
 slideNextPrevious();
