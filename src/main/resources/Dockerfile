@@ -1,3 +1,4 @@
 FROM openjdk:21
-ADD ./docker-spring-boot.jar /docker-spring-boot.jar
-ENTRYPOINT ["java", "-jar", "/docker-spring-boot.jar"]
+ARG JAR_FILE=target/*.jar
+COPY ./target/jeanyvesart-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
