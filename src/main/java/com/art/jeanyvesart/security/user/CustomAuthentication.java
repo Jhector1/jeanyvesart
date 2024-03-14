@@ -10,6 +10,7 @@ public class CustomAuthentication extends UsernamePasswordAuthenticationToken {
 
     //private String customDetail; // Custom detail you want to associate
     //private boolean authenticated=false;
+    //jean
 
     public CustomAuthentication(Object principal, Object credentials) {
         super(principal, credentials);
