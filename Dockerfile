@@ -4,7 +4,7 @@ FROM openjdk:17-jdk-alpine AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-RUN mvn clean package
+#RUN mvn clean package
 
 #stage 2 runtime
 FROM openjdk:17-jdk-alpine
