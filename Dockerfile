@@ -12,7 +12,7 @@ RUN mvn clean package
 FROM openjdk:17-jdk
 ARG JAR_FILE=target/*.jar
 WORKDIR /app
-COPY --from=build app/target/jeanyvesart-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=build ./target/jeanyvesart-0.0.1-SNAPSHOT.jar ./app.jar
 EXPOSE 7899
 #ENTRYPOINT ["java", "-jar", "./app.jar"]
 #CMD ["java", "-jar", "./app.jar"]
