@@ -8539,6 +8539,9 @@ li a, a {
   justify-content: center;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.86); }
+  .mask-background * {
+    line-height: 2.5;
+    /* Example line height */ }
   .mask-background .offer-wrap {
     align-self: center;
     width: 60%;
@@ -8611,12 +8614,7 @@ li a, a {
               border: none;
               outline: none;
               width: 60%; }
-            .mask-background .offer-wrap .offer-make .offer-info .label-offer .calcul-offer .offer-percentage {
-              padding: 2%;
-              border-radius: 50%;
-              font-size: 0.7rem;
-              justify-self: center; }
-        .mask-background .offer-wrap .offer-make .offer-info #phone-number, .mask-background .offer-wrap .offer-make .offer-info #message-input, .mask-background .offer-wrap .offer-make .offer-info #email {
+        .mask-background .offer-wrap .offer-make .offer-info #phone-number, .mask-background .offer-wrap .offer-make .offer-info #message-input {
           width: 100%; }
         .mask-background .offer-wrap .offer-make .offer-info .phone-textarea, .mask-background .offer-wrap .offer-make .offer-info .message-textarea {
           display: none; }
@@ -8635,6 +8633,12 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield; }
 
+@media only screen and (max-width: 1000px) {
+  .mask-background .offer-wrap {
+    width: 100%; } }
+@media only screen and (max-width: 600px) {
+  .mask-background .offer-wrap {
+    width: 100%; } }
 .contact-parent .message-contact {
   background-color: #aabff3;
   justify-content: center;

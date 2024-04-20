@@ -88,14 +88,16 @@ import {JsonRequest} from "./json_request.js";
 
             }
             price = offer_data[3].innerHTML;
-            const original_price = Number(price.split("$")[1]);
+            const original_price = Number(price);
             offer_input.onkeyup = () => {
-                if (offer_input.value >= 1 && offer_input.value <= original_price) {
-                    offer_percentage.style.display = "inline-block";
-                    offer_percentage.innerHTML = `${Math.round(((((Number(offer_input.value) * 100) / original_price) + Number.EPSILON) - 100) * 100) / 100}%`;
-                    offer_percentage.style.backgroundColor = "slategrey";
+
+
+                if (Number(offer_input.value) >= 1 && Number(offer_input.value )<= original_price) {
+               offer_percentage.style.visibility = "visible";
+                    offer_percentage.innerHTML =`${Math.round(((((Number(offer_input.value) * 100) / original_price) + Number.EPSILON) - 100) * 100) / 100}%`;
+                    //offer_percentage.style.backgroundColor = "slategrey";
                 } else {
-                    offer_percentage.style.display = "none";
+                   offer_percentage.style.visibility = "hidden";
                 }
             };
         }

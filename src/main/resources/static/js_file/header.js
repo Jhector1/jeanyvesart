@@ -258,7 +258,6 @@ getElement(".log-user-out").addEventListener('click', function() {
     // This function will be executed when the button is clicked
     sessionStorage.setItem("login-username", "anonymous");
 
-    console.log('Button clicked!');
 });
 
 if(sessionStorage.getItem("login-username")==="anonymous" || sessionStorage.getItem("login-username")===null ){

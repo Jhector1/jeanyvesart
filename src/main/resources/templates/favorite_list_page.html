@@ -14,12 +14,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="/js_file/loader.js" type="module" defer></script>
 
     <script src="/js_file/footer.js" type="module" defer></script>
     <script src="/js_file/favorite_artwork.js" type="module" defer></script>
-    <script src="/js_file/social_media_share.js" type="module" defer></script>
+<!--    <script src="/js_file/social_media_share.js" type="module" defer></script>-->
 
     <script th:src="@{/js_file/model/sendEmail.js}" type="module" defer></script>
 
@@ -59,13 +61,23 @@
                 <p>We are more likely to accept offer up<br>
                     to 15% off the artwork price</p>
                 <label class="label-offer" for="offer"><strong>Offer</strong>
-                    <div class="calcul-offer"><span>$</span> <input type="number" id="offer" name="offering"
-                                                                    required/><span
-                            class="offer-percentage"></span></div>
+                    <div class="input-group mb-3 input-group-sm">
+                    <span class="input-group-text">$</span>
+                    <input  id="offer"  type="number" class="form-control" name="offering" required>
+                        <span class="input-group-text offer-percentage"></span>
+                    </div>
+
+                        <!--                    <div class="calcul-offer"><span>$</span> <input type="number" id="offer" name="offering"-->
+<!--                                                                    required/><span-->
+<!--                            class="offer-percentage"></span></div>-->
                 </label>
 
-                <label class="label-email" for="email"><strong>Email</strong>
-                    <input type="email" id="email" name="email-buyer" required/>
+                <label class="label-email" for="email">
+                    <div class="input-group mb-3 input-group-sm">
+                        <span class="input-group-text">Email</span>
+                        <input  id="email"  type="email" class="form-control" name="email-buyer" required>
+<!--                    <input type="email" id="email" name="email-buyer" required/>-->
+                    </div>
                 </label>
 
                 <label>Would like to get your answer by text message</label>
