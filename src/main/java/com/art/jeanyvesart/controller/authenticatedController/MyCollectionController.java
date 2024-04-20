@@ -8,9 +8,11 @@ import com.art.jeanyvesart.model.MyOrder;
 
 import java.util.*;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,16 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/account", produces = "application/json")
 @Slf4j
 public class MyCollectionController {
+    @Value("${baseUrl}")
+    private String sever_domain;
+
+    private static String baseUrl;
+
+    @PostConstruct
+    public void init() {
+        baseUrl = sever_domain;
+    }
+
     private final Consumer<MyCustomer> consumer;
 
     public MyCollectionController(Consumer<MyCustomer> consumer) {
@@ -82,7 +94,7 @@ public class MyCollectionController {
         RestTemplate restTemplate = new RestTemplate();
         log.info("userinfo , {}",Objects.requireNonNull(Helper.getCookieValue(request, "user12345") ));
         ResponseEntity<List<MyOrder>> response = restTemplate.exchange(
-                "http://localhost:9090//order/customer/" + Objects.requireNonNull(Helper.getCookieValue(request, "user12345")),
+                baseUrl+"//order/customer/" + Objects.requireNonNull(Helper.getCookieValue(request, "user12345")),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<MyOrder>>() {
