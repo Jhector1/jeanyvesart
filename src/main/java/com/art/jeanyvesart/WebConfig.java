@@ -9,7 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index");
+        //registry.addViewController("/").setViewName("index");
       //  registry.addViewController("/cart/checkout/success").setViewName("success_page");
         registry.addViewController("/cart/checkout/cancel").setViewName("error_page");
         registry.addViewController("/terms-of-service").setViewName("terms_and_conditions");
@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
 
 
         registry.addViewController("/exhibitions").setViewName("exhibitions_page");
-        registry.addViewController("/about").setViewName("about");
+//        registry.addViewController("/about").setViewName("about");
       // registry.addViewController("/contact").setViewName("contact");
     }
 }
