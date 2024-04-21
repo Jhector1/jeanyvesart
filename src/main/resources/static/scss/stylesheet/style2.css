@@ -9450,6 +9450,8 @@ footer {
   flex-direction: column;
   justify-content: center;
   background-color: #c7ced5; }
+  footer a {
+    text-decoration: #2121ff; }
   footer .credit-card {
     padding: 1% 0;
     display: flex;
@@ -9458,17 +9460,20 @@ footer {
     footer .credit-card li i {
       font-size: 1.5rem; }
   footer .base {
-    padding: 2% 0;
+    padding: 1rem 0;
     display: flex;
-    width: 80%;
+    justify-content: space-around;
+    width: 100%;
     align-items: center; }
     footer .base .parent-logo2 {
       width: max-content;
-      justify-self: center;
-      margin: auto; }
-    footer .base .contact li {
-      padding: 2% 0;
-      text-align: center; }
+      align-self: center;
+      justify-self: center; }
+    footer .base .contact {
+      justify-self: flex-end; }
+      footer .base .contact li {
+        padding: 2% 0;
+        text-align: center; }
     footer .base .follow-us {
       width: max-content; }
       footer .base .follow-us > * {
@@ -9480,8 +9485,6 @@ footer {
         margin: auto;
         gap: 1rem;
         justify-content: space-between; }
-        footer .base .follow-us .social-media a {
-          color: black; }
 
 @media only screen and (max-width: 800px) {
   .base {
@@ -9705,6 +9708,21 @@ footer {
   justify-content: center;
   height: 50vh;
   width: 100vw; }
+
+.about-content, .terms-and-service {
+  padding: 2rem 1.5rem;
+  margin: 1.5rem; }
+  .about-content *, .terms-and-service * {
+    color: #575757;
+    font-family: proxima-nova, sans-serif;
+    padding: .5rem;
+    line-height: 1.6rem; }
+  .about-content ul li, .terms-and-service ul li {
+    list-style-type: square; }
+  .about-content h1, .terms-and-service h1 {
+    text-align: center; }
+  .about-content span, .terms-and-service span {
+    font-weight: bold; }
 
 body {
   background-color: rgba(112, 128, 144, 0.1); }

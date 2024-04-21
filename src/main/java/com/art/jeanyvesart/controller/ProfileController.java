@@ -5,9 +5,7 @@ import com.art.jeanyvesart.dto.CustomerDto;
 import com.art.jeanyvesart.helper.Helper;
 import com.art.jeanyvesart.helper.api.Consumer;
 import com.art.jeanyvesart.model.Address;
-import com.art.jeanyvesart.model.CustomerFavorite;
 import com.art.jeanyvesart.model.MyCustomer;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -24,9 +22,11 @@ import java.util.Set;
 @RequestMapping("/account")
 @SessionAttributes({"sessionId"})
 public class ProfileController {
+    private Helper helper;
     private final Consumer<MyCustomer> consumer;
 
-    public ProfileController(Consumer<MyCustomer> consumer) {
+    public ProfileController(Helper helper, Consumer<MyCustomer> consumer) {
+        this.helper = helper;
         this.consumer = consumer;
     }
 
@@ -36,7 +36,7 @@ public class ProfileController {
         //        Optional<MyCustomer> customer = customerRepository.findByEmail(Helper.getAuthenticatedEmail());
 
 
-        Optional<MyCustomer> customer = consumer.getResourceById("/customer/account/{email}", Objects.requireNonNull(Helper.getAuthenticatedEmail()),MyCustomer.class);
+        Optional<MyCustomer> customer = consumer.getResourceById("/customer/account/{email}", Objects.requireNonNull(helper.getAuthenticatedEmail()),MyCustomer.class);
        customer.ifPresent(myCustomer ->{
            log.info("customer {}", customer.get().getMyOrders());
 
@@ -54,8 +54,8 @@ public class ProfileController {
 
 
 
-        model.addAttribute( "sessionId" ,getSessionId());
-        Helper.setCookieValue("session_Id", getSessionId(), response);
+        model.addAttribute( "sessionId" ,helper.getSessionId());
+        helper.setCookieValue("session_Id", helper.getSessionId());
 
 //        System.out.println("details: "+a.getDetails());
      // System.out.println("principal:  "+a.getPrincipal());
@@ -73,9 +73,6 @@ public class ProfileController {
         return "authenticated/userProfile";
 
     }
-    @ModelAttribute
-    public static  String getSessionId(){
-       return Helper.getSessionId();
-    }
+
 
 }

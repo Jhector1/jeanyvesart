@@ -1,6 +1,6 @@
 package com.art.jeanyvesart.security.config;
 
-import com.art.jeanyvesart.controller.ProfileController;
+import com.art.jeanyvesart.helper.Helper;
 import com.art.jeanyvesart.security.component.authenticationProvider.CustomAuthenticationProvider;
 import com.art.jeanyvesart.security.service.CustomOAuth2UserService;
 import com.art.jeanyvesart.security.service.CustomOicdUserService;
@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -17,13 +16,15 @@ public class WebAuthorizationConfig {
     private final CustomAuthenticationProvider authenticationProvider;
     private final CustomOicdUserService oicdUserService;
     private final CustomOAuth2UserService oAuth2UserService;
+    private Helper helper;
     public WebAuthorizationConfig(
 
-            CustomAuthenticationProvider authenticationProvider, CustomOicdUserService oicdUserService, CustomOAuth2UserService oAuth2UserService) {
+            CustomAuthenticationProvider authenticationProvider, CustomOicdUserService oicdUserService, CustomOAuth2UserService oAuth2UserService, Helper helepr) {
 
         this.authenticationProvider = authenticationProvider;
         this.oicdUserService = oicdUserService;
         this.oAuth2UserService = oAuth2UserService;
+        this.helper = helepr;
     }
 
 
@@ -43,7 +44,7 @@ public class WebAuthorizationConfig {
 
         http.formLogin(c ->
                 c.loginPage("/login")
-                        .defaultSuccessUrl("/account/" + ProfileController.getSessionId() + "/profile", true)
+                        .defaultSuccessUrl("/account/" + helper.getSessionId() + "/profile", true)
                         .permitAll()
         ).oauth2Login(o ->
                 o.loginPage("/login")
@@ -51,7 +52,7 @@ public class WebAuthorizationConfig {
                                 .oidcUserService(oicdUserService)
                                 .userService(oAuth2UserService))
 
-                        .defaultSuccessUrl("/account/" + ProfileController.getSessionId() + "/profile", true)
+                        .defaultSuccessUrl("/account/" + helper.getSessionId() + "/profile", true)
                         .permitAll()
         ).logout(l -> l
                 .logoutUrl("/logout")

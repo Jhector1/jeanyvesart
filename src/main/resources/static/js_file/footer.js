@@ -8,76 +8,6 @@ class Footer extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `<head>
     <title></title>
-<!--    <style>footer {-->
-<!--    position: relative;-->
-<!--    z-index: 1;-->
-<!--    row-gap: 5%;-->
-<!--    display: flex;-->
-<!--    align-items: center;-->
-<!--    flex-direction: column;-->
-<!--    justify-content: center;-->
-<!--    background-color: var(&#45;&#45;main-color);-->
-<!--}-->
-
-<!--.credit-card {-->
-<!--    padding: 1% 0;-->
-<!--    display: flex;-->
-<!--    justify-content: space-around;-->
-<!--    width: 50%;-->
-<!--}-->
-
-<!--.credit-card li i {-->
-<!--    font-size: 1.5rem;-->
-<!--}-->
-
-
-<!--.base {-->
-<!--    padding: 2% 0;-->
-<!--    display: flex;-->
-<!--    justify-content: space-around;-->
-<!--    align-items: center;-->
-
-<!--}-->
-
-<!--/*previously 10% with Sygma logo*/-->
-
-<!--.base .logo2 {-->
-<!--    width: 10%;-->
-
-<!--}-->
-
-<!--.follow-us {-->
-<!--    width: max-content;-->
-<!--}-->
-
-<!--.follow-us > *, .contact li {-->
-<!--    padding: 2% 0;-->
-<!--}-->
-
-<!--.title, .contact li {-->
-<!--    text-align: center;-->
-<!--}-->
-
-<!--.social-media {-->
-<!--    display: flex;-->
-<!--    margin: auto;-->
-<!--    justify-content: space-between;-->
-<!--}-->
-
-<!--.social-media a {-->
-<!--    color: black;-->
-<!--}@media only screen and (max-width: 800px){-->
-<!--    .base{-->
-<!--        flex-direction: column;-->
-<!--    }-->
-<!--    .base .logo2{-->
-<!--    width: 40%;-->
-<!--    }-->
-<!--    .follow-us{-->
-<!--    width: 50%;-->
-<!--    }-->
-<!--}-->
-<!--</style>-->
     <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
 <!--   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.21.0/font/bootstrap-icons.css" rel="stylesheet">-->
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
@@ -110,10 +40,13 @@ class Footer extends HTMLElement {
                         <a href="https://www.instagram.com/therealjean.yves/" class="fa-brands fa-instagram"></a>
                    </nav>
                 </section>
-            </section>       
+            </section>   
+            <div >   
             <p style="text-align: center; padding:1rem; ">Copyright © 2023 Jean Yves Hector - All Rights Reserved</p>
+            <p>Jean Yves Art <a href="/terms-of-service">TERMS AND CONDITIONS OF USE</a> And <a href="/privacy_policy">PRIVACY POLICY</a></p>
 <p style="font-size: 13px; padding: 2%; text-align: center;  margin:auto">Powered by @maSygLink</p>
-        </footer>
+       </div>  
+       </footer>
     </body>`
     }
 }

@@ -10,7 +10,6 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
@@ -26,6 +25,7 @@ import java.util.UUID;
 public class Consumer<E> {
     @Value("${baseUrl}")
     private String sever_domain;
+    private final Helper helper;
 
     private static String baseUrl;
 
@@ -39,24 +39,17 @@ public class Consumer<E> {
             new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
     private static final RestTemplate restTemplate = new RestTemplate(factory);
 
-    public Consumer(HttpServletRequest request) {
+    public Consumer(Helper helper, HttpServletRequest request) {
+        this.helper = helper;
         this.request = request;
     }
 
-    public Optional<Inventory> getResourceById2(String url, Object id) {
-        return Optional.ofNullable(restTemplate.getForObject(baseUrl + url,
-                Inventory.class, id));
-    }
 
     public Optional<E> getResourceById(String url, Object id, Class<E> objClass) {
         return Optional.ofNullable(restTemplate.getForObject(baseUrl + url,
                 objClass, id));
     }
 
-    public Optional<List<MyOrder>> getResourceByIdParametized(String url, Object id, Class<List<MyOrder>> objClass) {
-        return Optional.ofNullable((List<MyOrder>) restTemplate.getForObject(baseUrl + url,
-                objClass, id));
-    }
 
     public Optional<E> createResource(String url, E obj) {
 
@@ -65,10 +58,10 @@ public class Consumer<E> {
         // Step 4: Prepare the headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String identifier = Helper.getCookieValue(request, "user12345");
+        String identifier = helper.getCookieValue("user12345");
 
         headers.add("X-IDENTIFIER", identifier.substring(identifier.length() / 2));
-        headers.add("X-CSRF-TOKEN", getCSRF(request).getToken());
+        headers.add("X-CSRF-TOKEN", getCSRF().getToken());
         // Step 5: Combine headers and request body
         HttpEntity<E> requestEntity = new HttpEntity<>(obj, headers);
 
@@ -77,10 +70,10 @@ public class Consumer<E> {
     }
 
     public ResponseEntity<E> updateResourceWithPatch(E obj, String url) {
-        String identifier = Helper.getCookieValue(request, "user12345");
+        String identifier = helper.getCookieValue("user12345");
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-IDENTIFIER", identifier.substring(identifier.length() / 2));
-        headers.add("X-CSRF-TOKEN", getCSRF(request).getToken());
+        headers.add("X-CSRF-TOKEN", getCSRF().getToken());
 
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -100,15 +93,12 @@ public class Consumer<E> {
 
     }
 
-    public static Token getCSRF(HttpServletRequest request) {
+    public  Token getCSRF() {
         String url = baseUrl + "/csrf/token";
         log.info("baseurl, {}", baseUrl);
-        String identifier = Helper.getCookieValue(request, "user12345");
-//log.info("cookie user id : {}", Helper.getCookieValue(request, "user12345"));
-        // Create HttpHeaders and add custom headers
+        String identifier = helper.getCookieValue( "user12345");
+
         HttpHeaders headers = new HttpHeaders();
-        if(identifier == null)
-            identifier= UUID.randomUUID().toString();
         headers.set("X-IDENTIFIER", identifier.substring(identifier.length() / 2));
 
         // Create HttpEntity with headers

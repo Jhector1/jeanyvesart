@@ -1,4 +1,7 @@
 footer {
+  a{
+    text-decoration: #2121ff;
+  }
   position: relative;
   z-index: 1;
   row-gap: 5%;
@@ -22,20 +25,23 @@ footer {
   }
 
   .base {
-    padding: 2% 0;
+    padding: 1rem 0;
     display: flex;
-    //justify-content: space-between;
-    width: 80%;
+    justify-content: space-around;
+    width: 100%;
     align-items: center;
+    //background-color: #2121ff;
 
     .parent-logo2 {
       width:max-content;
+      align-self: center;
       justify-self: center;
-      margin: auto;
+      //margin: auto;
 
     }
 
     .contact {
+justify-self: flex-end;
       li {
         padding: 2% 0;
         text-align: center;
@@ -61,7 +67,7 @@ footer {
         justify-content: space-between;
 
         a {
-          color: black;
+      //    color: black;
         }
       }
     }

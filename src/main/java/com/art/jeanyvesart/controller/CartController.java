@@ -22,10 +22,11 @@ import java.util.stream.Collectors;
 public class CartController {
     @Value("${stripe.public.key}")
     private String stripePublicKey;
-
+    private Helper helper;
     private final Consumer<CustomerFavorite> consumer;
 
-    public CartController(Consumer<CustomerFavorite> consumer) {
+    public CartController(Helper helper, Consumer<CustomerFavorite> consumer) {
+        this.helper = helper;
         this.consumer = consumer;
     }
 
@@ -41,7 +42,7 @@ public class CartController {
 //            }
 //        }
         //System.out.println(Helper.getCookieValue(request, "user12345"));
-        String userId = Helper.getCookieValue(request, "user12345");
+        String userId = helper.getCookieValue( "user12345");
         if (userId != null) {
             Optional<CustomerFavorite> customerFavorite = consumer.getResourceById("/favorite/artworks/cart/{userId}",Objects.requireNonNull(userId),CustomerFavorite.class);
             if (customerFavorite.isPresent()) {

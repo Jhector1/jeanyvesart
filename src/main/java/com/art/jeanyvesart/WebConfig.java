@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/cart/checkout/cancel").setViewName("error_page");
         registry.addViewController("/terms-of-service").setViewName("terms_and_conditions");
        // registry.addViewController("/login/account").setViewName("userProfile");
-
+        registry.addViewController("/privacy_policy").setViewName("privacy_policy");
 
         registry.addViewController("/exhibitions").setViewName("exhibitions_page");
 //        registry.addViewController("/about").setViewName("about");

@@ -9,7 +9,6 @@ import com.art.jeanyvesart.model.MyOrder;
 import java.util.*;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +32,7 @@ public class MyCollectionController {
     private String sever_domain;
 
     private static String baseUrl;
-
+private Helper helper;
     @PostConstruct
     public void init() {
         baseUrl = sever_domain;
@@ -41,7 +40,8 @@ public class MyCollectionController {
 
     private final Consumer<MyCustomer> consumer;
 
-    public MyCollectionController(Consumer<MyCustomer> consumer) {
+    public MyCollectionController(Helper helper, Consumer<MyCustomer> consumer) {
+        this.helper = helper;
         this.consumer = consumer;
     }
 
@@ -90,11 +90,11 @@ public class MyCollectionController {
         return "authenticated/my-collection";
     }
 
-    public static void getMyOrders(Model model, HttpServletRequest request) {
+    public  void getMyOrders(Model model, HttpServletRequest request) {
         RestTemplate restTemplate = new RestTemplate();
-        log.info("userinfo , {}",Objects.requireNonNull(Helper.getCookieValue(request, "user12345") ));
+        log.info("userinfo , {}",Objects.requireNonNull(helper.getCookieValue( "user12345") ));
         ResponseEntity<List<MyOrder>> response = restTemplate.exchange(
-                baseUrl+"//order/customer/" + Objects.requireNonNull(Helper.getCookieValue(request, "user12345")),
+                baseUrl+"//order/customer/" + Objects.requireNonNull(helper.getCookieValue( "user12345")),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<MyOrder>>() {

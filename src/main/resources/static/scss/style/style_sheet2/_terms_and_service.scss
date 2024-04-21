@@ -1,0 +1,26 @@
+
+.about-content, .terms-and-service {
+  padding: 2rem 1.5rem;
+  margin: 1.5rem;
+
+  * {
+
+    color: #575757;
+    font-family: proxima-nova, sans-serif;
+    padding: .5rem;
+    line-height: 1.6rem;
+  }
+  ul{
+    li{
+
+      list-style-type: square;
+    }
+  }
+h1{
+  text-align: center;
+}
+  span {
+    font-weight: bold;
+  }
+
+}

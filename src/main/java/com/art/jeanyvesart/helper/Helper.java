@@ -3,17 +3,27 @@ package com.art.jeanyvesart.helper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+@Component
+
 public class Helper {
 
+    public final HttpServletRequest request;
+    public final HttpServletResponse response;
 
+    public Helper(HttpServletRequest request, HttpServletResponse response) {
+        this.request = request;
+        this.response = response;
+    }
 //    private final CustomerRepository customerRepository;
 //    private final PasswordEncoder passwordEncoder;
 //
@@ -22,8 +32,9 @@ public class Helper {
 //        this.passwordEncoder = passwordEncoder;
 //    }
 
-    public static String getCookieValue(HttpServletRequest request, String cookieName) {
+    public  String getCookieValue( String cookieName) {
         Cookie[] cookies = request.getCookies();
+        String cookieVal = null;
 
         if (cookies != null) {
             // Iterate through the cookies
@@ -31,16 +42,20 @@ public class Helper {
 
                 if (cookie.getName().trim().equals(cookieName)) {
                     // Found the desired cookie
-                    return cookie.getValue();
+                    cookieVal= cookie.getValue();
                 }
             }
         }
+        else{
+            cookieVal =  UUID.randomUUID().toString();
+            setCookieValue(cookieName, cookieVal);
+        }
 
-        // Cookie not found
-        return null;
+
+        return cookieVal;
     }
 
-    public static String getAuthenticatedEmail(){
+    public  String getAuthenticatedEmail(){
     SecurityContext context  = SecurityContextHolder.getContext();
 
         Authentication a = context.getAuthentication();
@@ -55,7 +70,7 @@ public class Helper {
 
 
     }
-    public static String checkEmail(OAuth2User oAuth2User) {
+    public  String checkEmail(OAuth2User oAuth2User) {
 
         String email = oAuth2User.getAttribute("email");
 
@@ -71,7 +86,7 @@ public class Helper {
     }
 //
 //
-    public static String getSessionId(){
+    public  String getSessionId(){
         SecurityContext context  = SecurityContextHolder.getContext();
 
         Authentication a = context.getAuthentication();
@@ -88,7 +103,7 @@ public class Helper {
 
         } return sessionId;
     }
-    public static void setCookieValue(String cookiename, String cookievalue,HttpServletResponse response) {
+    public  void setCookieValue(String cookiename, String cookievalue) {
         // Create a cookie
         Cookie cookie = new Cookie(cookiename, cookievalue);
 
