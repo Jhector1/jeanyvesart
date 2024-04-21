@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -106,6 +107,8 @@ public class Consumer<E> {
 //log.info("cookie user id : {}", Helper.getCookieValue(request, "user12345"));
         // Create HttpHeaders and add custom headers
         HttpHeaders headers = new HttpHeaders();
+        if(identifier == null)
+            identifier= UUID.randomUUID().toString();
         headers.set("X-IDENTIFIER", identifier.substring(identifier.length() / 2));
 
         // Create HttpEntity with headers
