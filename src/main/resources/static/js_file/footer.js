@@ -43,7 +43,7 @@ class Footer extends HTMLElement {
             </section>   
             <div >   
             <p style="text-align: center; padding:1rem; ">Copyright © 2023 Jean Yves Hector - All Rights Reserved</p>
-            <p>Jean Yves Art <a href="/terms-of-service">TERMS AND CONDITIONS OF USE</a> And <a href="/privacy_policy">PRIVACY POLICY</a></p>
+            <p  style="text-align: center; padding:1rem; ">Jean Yves Art <a href="/terms-of-service">TERMS AND CONDITIONS OF USE</a> And <a href="/privacy_policy">PRIVACY POLICY</a></p>
 <p style="font-size: 13px; padding: 2%; text-align: center;  margin:auto">Powered by @maSygLink</p>
        </div>  
        </footer>
