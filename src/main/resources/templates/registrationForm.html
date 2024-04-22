@@ -196,10 +196,14 @@
                 </form>
 
                 <section>
-                    <a type="submit" class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/facebook}">
+                    <button type="submit" id="btn-facebook" class="btn btn-light btn-lg">
                         <i style="color:#0d6efd" class="fa-brands fa-facebook"></i>Continue with
                         Facebook
-                    </a>
+                    </button>
+<!--                    <button type="submit" id="btn-facebook" class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/facebook}">-->
+<!--                        <i style="color:#0d6efd" class="fa-brands fa-facebook"></i>Continue with-->
+<!--                        Facebook-->
+<!--                    </button>-->
                     <a class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/google}" id="google-sign-in">
                         <i style=" background: -webkit-linear-gradient(red,yellow, green, blue);
                                               -webkit-background-clip: text;
@@ -230,7 +234,7 @@
 <footer-component></footer-component>
 
 </body>
-<script>document.querySelector("#btn-facebook").onclick=()=>{
+<script>document.querySelector("#btn-facebook").onclick=()=>{window.open("https://jeanyveshector.com/oauth2/authorization/facebook")
 
 }</script>
 
