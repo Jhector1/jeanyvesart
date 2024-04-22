@@ -196,7 +196,7 @@
                 </form>
 
                 <section>
-                    <a class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/facebook}">
+                    <a type="submit" class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/facebook}">
                         <i style="color:#0d6efd" class="fa-brands fa-facebook"></i>Continue with
                         Facebook
                     </a>
@@ -230,6 +230,9 @@
 <footer-component></footer-component>
 
 </body>
+<script>document.querySelector("#btn-facebook").onclick=()=>{
+
+}</script>
 
 
 </html>
