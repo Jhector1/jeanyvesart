@@ -32,7 +32,7 @@ public class Helper {
 //        this.passwordEncoder = passwordEncoder;
 //    }
 
-    public  String getCookieValue( String cookieName) {
+    public String getCookieValue(String cookieName) {
         Cookie[] cookies = request.getCookies();
         String cookieVal = null;
 
@@ -42,35 +42,32 @@ public class Helper {
 
                 if (cookie.getName().trim().equals(cookieName)) {
                     // Found the desired cookie
-                    cookieVal= cookie.getValue();
+                    return cookie.getValue();
                 }
+
             }
         }
-        else{
-            cookieVal =  UUID.randomUUID().toString();
-            setCookieValue(cookieName, cookieVal);
-        }
-
-
+        cookieVal = UUID.randomUUID().toString();
+        setCookieValue(cookieName, cookieVal);
         return cookieVal;
     }
 
-    public  String getAuthenticatedEmail(){
-    SecurityContext context  = SecurityContextHolder.getContext();
+    public String getAuthenticatedEmail() {
+        SecurityContext context = SecurityContextHolder.getContext();
 
         Authentication a = context.getAuthentication();
         String email;
-        if(a.getPrincipal() instanceof OAuth2User oAuth2User){
+        if (a.getPrincipal() instanceof OAuth2User oAuth2User) {
             email = checkEmail(oAuth2User);
-        }
-        else{
+        } else {
             email = a.getPrincipal().toString();
         }
         return email;
 
 
     }
-    public  String checkEmail(OAuth2User oAuth2User) {
+
+    public String checkEmail(OAuth2User oAuth2User) {
 
         String email = oAuth2User.getAttribute("email");
 
@@ -84,26 +81,28 @@ public class Helper {
             return email;
         }
     }
+
+    //
 //
-//
-    public  String getSessionId(){
-        SecurityContext context  = SecurityContextHolder.getContext();
+    public String getSessionId() {
+        SecurityContext context = SecurityContextHolder.getContext();
 
         Authentication a = context.getAuthentication();
-        String sessionId ;
-        if(a==null){
+        String sessionId;
+        if (a == null) {
             sessionId = UUID.randomUUID().toString();
-        }
-        else {
+        } else {
             WebAuthenticationDetails details = (WebAuthenticationDetails) a.getDetails();
 
             // Access the session ID
             sessionId = details.getSessionId();
 
 
-        } return sessionId;
+        }
+        return sessionId;
     }
-    public  void setCookieValue(String cookiename, String cookievalue) {
+
+    public void setCookieValue(String cookiename, String cookievalue) {
         // Create a cookie
         Cookie cookie = new Cookie(cookiename, cookievalue);
 
