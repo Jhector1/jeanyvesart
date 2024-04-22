@@ -193,17 +193,13 @@
                         Log In
                     </button>
                     <span>or</span>
-
+                </form>
 
                 <section>
-                    <button type="submit" id="btn-facebook" class="btn btn-light btn-lg">
+                    <a class="btn btn-primary btn-light btn-lg" th:href="@{/oauth2/authorization/facebook}">
                         <i style="color:#0d6efd" class="fa-brands fa-facebook"></i>Continue with
                         Facebook
-                    </button>
-<!--                    <button type="submit" id="btn-facebook" class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/facebook}">-->
-<!--                        <i style="color:#0d6efd" class="fa-brands fa-facebook"></i>Continue with-->
-<!--                        Facebook-->
-<!--                    </button>-->
+                    </a>
                     <a class="btn btn-light btn-lg" th:href="@{/oauth2/authorization/google}" id="google-sign-in">
                         <i style=" background: -webkit-linear-gradient(red,yellow, green, blue);
                                               -webkit-background-clip: text;
@@ -214,7 +210,6 @@
                             class="fa-brands fa-apple"></i>Continue with Apple
                     </button>
                 </section>
-                </form>
                 <section> <p>By clicking Sign In or Continue with Apple,
                     Google, or Facebook, you agree to Jean Yves Art’s <a href="/terms-of-service">Terms of Use</a>
                     and <a href="/privacy_policy"> Privacy Policy</a> and to receiving emails from Jean Yves Art.</p></section>
@@ -235,9 +230,6 @@
 <footer-component></footer-component>
 
 </body>
-<script>document.querySelector("#btn-facebook").onclick=()=>{window.open("https://jeanyveshector.com/oauth2/authorization/facebook")
-
-}</script>
 
 
 </html>
