@@ -188,23 +188,42 @@ makeFetchSynchronous().then((data) => {
 
 });
 
+function previewFile(index) {
+    // const preview = document.querySelector("img");
+    const fileInput = document.querySelector(".file-image");
+    const reader = new FileReader();
+    const file = fileInput.files[0];
 
+    reader.addEventListener(
+        "load",
+        () => {
+            // convert image file to base64 string
+            // console.log(reader.result.split(",")[1]);
+            myData(index, reader.result.split(",")[1], file.name);
+        },
+        false,
+    );
 
-function myData() {
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+getElement("#submit-review").onclick=()=>{
+    if(Number(getElement("#rate-num").value) <=0){
+        getElement(".start-rating-alert").style.display="block";
+    }
+    else{
+        getElement(".start-rating-alert").style.display="none";
+    }
+}
+function myData(rate, imageData = null, imageName = null) {
 
 
     getElement("#form-review").onsubmit = (event) => {
 
         event.preventDefault();
-        let  imageData = null;
-        let imageName = null;
-        if (window.uploadedFile) {
-            alert("yes")
-           imageData= window.uploadedFile.dataURL.split(",")[1];
-            imageName=window.uploadedFile.file.name;
-        }
 
-        const rate =  getElement("#rate-num").value;
+
         const headline = getElement("#headline").value;
         const comment = getElement("#comment").value;
         const productId = artworkID.substring(5);
@@ -326,7 +345,7 @@ async function displayReviews() {
 
 }
 
-
+getRate();
 
 function getRate() {
     const allStar = getAllElement(".star-blank");
@@ -344,13 +363,24 @@ function getRate() {
                 allStar[y].src = "/images/icons/star_review.svg";
 
             }
+            const fileInput = getElement(".file-image");
 
+            fileInput.onchange = () => {
+                const file = fileInput.files[0];
+                if(file && file.type.startsWith("image/")){
+                previewFile(index);
+                return 0;}
+                else{
+                    fileInput.value=null;
+                    alert("Unsupported file")
+                }
+            }
             getElement("#rate-num").value = index;
-            //myData(index);
+            myData(index);
 
-            // getElement("#submit-review").disabled = false;
-            //
-            // getElement(".file-image").disabled = false;
+            getElement("#submit-review").disabled = false;
+
+            getElement(".file-image").disabled = false;
 
         }
 
@@ -358,43 +388,3 @@ function getRate() {
     //return u;
 
 }
-// Function to handle file upload
-function handleFileUpload(event) {
-    const file = event.target.files[0];
-    if (file && file.type.startsWith("image/")) {
-        // Store the file object in a variable accessible to the submitForm function
-        window.uploadedFile = {
-            file: file,
-            dataURL: null // Initially set to null
-        };
-
-        // Display image preview
-        const reader = new FileReader();
-        reader.onload = function(e) {
-           // const preview = document.getElementById("imagePreview");
-          //  preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-
-            // Store the data URL in the window.uploadedFile object
-            window.uploadedFile.dataURL = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-
-(function submitForm() {
-    getElement("#submit-review").onclick=()=>{
-        if(Number(getElement("#rate-num").value) <=0){
-            getElement(".start-rating-alert").style.display="block";
-        }
-        else{
-            getElement(".start-rating-alert").style.display="none";
-        }
-    }
-    getRate();
-    document.querySelector(".file-image").addEventListener("change", handleFileUpload);
-    myData();
-
-})();
-
-

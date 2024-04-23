@@ -54,42 +54,7 @@
 <header th:replace="~{header.html :: header-component}"></header>
 <div th:replace="~{dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>
 
-<!--<div class="loading loader">-->
-<!--    <div class="container mt-3">-->
-
-<!--        <div class="spinner-grow text-muted"></div>-->
-<!--        <div class="spinner-grow text-primary"></div>-->
-<!--        <div class="spinner-grow text-success"></div>-->
-<!--        <div class="spinner-grow text-info"></div>-->
-<!--        <div class="spinner-grow text-warning"></div>-->
-<!--        <div class="spinner-grow text-danger"></div>-->
-<!--        <div class="spinner-grow text-secondary"></div>-->
-<!--        <div class="spinner-grow text-dark"></div>-->
-<!--        <div class="spinner-grow text-light"></div>-->
-<!--    </div>-->
-<!--    <p class="while-waiting">One second...</p>-->
-<!--</div>-->
 <div th:replace="~{dryTemplate.html :: spinner(message='Getting ready for checkout...', dynamicClass='loading-checkout')}"></div>
-
-<!--<div class="loading loading-checkout">-->
-
-
-<!--    <div class="container mt-3">-->
-
-<!--        <div class="spinner-grow text-muted"></div>-->
-<!--        <div class="spinner-grow text-primary"></div>-->
-<!--        <div class="spinner-grow text-success"></div>-->
-<!--        <div class="spinner-grow text-info"></div>-->
-<!--        <div class="spinner-grow text-warning"></div>-->
-<!--        <div class="spinner-grow text-danger"></div>-->
-<!--        <div class="spinner-grow text-secondary"></div>-->
-<!--        <div class="spinner-grow text-dark"></div>-->
-<!--        <div class="spinner-grow text-light"></div>-->
-<!--    </div>-->
-<!--    <p class="while-waiting">Getting ready for checkout...</p>-->
-
-<!--</div>-->
-<!--<input class="csrf-token" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
 <input class="csrf-token" type="hidden"  th:value="${token}"/>
 
 <main style="position: static; background-color: white" class="artwork-details-info-popup">
@@ -183,6 +148,7 @@
 
 
                                 <form id="form-review">
+                                    <small style="color: red; display:none" class="start-rating-alert">Please select a star rating</small>
                                     <div class="star-review-parent">
                                     <input type="hidden" id="#star-review">
                                     <div><img class="star-blank" type="image/svg+xml"
@@ -195,6 +161,7 @@
                                               src="/images/icons/star_blank.svg" alt=""></div>
                                     <div><img class="star-blank" type="image/svg+xml"
                                               src="/images/icons/star_blank.svg" alt=""></div>
+                                        <input style="opacity: 0" type="text" id="rate-num" required>
                                 </div>
                                     <div class="form-floating mb-3 mt-3">
                                         <input type="hidden" class="form-control" id="review-num" name="review-num" required>
@@ -206,7 +173,7 @@
 
                                     </div>
                                     <div class="input-group mb-3">
-                                        <input type="file" name ="file" class="form-control file-image" id="inputGroupFile02" disabled />
+                                        <input type="file" name ="file"  accept="image/*" class="form-control file-image" id="inputGroupFile02" />
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
 
@@ -217,7 +184,7 @@
                                         <div class="invalid-feedback">Please fill out this field.</div>
 
                                     </div>
-                                    <button type="submit" id="submit-review" class="btn btn-primary" disabled>Submit</button>
+                                    <button type="submit" id="submit-review" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
 
