@@ -7955,7 +7955,7 @@ textarea.form-control-lg {
         .header-wrapper .nav-link .menu {
           display: block;
           cursor: pointer;
-          border-top: 1px slategray solid; } }
+          border-top: 3px rgba(112, 128, 144, 0.1) solid; } }
 
 nav li, .repo-icon li, .header-wrapper .nav-link li, .credit-card li, .contact li {
   list-style-type: none; }
