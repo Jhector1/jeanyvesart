@@ -11,6 +11,7 @@
   <script th:src="@{/js_file/artwork_like.js}" type="module" defer></script>
   <script th:src="@{/js_file/footer.js}" type="module" defer></script>
   <script th:src="@{/js_file/reset_all_parent_to_wrap.js}" type="module" defer></script>
+  <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
 <!--  <script src="/js_file/artwork_header_tab.js" type="module" defer></script>-->
 
   <style>
@@ -19,7 +20,7 @@
 </head>
 <body>
 <header  th:replace="~{header.html :: header-component}" ></header>
-<artwork-header-tab></artwork-header-tab>
+<!--<artwork-header-tab></artwork-header-tab>-->
 
 <!--<section th:replace="~{artworks/popup_artwork_display.html :: popup_artwork}"></section>-->
 <div th:insert="~{artworks/artworkTemplate.html :: artworksMainTemplate(category='Clothes')}" th:with="object=${jackets}"></div>

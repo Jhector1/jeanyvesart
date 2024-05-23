@@ -32,48 +32,6 @@ import {sharing} from "./social_media_share.js";
     CookieClient.displayDataLength(".cart-total-items", data);
 
 });
-// (async () => {
-//     const data = await new CookieClient().displayArtworkDataFromDB(".related-items-parent", ".related-items-frame", ".related-items-common-op", "favorite");
-//
-//
-//     // const cart_add = getAllElement(".cart-add-action");
-//     // const cart_remove = getAllElement(".cart-remove-action");
-//     // const cart_icon_add = getAllElement(".cart-add-box");
-//     // const cart_icon_remove = getAllElement(".cart-remove-box");
-//     // const elementSold = getAllElement(".sold-item");
-//     //
-//     // for (let i = 0; i < data.length; i++) {
-//     //     const img_url = data[i].artwork.imageUrl;
-//     //     let x = i+1;
-//     //     const all_artwork_data =[img_url, data[i].artwork.title, data[i].artwork.medium, data[i].artwork.size, data[i].artwork.price,data[i].artwork.isUnique ];
-//     //
-//     //     (() => {
-//     //         //cartAddRemoveDesign(data[i].id, cart_remove[x], cart_add[x], img_url, all_artwork_data, elementSold[x]);
-//     //         //cartAddRemoveDesignIcon(data[i].id, cart_icon_remove[x], cart_icon_add[x], img_url, all_artwork_data, elementSold[x]);
-//     //
-//     //     })();
-//     //
-//     // }
-//     //totalItemsPrice();
-//
-//
-//     getAllElement(".related-items-frame").forEach(value => {
-//         value.style.display = "block";
-//     })
-//     getAllElement(".related-items-frame")[0].style.display = "none";
-//     slideNextPrevious();
-//
-//     // reloadLocationOnCardAdding(cart_remove, cart_add);
-//     // reloadLocationOnCardAdding(cart_icon_remove, cart_icon_add);
-//     return data;
-//
-// })().then(data => {
-//     for (let index = 0; index < data.length; index++) {
-//         visitArtwork(getAllElement(".artwork-data-img")[index + 1], data[index].myProduct.id);
-//
-//     }
-// });
-
 function reloadLocationOnCardAdding(cart_remove, cart_add) {
     for (let y = 0; y < cart_remove.length; y++) {
         cart_remove[y].addEventListener('click', () => {

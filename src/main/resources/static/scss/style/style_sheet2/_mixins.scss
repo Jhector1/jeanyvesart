@@ -140,7 +140,7 @@ cursor: pointer;
 }
 @mixin contact-form-design($position){
   .message-contact {
-    background-color: #aabff3;
+    background-color: rgba(0, 100, 0, 0.06);;
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;

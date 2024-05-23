@@ -20,7 +20,7 @@ class ArtworkHeaderTab extends HTMLElement {
 
     }
     .all-art-movement{
-    position: relative;
+        position: relative;
     }
     .all-art-movement:hover .art-movement {
         display: block;

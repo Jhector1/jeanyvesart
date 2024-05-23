@@ -8315,7 +8315,7 @@ li a, a {
     box-shadow: 1px 1px 100px 1px var(--border-color-less-opacity);
     border-radius: 3%;
     padding-bottom: 3%;
-    border: 1px rgba(112, 128, 144, 0.1) solid;
+    border: rgba(112, 128, 144, 0.1) 2px solid;
     height: 17.5rem;
     width: 18.125rem;
     min-width: 18.125rem;
@@ -8640,7 +8640,7 @@ input[type=number] {
   .mask-background .offer-wrap {
     width: 100%; } }
 .contact-parent .message-contact {
-  background-color: #aabff3;
+  background-color: rgba(0, 100, 0, 0.06);
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
@@ -8818,7 +8818,7 @@ input[type=number] {
       gap: 0;
       flex-wrap: nowrap; }
   .grand-parent-wishlist .message-contact {
-    background-color: #aabff3;
+    background-color: rgba(0, 100, 0, 0.06);
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;

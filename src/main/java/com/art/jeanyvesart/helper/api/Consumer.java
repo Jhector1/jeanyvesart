@@ -25,7 +25,7 @@ import java.util.UUID;
 public class Consumer<E> {
     @Value("${baseUrl}")
     private String sever_domain;
-    private final Helper helper;
+    private  Helper helper;
 
     private static String baseUrl;
 
@@ -34,7 +34,7 @@ public class Consumer<E> {
         baseUrl = sever_domain;
     }
 
-    private final HttpServletRequest request;
+    private  HttpServletRequest request;
     static HttpComponentsClientHttpRequestFactory factory =
             new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
     private static final RestTemplate restTemplate = new RestTemplate(factory);

@@ -613,6 +613,7 @@ async purchaseAndCartItem(purchaseArray){
 
 
         this.element1.onclick = () => {
+            alert("mo")
             this.showElement(cookie, operation);
         }
         this.element2.onclick = () => {

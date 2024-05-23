@@ -9,9 +9,11 @@ import com.luciad.imageio.webp.WebPImageReaderSpi;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
@@ -19,7 +21,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 
 @Controller
 @Slf4j
@@ -32,12 +38,14 @@ public class ArtworkController {
     private final Paintings paintings = new Paintings();
 
     private final Consumer<Inventory> consumer;
+    private final Consumer<Inventory[]> consumerInventory;
 
     @Value(value = "${stripe.public.key}")
     private String stripePublicKey;
 
-    public ArtworkController(Consumer<Inventory> consumer) {
+    public ArtworkController(Consumer<Inventory> consumer, Consumer<Inventory[]> consumerInventory) {
         this.consumer = consumer;
+        this.consumerInventory = consumerInventory;
     }
 
 
@@ -84,9 +92,17 @@ public class ArtworkController {
         //return allArtworkRepository.findAllBySeriesContainingIgnoreCase("healing_plants");
     }
     @ModelAttribute("green_energy")
-    public Iterable<MyProduct> displayGreen_energySeries() {
+    public List<MyProduct> displayGreen_energySeries() {
+
+
+        //ResponseEntity<Inventory[]> response = new RestTemplate().getForEntity("http://localhost:9090/data/artworks/{Print}", Inventory[].class, "Print");
+       // return Arrays.stream(response.getBody()).map(inventory -> inventory.getMyProduct()).collect(Collectors.toList());
+       // Optional<Inventory[]> response = consumerInventory.getResourceById("/data/artworks/{print}", "Print", Inventory[].class);
+//lo
+//        assert response.orElse(null) != null;
+        //return Arrays.stream(response.orElse(null)).map(Inventory::getMyProduct).collect(Collectors.toList());
+       // log.info("artwork, {}", response);
         return paintings.getSeries(() -> new GreenEnergy().getArtworkList());
-        //return allArtworkRepository.findAllBySeriesContainingIgnoreCase("healing_plants");
     }
     @ModelAttribute("enlightenment")
     public Iterable<MyProduct> displayEnlightenmentSeries() {
