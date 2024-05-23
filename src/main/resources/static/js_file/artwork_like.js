@@ -8,7 +8,7 @@ import {
 } from "./helperMethod.js";
 import {Cookie, ElementManager} from "./allcookies.js";
 
-fetch("http://localhost:9090/data/artworks/category/all").then(response => response.json()).then(data => {
+fetch(`${apiBaseUrl}/data/artworks/category/all`).then(response => response.json()).then(data => {
     let count = 0;
     data.forEach(inventory => {
 
