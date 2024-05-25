@@ -38,7 +38,7 @@
 
 <!--    <script src="/js_file/header.js" type="module" defer></script>-->
     <script src="/js_file/footer.js" type="module" defer></script>
-    <script src="/js_file/artwork_like.js" type="module" defer></script>
+<!--    <script src="/js_file/artwork_like.js" type="module" defer></script>-->
     <script src="/js_file/loader.js" type="module" defer></script>
 
 </head>
@@ -71,5 +71,10 @@
 
 </article>
 <footer-component></footer-component>
+<script type="module">
+    import displayProduct from "/js_file/artwork_like.js";
+
+    displayProduct("all");
+</script>
 </body>
 </html>

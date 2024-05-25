@@ -58,7 +58,7 @@ public class ResetPasswordController {
 
             if (bindingResult.hasErrors()) {
                 //model.addAttribute("customerDto", new CustomerDto());
-
+log.info("yeah");
                 return "reset_password";
             } else if (!newPassword.equals(confirm_new_password)) {
                 model.addAttribute("error", "Password does not match");

@@ -10,5 +10,6 @@ for(let box=0; box<allArtParent.length; box++){
     allNext2[box].style.display="none";
     allPrevious2[box].style.display="none";
     allArtParent[box].style.justifyContent="center";
+
 }
 getElement(".link-directive").style.display="flex";
