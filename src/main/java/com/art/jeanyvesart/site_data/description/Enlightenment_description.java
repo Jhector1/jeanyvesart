@@ -9,7 +9,7 @@ public class Enlightenment_description implements Description {
     }
 
     public List<String> enlightenmentDescriptions = new ArrayList<>();
-    String dear_time_description = "The artwork titled \"Dear Time\" depicts a young woman with her skin " +
+    String dear_time_description ="" /*"The artwork titled \"Dear Time\" depicts a young woman with her skin " +
             "colored in green" +
             ". The woman appears to be looking" +
             " off to the side, with a pensive and contemplative expression on her face. \n" +
@@ -24,10 +24,10 @@ public class Enlightenment_description implements Description {
             " is pondering the passage of time and its impact on her life. \n" +
             "\n" +
             "Overall, \"Dear Time\" is a thought-provoking and evocative artwork that uses striking " +
-            "imagery and symbolism to explore themes of nature, growth, and the passage of time.";
+            "imagery and symbolism to explore themes of nature, growth, and the passage of time."*/;
 
 
-    String freedom_to_choose_your_life = "This piece depicts a young " +
+    String freedom_to_choose_your_life = ""/*"This piece depicts a young " +
             "woman with a happy and carefree expression on her face, with a colorful " +
             "green bouquet flowers that represent her hair. The woman is shown with a bright and vibrant skin color " +
             "in shades of green, which further adds to the cheerful and optimistic tone of the artwork.\n" +
@@ -43,8 +43,8 @@ public class Enlightenment_description implements Description {
             "\n" +
             "In a nutshell, \"Freedom to Choose the Life You Want\" is an uplifting and inspiring artwork that " +
             "celebrates the power of choice and individuality, and encourages viewers to embrace their own unique " +
-            "path in life.";
-    String my_garden_my_life = "The artwork titled \"My Garden, My Life, My Peace\" depicts a young woman " +
+            "path in life."*/;
+    String my_garden_my_life ="" /*"The artwork titled \"My Garden, My Life, My Peace\" depicts a young woman " +
             " standing in front of a serene blue background. The woman's eyes are closed and she wears a pensive yet " +
             "peaceful expression on her face, suggesting a deep connection with the universe.\n" +
             "\n" +
@@ -56,8 +56,8 @@ public class Enlightenment_description implements Description {
             " suggesting a personal and intimate connection with nature and the natural world. " +
             "\"My Garden, My Life, My Peace\" is a reflective and introspective artwork that celebrates the beauty" +
             " and serenity of nature, and encourages viewers to find their own sense of peace and connection with the" +
-            " natural world.";
-    String prince_of_pic_macaya = "Pic Macaya is a mountain peak located in the southern region of Haiti." +
+            " natural world."*/;
+    String prince_of_pic_macaya ="" /*"Pic Macaya is a mountain peak located in the southern region of Haiti." +
             " It is part of the larger Massif de la Hotte mountain range, which is known for its biodiversity " +
             "and unique plant and animal species. This is a representation of a young man who is connected to nature " +
             "and possesses a deep knowledge of the forest. The use of the color green likely creates a sense of " +
@@ -70,7 +70,7 @@ public class Enlightenment_description implements Description {
             "The piece conveys a sense of reverence for nature and the wisdom that can be gained " +
             "from observing and learning from it. The use of the color green and the imagery of the young " +
             "man as a prince create a sense of beauty and wonder that invites the viewer to connect with nature " +
-            "in a deeper way.\n";
+            "in a deeper way.\n"*/;
 
     public void setEnlightenmentDescriptionsData() {
         enlightenmentDescriptions.add(dear_time_description);

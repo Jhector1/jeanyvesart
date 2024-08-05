@@ -9,10 +9,10 @@ public class Healing_description implements Description {
     }
 
     public List<String> healingPlantsDescriptions = new ArrayList<>();
-    String assorossi_description = "The \"Assorrossi Dose tryptich\" is a captivating series of three paintings " +
+    String assorossi_description = ""/*"The \"Assorrossi Dose tryptich\" is a captivating series of three paintings " +
             "that pay homage to the healing power of Assorrossi, a revered Haitian herb known for its " +
             "effectiveness in treating a variety of common ailments. Each painting within the trilogy explores " +
-            "the theme of herbal medicine and invites viewers into a world of natural remedies and holistic healing.";
+            "the theme of herbal medicine and invites viewers into a world of natural remedies and holistic healing."*/;
 
 
 
