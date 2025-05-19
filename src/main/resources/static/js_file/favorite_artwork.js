@@ -22,8 +22,10 @@ import {getCookie} from "./anonymous_user_cookie.js";
 import {JsonRequest} from "./json_request.js";
 
 
+
 (async () => {
     const data = await new CookieClient().displayArtworkDataFromDB(".parent-wishlist", ".wish-list", ".common-op", "favorite");
+    console.log(data)
     removeItem("favorite", ".remove-like", data);
     getElement(".clear-favorite").onclick = () => {
         if (confirm("This action will clear\nyour favorite artwork list"))

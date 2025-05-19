@@ -5,7 +5,9 @@
     <!--    <meta name="description" content="Shop our collection of unique and affordable art pieces at our online art store. Discover original paintings, prints, and sculptures from emerging and established artists. Free shipping.">-->
     <meta name="Author" content="Jean Yves Hector">
     <title>Favorite List | Jean Yves</title>
-    <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost:7272/favorite_artwork.css" type="text/css">
+
+    <!--      <link rel="stylesheet" href="/stylesheet/scss/styles.css" type="text/css">-->
     <!--    <link rel="icon" th:href=-->
     <!--            "@{/images/favicon.png}"-->
     <!--          type="image/x-icon">-->
@@ -15,159 +17,157 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="http://localhost:7272/favorite_artwork.bundle.js" type="module" defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/js_file/loader.js" type="module" defer></script>
+    <!--    <script src="/js_file/loader.js" type="module" defer></script>-->
 
-    <script src="/js_file/footer.js" type="module" defer></script>
-    <script src="/js_file/favorite_artwork.js" type="module" defer></script>
-<!--    <script src="/js_file/social_media_share.js" type="module" defer></script>-->
+    <!--    <script src="/js_file/footer.js" type="module" defer></script>-->
+    <!--    <script src="/js_file/favorite_artwork.js" type="module" defer></script>-->
+    <!--    &lt;!&ndash;    <script src="/js_file/social_media_share.js" type="module" defer></script>&ndash;&gt;-->
 
-    <script th:src="@{/js_file/model/sendEmail.js}" type="module" defer></script>
+    <!--    <script th:src="@{/js_file/model/sendEmail.js}" type="module" defer></script>-->
 
 </head>
 <body>
-<div th:replace="~{dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>
+<!--<div th:replace="~{module/dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>-->
 
 <div class="social-media-link-cover">
-    <section th:insert="~{socialmediaicon.html :: social-media-share}"></section>
+    <section th:insert="~{module/socialmediaicon.html :: social-media-share}"></section>
 </div>
-<header  th:replace="~{header.html :: header-component}" ></header>
+<header th:replace="~{header.html :: header-component}"></header>
 <!--<input class="csrf-token" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-<input class="csrf-token" type="hidden"  th:value="${token}"/>
+<input class="csrf-token" type="hidden" th:value="${token}"/>
+<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">-->
+<!--    Open Modal-->
+<!--</button>-->
+<!--<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            &lt;!&ndash; Modal Header &ndash;&gt;-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="myModalLabel">Modal Title</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Modal Body &ndash;&gt;-->
+<!--            <div class="modal-body">-->
+<!--                This is the content of the modal.-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Modal Footer &ndash;&gt;-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                <button type="button" class="btn btn-primary">Save changes</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
-<form class="offer-form mask-background">
-    <div class="offer-wrap">
-        <button class="cancel"><span id="cancel-button">&#x2715;</span>
-        </button>
-        <div class="offer-make">
+<article id="parent-favorite">
+    <section class="favorite-list"></section>
 
 
-            <div class="painting-offer">
-                <ul>
-                    <li><img src="" alt="image"></li>
-                    <li class="offer-titre offer-data">title</li>
-                    <li class="offer-medium offer-data">$1000</li>
-                    <li class="offer-size offer-data">Oil on Canvas</li>
-                    <div style="display: flex;">
-                        <small style="display: inline;" class="currency">$US</small>
-                        <li class="offer-price offer-data">$1000</li>
+    <div class="quick-message-parent container mt-5">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
 
+                <section class="">
+                    <div class="quick-message">
+                        <div class="profile-wrapper"><img src="/images/profilepic.jpg" alt="profile"/></div>
+                        <p>Hello, if you have any question, Please don't hesitate to send me a quick
+                            message here.
+                        </p>
+                        <h4 class="quick-message">I usually reply withing minutes</h4>
+                        <h3 class="contact-me">Contact me</h3>
                     </div>
-                </ul>
+                    <div class="quick-message-popup"></div>
+                </section>
+
+<!--                <h5 class="card-title">Card Title</h5>-->
+<!--                <h6 class="card-subtitle mb-2 text-muted">Card Subtitle</h6>-->
+<!--                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--                <a href="#" class="card-link">Card link</a>-->
+<!--                <a href="#" class="card-link">Another link</a>-->
             </div>
-            <aside class="offer-info">
-                <h2 class="heading-offer">Make an Offer</h2>
-                <p>We are more likely to accept offer up<br>
-                    to 15% off the artwork price</p>
-                <label class="label-offer" for="offer"><strong>Offer</strong>
-                    <div class="input-group mb-3 input-group-sm">
-                    <span class="input-group-text">$</span>
-                    <input  id="offer"  type="number" class="form-control" name="offering" required>
-                        <span class="input-group-text offer-percentage"></span>
-                    </div>
-
-                        <!--                    <div class="calcul-offer"><span>$</span> <input type="number" id="offer" name="offering"-->
-<!--                                                                    required/><span-->
-<!--                            class="offer-percentage"></span></div>-->
-                </label>
-
-                <label class="label-email" for="email">
-                    <div class="input-group mb-3 input-group-sm">
-                        <span class="input-group-text">Email</span>
-                        <input  id="email"  type="email" class="form-control" name="email-buyer" required>
-<!--                    <input type="email" id="email" name="email-buyer" required/>-->
-                    </div>
-                </label>
-
-                <label>Would like to get your answer by text message</label>
-                <label class="label-phone" for="text-answer-1"><strong>Yes</strong> <input class="input-phone"
-                                                                                           type="checkbox"
-                                                                                           id="text-answer-1"
-                                                                                           name="answer-text"/><i>(Optional)</i></label>
-                <label for="phone-number" class="phone-textarea"><strong>Enter Your Phone Number</strong>
-                    <input type="number" id="phone-number" name="phone"/>
-                </label>
-                <label>Would like to add a message?</label>
-                <label class="label-message" for="message"><strong>Yes</strong> <input class="input-message"
-                                                                                       id="message" name="message"
-                                                                                       type="checkbox"/><i>(Optional)</i></label>
-                <label class="message-textarea">
-                    <strong>Enter your message</strong>
-                    <textarea rows="10" cols="30" id="message-input"></textarea>
-                </label>
-                <button class="btn btn-light" id="offer-submit" style="position:relative" type="submit">Submit your Offer</button>
-            </aside>
         </div>
     </div>
-</form>
-<article class="grand-parent-wishlist">
-    <section class="parent-wishlist parent-favorite-list">
-        <div style="display: none;" class="wish-list favorite-list">
-            <input type="hidden" class="favorite-image-id">
-            <input class="uniqueness" type="hidden">
-            <section th:replace="~{dryTemplate.html :: inventory-data}"></section>
-
-            <div class="wish-list-img-wrapper"><img class="favorite-img" src="" alt="img"/></div>
-            <p style="display: none;" class="image-id"></p>
-            <div class="parent-details-wish-list">
-                <div class="details">
-
-                    <!--                    <span class="cart-currency">Qty </span>-->
-                    <!--                    <span class="quantity-cart cart-common-op2">Price</span>-->
-
-                    <ul id="a">
-                        <li style="word-break:break-all;" class="common-op share-title">Title</li>
-                        <li class="common-op common-color">price</li>
-
-                        <li class="common-op common-color">Medium</li>
-                        <div class="price-wrapper"><span>$US</span>
-                            <li class="common-op">Size</li>
-                        </div>
-
-                        <li style="display: none;" class="favorite-id"></li>
-                    </ul>
-                    <div id="b">
-                        <button class="btn btn-secondary make-an-offer">Make an offer</button>
-                        <div class="parent-remove-add-cart">
-                            <section th:replace="~{dryTemplate.html :: quantity-list}"></section>
-                            <button class="btn btn-light add-to-cart">Add to cart</button>
-                            <button class="btn btn-light ellipsisText remove-from-cart">Remove from cart</button>
-                            <button class="favorite-sold-item">Sold</button>
-
-                        </div>
-                    </div>
-                </div>
-                <ul class="other-op">
-                    <li class="remove-like">Remove</li>
-                    <li class="unavailable-link">Save for later</li>
-                    <li class="share-to-media">Share</li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="display-favorite-total-items"><h4 class="title-heading">Favorite (<span
-                class="title-heading favorite-total-items">0</span>)</h4>
-            <p class="clear-favorite">Clear Favorite</p></div>
-        <div class="empty-favorite-alert"><h1>Your Favorite list is currently empty</h1>
-            <p>To find a piece you love continue browsing <a style="color:rebeccapurple;" href="/artworks">here</a></p>
-        </div>
-    </section>
-    <section class="quick-message-parent">
-        <div class="quick-message">
-            <div class="profile-wrapper"><img src="/images/profilepic.jpg" alt="profile"/></div>
-            <p>Hello, if you have any question, Please don't hesitate to send me a quick
-                message here.
-            </p>
-            <h4 class="quick-message">I usually reply withing minutes</h4>
-            <h3 class="contact-me">Contact me</h3>
-        </div>
-        <div class="quick-message-popup"></div>
-    </section>
-    <section th:insert="~{contactform.html :: contact-form}"></section>
-
 </article>
+
+<!--<form class="offer-form mask-background">-->
+<!--    <div class="offer-wrap">-->
+<!--        <button class="cancel"><span id="cancel-button">&#x2715;</span>-->
+<!--        </button>-->
+<!--     -->
+<!--    </div>-->
+<!--</form>-->
+<!--<article class="grand-parent-wishlist">-->
+<!--    <section class="parent-wishlist parent-favorite-list">-->
+<!--        <div style="display: none;" class="wish-list favorite-list">-->
+<!--            <input type="hidden" class="favorite-image-id">-->
+<!--            <input class="uniqueness" type="hidden">-->
+<!--            <section th:replace="~{module/dryTemplate.html :: inventory-data}"></section>-->
+
+<!--            <div class="wish-list-img-wrapper"><img class="favorite-img" src="" alt="img"/></div>-->
+<!--            <p style="display: none;" class="image-id"></p>-->
+<!--            <div class="parent-details-wish-list">-->
+<!--                <div class="details">-->
+
+<!--                    &lt;!&ndash;                    <span class="cart-currency">Qty </span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <span class="quantity-cart cart-common-op2">Price</span>&ndash;&gt;-->
+
+<!--                    <ul id="a">-->
+<!--                        <li style="word-break:break-all;" class="common-op share-title">Title</li>-->
+<!--                        <li class="common-op common-color">price</li>-->
+
+<!--                        <li class="common-op common-color">Medium</li>-->
+<!--                        <div class="price-wrapper"><span>$US</span>-->
+<!--                            <li class="common-op">Size</li>-->
+<!--                        </div>-->
+
+<!--                        <li style="display: none;" class="favorite-id"></li>-->
+<!--                    </ul>-->
+<!--                    <div id="b">-->
+
+<!--                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary make-an-offer">Make an offer</button>-->
+<!--                        <div class="parent-remove-add-cart">-->
+<!--                            <section th:replace="~{module/dryTemplate.html :: quantity-list}"></section>-->
+<!--                            <button class="btn btn-light add-to-cart">Add to cart</button>-->
+<!--                            <button class="btn btn-light ellipsisText remove-from-cart">Remove from cart</button>-->
+<!--                            <button class="favorite-sold-item">Sold</button>-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <ul class="other-op">-->
+<!--                    <li class="remove-like">Remove</li>-->
+<!--                    <li class="unavailable-link">Save for later</li>-->
+<!--                    <li class="share-to-media">Share</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+
+<!--        </div>-->
+
+<!--        <div class="display-favorite-total-items"><h4 class="title-heading">Favorite (<span-->
+<!--                class="title-heading favorite-total-items">0</span>)</h4>-->
+<!--            <p class="clear-favorite">Clear Favorite</p>-->
+<!--        </div>-->
+<!--        <div class="empty-favorite-alert"><h1>Your Favorite list is currently empty</h1>-->
+<!--            <p>To find a piece you love continue browsing <a style="color:rebeccapurple;" href="/artworks">here</a></p>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--    <section class="quick-message-parent">-->
+<!--        <div class="quick-message">-->
+<!--            <div class="profile-wrapper"><img src="/images/profilepic.jpg" alt="profile"/></div>-->
+<!--            <p>Hello, if you have any question, Please don't hesitate to send me a quick-->
+<!--                message here.-->
+<!--            </p>-->
+<!--            <h4 class="quick-message">I usually reply withing minutes</h4>-->
+<!--            <h3 class="contact-me">Contact me</h3>-->
+<!--        </div>-->
+<!--        <div class="quick-message-popup"></div>-->
+<!--    </section>-->
+<!--    <section th:insert="~{module/contactform.html :: contact-form}"></section>-->
+
+<!--</article>-->
 <footer-component></footer-component>
 </body>
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="http://localhost:7272/user_home.css" type="text/css">
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <meta charset="UTF-8">
+    <title  th:text="${customerDto.getFullName()}" >Title</title>
+</head>
+<body>
+<header  th:replace="~{header.html :: header-component}" ></header>
+<section th:replace="~{authenticated/authenticated_nav.html :: auth-nav}" ></section>
+<div th:replace="~{module/dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>
+
+<section id="profile-img-section">
+    <div id="profile-img-box">
+        <img src="/images/profilepic.jpg" alt="">
+    </div>
+</section>
+    <h1 id="current-user-name" th:text="${customerDto.getFullName()}">Jean Yves Hector</h1>
+    <section></section>
+
+<article class="artworks-wrapper"></article>
+<footer-component></footer-component>
+
+</body>
+<script type="module">
+    console.log("yeah")
+
+    // import displayProduct from "/js_file/artwork_like.js";
+    // import {checkCookie} from "/js_file/anonymous_user_cookie.js";
+    // import MyTemplate from "/js_file/artworkTemplate.js";
+    import {reset_all_parent_to_wrap, MyTemplate,displayProduct, checkCookie} from "http://localhost:7272/user_home.bundle.js";
+
+    const apiEndpoint = `favorite/artworks`;
+    const myTemplate = new MyTemplate();
+    const category = checkCookie("user12345");
+    displayProduct(category, apiEndpoint, () => {
+
+        return fetch(`${apiBaseUrl}/${apiEndpoint}/${category}`).then(response => response.json()).then(async data => {
+
+            let template = await myTemplate.productTemplate({category: `Items You Like (${data.length})`}, data, false);
+            document.querySelector(".artworks-wrapper").innerHTML += template;
+            console.log(" correct Url")
+            reset_all_parent_to_wrap();
+            return myTemplate.count;
+
+
+        }).catch(err=>{
+            console.log(err + " invalid Url")
+        })
+    }, true);
+
+</script>
+
+</html>

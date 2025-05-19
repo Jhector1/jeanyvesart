@@ -3,6 +3,7 @@ package com.art.jeanyvesart.helper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-
+@Slf4j
 public class Helper {
 
     public final HttpServletRequest request;
@@ -68,13 +69,16 @@ public class Helper {
     }
 
     public String checkEmail(OAuth2User oAuth2User) {
-
+        log.info("user {}", oAuth2User.toString());
         String email = oAuth2User.getAttribute("email");
 
 
         if (email == null) {
             String id = oAuth2User.getAttribute("id");
             String name = oAuth2User.getAttribute("name");
+            if(name==null){
+                name="anonymous";
+            }
 
             return name.replace(" ", "") + id + "@jeanyveshector.com";
         } else {

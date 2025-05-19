@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost:7272/artwork_page.css" type="text/css">
 <!--    <script src="/js_file/registration.js" type="module" defer></script>-->
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -34,12 +34,12 @@
     <link rel="manifest" href="/site.webmanifest">
 <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>-->
 
-<!--    <script src="/js_file/header.js" type="module" defer></script>-->
-    <script src="/js_file/footer.js" type="module" defer></script>
-<!--    <script src="/js_file/artwork_like.js" type="module" defer></script>-->
-    <script src="/js_file/loader.js" type="module" defer></script>
+<!--&lt;!&ndash;    <script src="/js_file/header.js" type="module" defer></script>&ndash;&gt;-->
+<!--    <script src="/js_file/footer.js" type="module" defer></script>-->
+<!--&lt;!&ndash;    <script src="/js_file/artwork_like.js" type="module" defer></script>&ndash;&gt;-->
+<!--    <script src="http://localhost:7272/artwork_page.bundle.js" type="module" defer></script>-->
 
 </head>
 <body>
@@ -47,34 +47,49 @@
 <header  th:replace="~{header.html :: header-component}" >
 </header>
 <!--<artwork-header-tab></artwork-header-tab>-->
-<div th:replace="~{dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>
+<div th:replace="~{module/dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>
 
 <div>
 
 </div>
-<article class="artworks-wrapper">
+<article id="artwork-wrapper-parent">
+    <aside id="recently-viewed"></aside>
 
-<!--    <div th:insert="~{artworks/artworkTemplate.html :: artworksTemplateData(field_artwork_category='enlightenment')}"-->
-<!--         th:with="object=${enlightenment}"></div>-->
-<!--    <div th:insert="~{artworks/artworkTemplate.html :: artworksTemplateData(field_artwork_category='healing plants')}"-->
-<!--         th:with="object=${healing_plants}"></div>-->
-<!--    <div th:insert="~{artworks/artworkTemplate.html :: artworksTemplateData(field_artwork_category='little black angels')}"-->
-<!--         th:with="object=${little_black_angels}"></div>-->
-<!--    <div th:insert="~{artworks/artworkTemplate.html :: artworksTemplateData(field_artwork_category='renaissance')}"-->
-<!--         th:with="object=${renaissance}"></div>-->
-<!--    <div th:insert="~{artworks/artworkTemplate.html :: artworksTemplateData(field_artwork_category='Jackets')}"-->
-<!--         th:with="object=${jackets}"></div>-->
-<!--    <div class="last-row"-->
-<!--         th:insert="~{artworks/artworkTemplate.html :: artworksTemplateData(field_artwork_category='Green Energy')}"-->
-<!--         th:with="object=${green_energy}"></div>-->
+    <section class="artworks-wrapper">
 
 
+    </section>
 </article>
+
 <footer-component></footer-component>
 <script type="module">
-    import displayProduct from "/js_file/artwork_like.js";
+    import {displayProduct, Frame,slideNextPrevious,checkCookie }from "http://localhost:7272/artwork_page.bundle.js";
+displayProduct("all");
 
-    displayProduct("all");
+
+
+    const apiEndpoint = `recently-viewed/artworks`;
+    const category = checkCookie("user12345");
+
+
+    fetch(`${apiBaseUrl}/${apiEndpoint}/${category}`).then(response => response.json()).then( async data => {
+
+        let template = new Frame(data, {category: `Recently Viewed (${data.length})`});
+        template.lin_directive = false;
+        template.cartBtnComponent = false;
+        template.likeBtnComponent = false;
+        document.querySelector("#recently-viewed").innerHTML += await template.toString();
+        console.log(" correct Url")
+        return 1;
+
+
+    }).then(()=>{
+        slideNextPrevious();
+    }).catch(err=>{
+        console.log(err + " invalid Url")
+    });
+
+
 </script>
 </body>
 </html>

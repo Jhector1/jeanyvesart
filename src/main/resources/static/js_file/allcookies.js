@@ -183,7 +183,7 @@ class CookieClient {
                     const clone = document.querySelector(`${parent_element} ${list}`);
                     const cloneNode = clone.cloneNode(true);
                     let count = 1;
-                    cloneNode.querySelector(`${list} img`).src = artwork_description[0].trim();
+                    cloneNode.querySelector(`${list} img`).src = artwork_description[0];
                     const common = cloneNode.querySelectorAll(common_op);
                     cloneNode.querySelector(".inventory-data").value = value.inventory;
 
@@ -217,13 +217,12 @@ class CookieClient {
                     document.querySelector(parent_element).appendChild(cloneNode);
                 });
 
-
             return data;
 
         } catch (e) {
             getElement(`.clear-${type}`).style.display = "none";
             getElement(`.parent-${type}-list`).style.margin = "auto";
-
+            console.log("An error occurred: " + e)
             getElement(`.empty-${type}-alert`).style.display = "flex";
             console.log("error");
 
@@ -250,7 +249,7 @@ class ElementManager {
     }
 
 
-    async displayElementStatusFromDB( operation, cookie) {
+    async displayElementStatusFromDB(operation, cookie) {
         try {
             const response = await fetch(`${apiBaseUrl}/${cookie.type}/artworks/${checkCookie("user12345")}/${cookie.id}`);
 
@@ -280,122 +279,123 @@ class ElementManager {
 
 
     }
-async purchaseAndCartItem(purchaseArray){
-    try {
-        const response1 = fetch(`${apiBaseUrl}/${cookie.type}/artworks/${checkCookie("user12345")}`);
-        console.log(response1); // .then(results => {
+
+    async purchaseAndCartItem(purchaseArray) {
+        try {
+            const response1 = fetch(`${apiBaseUrl}/${cookie.type}/artworks/${checkCookie("user12345")}`);
+            console.log(response1); // .then(results => {
 
 
-        const response = fetch(`${apiBaseUrl}/api/artworks/purchase-all`);
+            const response = fetch(`${apiBaseUrl}/api/artworks/purchase-all`);
 
-        const result = await Promise.allSettled([(await response1).json(), (await response).json()]);
-        console.log(result);
-        let mergeArrayIds;
-        const [arr1, arr2] = result;
-        console.log(arr1.value)
-        if (arr1.status === 'fulfilled' && arr2.status === 'fulfilled') {
-            mergeArrayIds = arr1.value.map(element => element.myProduct.id).concat(arr2.value);
+            const result = await Promise.allSettled([(await response1).json(), (await response).json()]);
+            console.log(result);
+            let mergeArrayIds;
+            const [arr1, arr2] = result;
+            console.log(arr1.value)
+            if (arr1.status === 'fulfilled' && arr2.status === 'fulfilled') {
+                mergeArrayIds = arr1.value.map(element => element.myProduct.id).concat(arr2.value);
 
-        } else if (arr1.status === 'fulfilled') {
-            mergeArrayIds = arr1.value.map(element => element.myProduct.id);
-        } else if (arr2.status === 'fulfilled') {
-            mergeArrayIds = arr2.value;
-        } else mergeArrayIds = [];
-        mergeArrayIds.sort((a, b) => a - b);
-        purchaseArray = arr2;
-
-        return mergeArrayIds;
-
-    }catch (e) {
-        return e;
-    }
-    }
-     async displayElementStatusOrPurchase2(cookie, likedData, notLikedData, soldData, allData, operation) {
-             console.log(mergeArrayIds);
-
-            const formValidation = new FormValidation();
-            let start=0;
-            let low =0;
-
-            for (let id of mergeArrayIds) {
-
-                while (start < id) {
-                    console.log(start+"p0=");
-
-                    notLikedData[start].style.display="block";
-
-                   start++;
-                 //   console.log(start)
-
-                }
-                start = id+1;
-                //console.log(id)
-                // notLikedData[id].style.display = "none";
-                if (arr2.value.includes(id)) {
-                   // console.log(id)
-                    likedData[id].style.display = "none";
-                    notLikedData[id].style.display = "none";
-
-                    soldData[id].style.display = "flex"
-
-                } else {
-
-                    likedData[id].style.display = "flex";
-
-                }
-
-
-                while (low < id) {
-                    console.log(low)
-                    likedData[low].onclick = () => {
-                        this.showElement2(new Cookie("favorite", low), operation, likedData[low], notLikedData[low]);
-                    }
-                    notLikedData[low].onclick = () => {
-                        if (cookie.type === "cart" && allData.get("inventory").value > 1) {
-                            this.quantityValue = allData.get("quantity").value;
-                            console.log(allData.get("quantity") + "Yeah");
-                            ElementManager.validateQuantity(formValidation, allData.get("quantity"), allData.get("quantity-error"));
-                            if (formValidation.allinputValid) {
-
-                                this.notShowElement2( new Cookie("favorite", low), operation,likedData[low], notLikedData[low]);
-                            }
-                        } else {
-                            allData.set("quantity", 1);
-                            this.notShowElement2( new Cookie("favorite", low), operation,likedData[low], notLikedData[low]);
-
-                        }
-
-                    }
-
-                    low++;
-                    //   console.log(start)
-
-                }
-                low = id;
-            }
-
-            // for (let id in mergeArrayIds) {
-            //     while (start < id) {
-            //
-            //
-            //     }
-            //     start = id+1;
-            //     console.log(id)
-            //     notLikedData[id].style.display = "none";
-            //     if (arr2.value.includes(id)) {
-            //         console.log(id)
-            //         likedData[id].style.display = "none";
-            //         soldData[id].style.display = "flex"
-            //
-            //     } else {
-            //         likedData[id].style.display = "flex";
-            //     }
-            //
-            // }
-
+            } else if (arr1.status === 'fulfilled') {
+                mergeArrayIds = arr1.value.map(element => element.myProduct.id);
+            } else if (arr2.status === 'fulfilled') {
+                mergeArrayIds = arr2.value;
+            } else mergeArrayIds = [];
+            mergeArrayIds.sort((a, b) => a - b);
+            purchaseArray = arr2;
 
             return mergeArrayIds;
 
+        } catch (e) {
+            return e;
+        }
+    }
+
+    async displayElementStatusOrPurchase2(cookie, likedData, notLikedData, soldData, allData, operation) {
+        console.log(mergeArrayIds);
+
+        const formValidation = new FormValidation();
+        let start = 0;
+        let low = 0;
+
+        for (let id of mergeArrayIds) {
+
+            while (start < id) {
+                console.log(start + "p0=");
+
+                notLikedData[start].style.display = "block";
+
+                start++;
+                //   console.log(start)
+
+            }
+            start = id + 1;
+            //console.log(id)
+            // notLikedData[id].style.display = "none";
+            if (arr2.value.includes(id)) {
+                // console.log(id)
+                likedData[id].style.display = "none";
+                notLikedData[id].style.display = "none";
+
+                soldData[id].style.display = "flex"
+
+            } else {
+
+                likedData[id].style.display = "flex";
+
+            }
+
+
+            while (low < id) {
+                console.log(low)
+                likedData[low].onclick = () => {
+                    this.showElement2(new Cookie("favorite", low), operation, likedData[low], notLikedData[low]);
+                }
+                notLikedData[low].onclick = () => {
+                    if (cookie.type === "cart" && allData.get("inventory").value > 1) {
+                        this.quantityValue = allData.get("quantity").value;
+                        console.log(allData.get("quantity") + "Yeah");
+                        ElementManager.validateQuantity(formValidation, allData.get("quantity"), allData.get("quantity-error"));
+                        if (formValidation.allinputValid) {
+
+                            this.notShowElement2(new Cookie("favorite", low), operation, likedData[low], notLikedData[low]);
+                        }
+                    } else {
+                        allData.set("quantity", 1);
+                        this.notShowElement2(new Cookie("favorite", low), operation, likedData[low], notLikedData[low]);
+
+                    }
+
+                }
+
+                low++;
+                //   console.log(start)
+
+            }
+            low = id;
+        }
+
+        // for (let id in mergeArrayIds) {
+        //     while (start < id) {
+        //
+        //
+        //     }
+        //     start = id+1;
+        //     console.log(id)
+        //     notLikedData[id].style.display = "none";
+        //     if (arr2.value.includes(id)) {
+        //         console.log(id)
+        //         likedData[id].style.display = "none";
+        //         soldData[id].style.display = "flex"
+        //
+        //     } else {
+        //         likedData[id].style.display = "flex";
+        //     }
+        //
+        // }
+
+
+        return mergeArrayIds;
 
 
     }
@@ -420,7 +420,7 @@ async purchaseAndCartItem(purchaseArray){
     }
 
 
-    async displayElementStatusOrPurchase( cookie, operation, element4 = null) {
+    async displayElementStatusOrPurchase(cookie, operation, element4 = null) {
         try {
             const response = await fetch(`${apiBaseUrl}/api/artworks/purchase/${cookie.id}`);
 
@@ -439,10 +439,11 @@ async purchaseAndCartItem(purchaseArray){
             return purchaseArtwork;
 
         } catch (error) {
-            await this.displayElementStatusFromDB( operation, cookie)
+            await this.displayElementStatusFromDB(operation, cookie)
         }
 
     }
+
     showElement(cookie, operation) {
         const temp = this.element1.innerHTML;
         let textM = "Loading...";
@@ -488,19 +489,19 @@ async purchaseAndCartItem(purchaseArray){
             textM = "Removing...";
         }
         element1.innerHTML = `<span class='spinner-grow spinner-grow-sm'></span> ${textM}`
-       element1.disabled = true;
+        element1.disabled = true;
 
 
         setTimeout(() => {
             try {
                 CookieManager.removeCookie(cookie).then(response => {
                     if (response.ok) {
-                        alert(90)
+
                         if (operation === "display") {
                             element1.innerHTML = temp;
                             element1.style.display = "none";
                             element2.style.display = "flex";
-                           element1.disabled = false;
+                            element1.disabled = false;
 
                         } else if (operation === "visibility") {
                             element1.innerHTML = temp;
@@ -519,7 +520,8 @@ async purchaseAndCartItem(purchaseArray){
             }
         }, 1000)
     }
-    notShowElement( allData, cookie, operation) {
+
+    notShowElement(allData, cookie, operation) {
         const temp = this.element2.innerHTML;
         let textM = "Loading...";
         if (cookie.type.toLowerCase().trim() === "cart") {
@@ -559,7 +561,7 @@ async purchaseAndCartItem(purchaseArray){
 
     }
 
-    notShowElement2( cookie, operation, element1, element2) {
+    notShowElement2(cookie, operation, element1, element2) {
         const temp = element2.innerHTML;
         let textM = "Loading...";
         if (cookie.type.toLowerCase().trim() === "cart") {
@@ -567,25 +569,25 @@ async purchaseAndCartItem(purchaseArray){
         }
 
         element2.innerHTML = `<span class='spinner-grow spinner-grow-sm'></span> ${textM}`
-       element2.disabled = true;
+        element2.disabled = true;
 
         setTimeout(() => {
             try {
                 CookieManager.addCookie(cookie, this.quantityValue).then(response => {
                     if (response.ok) {
-                        alert(78)
+
                         if (operation === "display") {
-                           element1.style.display = "flex";
+                            element1.style.display = "flex";
                             element2.style.display = "none";
-                           element2.innerHTML = temp;
+                            element2.innerHTML = temp;
                             element2.disabled = false;
 
 
                         } else if (operation === "visibility") {
-                           element1.style.visibility = "visible";
+                            element1.style.visibility = "visible";
                             element2.style.visibility = "hidden";
-                           element2.innerHTML = temp;
-                           element2.disabled = false;
+                            element2.innerHTML = temp;
+                            element2.disabled = false;
 
                         }
 
@@ -608,29 +610,32 @@ async purchaseAndCartItem(purchaseArray){
     }
 
     switchAppearance(allData, cookie, operation, element4 = null) {
-        this.displayElementStatusOrPurchase( cookie, operation, element4).then(data => data);
+        this.displayElementStatusOrPurchase(cookie, operation, element4).then(data => data);
         const formValidation = new FormValidation();
 
 
-        this.element1.onclick = () => {
-            alert("mo")
-            this.showElement(cookie, operation);
-        }
-        this.element2.onclick = () => {
-            if (cookie.type === "cart" && allData.get("inventory").value > 1) {
-                this.quantityValue = allData.get("quantity").value;
-                //console.log(allData.get("quantity") + "Yeah");
-                ElementManager.validateQuantity(formValidation, allData.get("quantity"), allData.get("quantity-error"));
-                if (formValidation.allinputValid) {
+        if (this.element1) {
+            this.element1.onclick = () => {
 
-                    this.notShowElement( allData, cookie, operation);
-                }
-            } else {
-                allData.set("quantity", 1);
-                this.notShowElement(allData, cookie, operation);
-
+                this.showElement(cookie, operation);
             }
+        }
+        if (this.element2) {
+            this.element2.onclick = () => {
+                if (cookie.type === "cart" && allData.get("inventory").value > 1) {
+                    this.quantityValue = allData.get("quantity").value;
+                    //console.log(allData.get("quantity") + "Yeah");
+                    ElementManager.validateQuantity(formValidation, allData.get("quantity"), allData.get("quantity-error"));
+                    if (formValidation.allinputValid) {
 
+                        this.notShowElement(allData, cookie, operation);
+                    }
+                } else {
+                    allData.set("quantity", 1);
+                    this.notShowElement(allData, cookie, operation);
+
+                }
+            }
         }
     }
 

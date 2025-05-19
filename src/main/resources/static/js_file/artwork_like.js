@@ -10,17 +10,34 @@ import {Cookie, ElementManager} from "./allcookies.js";
 import productTemplate from "./artworkTemplate.js";
 import MyTemplate from "./artworkTemplate.js";
 
-export default function displayProduct(category) {
+export default async function displayProduct(category, endpoint="data/artworks/category",callback = (myTemplate)=>{
+   return  fetch(`${apiBaseUrl}/${endpoint}/${category}`).then(response => response.json()).then(async data => {
+       for (const inventory of data) {
+
+
+           let template = await myTemplate.productTemplate(inventory);
+
+
+           document.querySelector(".artworks-wrapper").innerHTML += template;
+
+
+       }
+
+       return myTemplate.counter;
+
+
+   })
+}) {
 
     const myTemplate = new MyTemplate();
 
-   return (category ==='all' ?  fetch(`${apiBaseUrl}/data/artworks/category/all`).then(response => response.json()).then(data => {
+   return (category ==='all' ?  fetch(`${apiBaseUrl}/${endpoint}/all`).then(response => response.json()).then(async data => {
 
-        data.forEach(inventory => {
+       for (const inventory of data) {
 
-             let template = `<div class="artworks-grandparent">`
-            template += myTemplate.productTemplate(inventory);
-         template+= ` <div class="see-more">
+           let template = `<div class="artworks-grandparent">`
+           template += await myTemplate.productTemplate(inventory);
+           template += ` <div class="see-more">
                 <div class="see-in-details-wrapper">
                     <hr>
                     <h1 class="see-in-details" href="#">See More</h1>
@@ -31,30 +48,15 @@ export default function displayProduct(category) {
             </div>
         </div>`;
 
-            document.querySelector(".artworks-wrapper").innerHTML += template;
+           document.querySelector(".artworks-wrapper").innerHTML += template;
 
 
-        })
+       }
 
-        return myTemplate.counter;
-
-
-    }): fetch(`${apiBaseUrl}/data/artworks/category/${category}`).then(response => response.json()).then(data => {
-      data.forEach(inventory => {
+       return myTemplate.counter;
 
 
-          let template = myTemplate.productTemplate(inventory);
-
-
-          document.querySelector(".artworks-wrapper").innerHTML += template;
-
-
-      })
-
-      return myTemplate.counter;
-
-
-  })).then((count) => {
+   }): callback(myTemplate)).then((count) => {
         const all_frame = getAllElement(".frame");
 
         const cookieNum = getAllElement(".image-id");
@@ -80,11 +82,11 @@ export default function displayProduct(category) {
             all_artwork_data.set("title", all_artwork[0].innerHTML);
             all_artwork_data.set("medium", all_artwork[1].innerHTML);
             all_artwork_data.set("size", all_artwork[2].innerHTML);
-            all_artwork_data.set("price", all_artwork[3].innerHTML);
+            all_artwork_data.set("price", all_artwork[3]?all_artwork[3].innerHTML: "unavailable");
             //all_artwork_data.set("unique", unique[i].value);
             //all_artwork_data.set("inventory", getAllElement(".inventory-data")[i]);
-            all_artwork_data.set("description", getAllElement(".describe-artwork")[y].innerHTML);
-            likeOrNotDesign(cookieNum[y].value, not_liked_heart[y], liked_heart[y], all_artwork_data, elementSold[y]);
+            all_artwork_data.set("description",  getAllElement(".describe-artwork")[y]?getAllElement(".describe-artwork")[y].innerHTML: "");
+            //likeOrNotDesign(artworkID[y].value, not_liked_heart[y], liked_heart[y], all_artwork_data, elementSold[y]);
 
         }
     }).then(() => {

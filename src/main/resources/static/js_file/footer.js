@@ -55,64 +55,67 @@ customElements.define("footer-component", Footer);
 import {CookieClient} from "./allcookies.js";
 import {getCookie, setCookie} from "./anonymous_user_cookie.js";
 
-const cookieClient = new CookieClient();
-cookieClient.addToClientBasket("C")
-cookieClient.displayNumberLike(".cart-add-list", "cart");
+export default function header_js() {
+    const cookieClient = new CookieClient();
+    cookieClient.addToClientBasket("C")
+    cookieClient.displayNumberLike(".cart-add-list", "cart");
 
-const cookieClient2 = new CookieClient();
-cookieClient2.addToClientBasket("L");
-cookieClient2.displayNumberLike(".count-favorite-list", "favorite");
-getElement(".menu").addEventListener('click', () => {
-    if (getElement(".artwork-menu").style.display === "flex") {
-        getElement(".artwork-menu").style.display = "none";
-    } else {
-        getElement(".artwork-menu").style.display = "flex";
+    const cookieClient2 = new CookieClient();
+    cookieClient2.addToClientBasket("L");
+    cookieClient2.displayNumberLike(".count-favorite-list", "favorite");
+    getElement(".menu").addEventListener('click', () => {
+        if (getElement(".artwork-menu").style.display === "flex") {
+            getElement(".artwork-menu").style.display = "none";
+        } else {
+            getElement(".artwork-menu").style.display = "flex";
 
-    }
-});
+        }
+    });
 
-getElement(".log-user-out").addEventListener('click', function() {
-    // This function will be executed when the button is clicked
-    sessionStorage.setItem("login-username", "anonymous");
+    getElement(".log-user-out").addEventListener('click', function () {
+        // This function will be executed when the button is clicked
+        sessionStorage.setItem("login-username", "anonymous");
 
-    console.log('Button clicked!');
-});
+        console.log('Button clicked!');
+    });
 
-setTimeout(()=> {
-    if (sessionStorage.getItem("login-username") === "anonymous" || sessionStorage.getItem("login-username") === null) {
-        getElement(".anonymous-user").style.display = "block";
-        getElement(".user-icon-box").style.display = "none";
+    setTimeout(() => {
+        if (sessionStorage.getItem("login-username") === "anonymous" || sessionStorage.getItem("login-username") === null) {
+            getElement(".anonymous-user").style.display = "block";
+            getElement(".user-icon-box").style.display = "none";
 
-    } else {
-        getElement(".user-icon-box").style.display = "block";
-        getElement(".anonymous-user").style.display = "none";
+        } else {
+            getElement(".user-icon-box").style.display = "block";
+            getElement(".anonymous-user").style.display = "none";
 
-    }
+        }
 
 
-},1);
-setUrl(".item1", "profile");
-setUrl(".item2", "collections");
+    }, 1);
+    setUrl(".item1", "profile");
+    setUrl(".item2", "collections");
 //setUrl(".item3", "payment-settings");
 //setUrl(".item4", "myReviews");
 
-function setUrl(selector, url_head){
-    getElement(selector).href = `/account/${getCookie("session_Id")}/${url_head}`;
-}
-window.addEventListener('resize',showMenuHorizontally);
-showMenuHorizontally();
-function showMenuHorizontally(){
-    // Get the width of the window
-    const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    function setUrl(selector, url_head) {
+        getElement(selector).href = `/account/${getCookie("session_Id")}/${url_head}`;
+    }
+
+    window.addEventListener('resize', showMenuHorizontally);
+    showMenuHorizontally();
+
+    function showMenuHorizontally() {
+        // Get the width of the window
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
 // Get the height of the window
-    //  var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        //  var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-    if(windowWidth>501 &&  windowWidth < 800){
-        getElement(".menu-to-show").classList.add("show");
-    }
-    else{
-        getElement(".menu-to-show").classList.remove("show");
+        if (windowWidth > 501 && windowWidth < 800) {
+            getElement(".menu-to-show").classList.add("show");
+        } else {
+            getElement(".menu-to-show").classList.remove("show");
 
+        }
     }
 }

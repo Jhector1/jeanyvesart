@@ -152,7 +152,7 @@ public class ArtworkController {
 
             MyProduct artwork = productInventory.get().getMyProduct();
         //    log.info("object product, {}", artwork);
-            String artworkImageUrl = artwork.getImageUrl().trim();
+            String artworkImageUrl = artwork.getImageUrl()!=null?artwork.getImageUrl().trim():"data:"+artwork.getImageData().getType()+";base64,"+artwork.getImageData().getBase64Image();
             ImageIO.scanForPlugins();
             ImageIO.getImageReadersByMIMEType("image/webp").next();
 

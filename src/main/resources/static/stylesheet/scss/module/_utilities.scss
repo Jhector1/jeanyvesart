@@ -1,0 +1,51 @@
+
+@import "mixins";
+
+@import "header";
+@import "authenticated/authenticated_nav";
+@import "social_media_link";
+
+@import "index_page_style";
+@import "popup_display";
+@import "artwork_page_style";
+@import "popup_offer";
+@import "contact_form";
+
+@import "favorite_page_style";
+@import "reset_password";
+
+//*************cart page design***********************
+@import "cart_page";
+
+@import "media_query";
+@import "about";
+@import "social_media_icon";
+@import "footer";
+@import "artwork_link_display";
+
+@import "authenticated/my_collection";
+
+@import "terms_and_service";
+@import "my_spinner";
+body{
+  background-color: $border-color-less-opacity;
+}
+
+
+//.loader::after {
+//  content: "";
+//  width: 6vw;
+//  height: 6vw;
+//  border: 0.6rem solid #dddddd;
+//  border-top-color: green;
+//  border-radius: 50%;
+//  animation: loading2 0.75s ease infinite;
+//}@keyframes loading2 {
+//   from {
+//     transform: rotate(0turn);
+//   }
+//   to {
+//     transform: rotate(1turn);
+//   }
+// }
+

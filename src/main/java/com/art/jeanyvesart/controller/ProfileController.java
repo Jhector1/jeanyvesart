@@ -30,6 +30,37 @@ public class ProfileController {
         this.consumer = consumer;
     }
 
+    @GetMapping("/{sessionId}/home")
+    public String getProfileHomePage(Model model, HttpServletResponse response){
+        //        Optional<MyCustomer> customer = customerRepository.findByEmail(Helper.getAuthenticatedEmail());
+
+
+        Optional<MyCustomer> customer = consumer.getResourceById("/customer/account/{email}", Objects.requireNonNull(helper.getAuthenticatedEmail()),MyCustomer.class);
+        customer.ifPresent(myCustomer ->{
+            log.info("customer profile  triggered {}", customer.get().getMyOrders());
+
+            CustomerDto customerDto = new CustomerDto();
+            customerDto.setEmail(myCustomer.getEmail());
+            customerDto.setFullName(myCustomer.getFullName());
+            customerDto.setTelephone(myCustomer.getTelephone());
+            Set<Address> addressSet = myCustomer.getAddressList();
+            customerDto.setAddress(!addressSet.isEmpty()? (Address) addressSet.toArray()[0] : null);
+
+            model.addAttribute("secret", myCustomer.getId());
+            model.addAttribute("customerDto", customerDto);
+        });
+
+
+
+
+        model.addAttribute( "sessionId" ,helper.getSessionId());
+        helper.setCookieValue("session_Id", helper.getSessionId());
+
+
+
+        return "authenticated/userHome";
+
+    }
 
     @GetMapping("/{sessionId}/profile")
     public String getProfilePage(Model model, HttpServletResponse response){
@@ -38,7 +69,7 @@ public class ProfileController {
 
         Optional<MyCustomer> customer = consumer.getResourceById("/customer/account/{email}", Objects.requireNonNull(helper.getAuthenticatedEmail()),MyCustomer.class);
        customer.ifPresent(myCustomer ->{
-           log.info("customer {}", customer.get().getMyOrders());
+           log.info("customer profile  triggered {}", customer.get().getMyOrders());
 
            CustomerDto customerDto = new CustomerDto();
            customerDto.setEmail(myCustomer.getEmail());

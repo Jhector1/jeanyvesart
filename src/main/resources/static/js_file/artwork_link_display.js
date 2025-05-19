@@ -4,13 +4,15 @@ import {FormValidation} from "./formValidation.js";
 import {ElementManager} from "./allcookies.js";
 import {checkCookie} from "./anonymous_user_cookie.js";
 import {ProductAndInventory} from "./model/product_and_Inventory.js";
+
 console.log("hello world")
+
 async function makeFetchSynchronous() {
     try {
         const url = `${apiBaseUrl}/data/artworks/${artworkID}`;
         console.log(url);
         const response = await fetch(url);
-               const data = await response.json();
+        const data = await response.json();
         const imageData = data.myProduct.imageUrl;
         const imageTitle = data.myProduct.title;
         const imageMedium = data.myProduct.medium;
@@ -82,7 +84,7 @@ async function makeFetchSynchronous() {
         map.set("inventory", getElement(".inventory-data"));
 
 
-        likeOrNotDesign(cookieNum2, popup_not_liked_heart, popup_liked_heart,  map, popup_element_sold);
+        likeOrNotDesign(cookieNum2, popup_not_liked_heart, popup_liked_heart, map, popup_element_sold);
         //
         cartAddRemoveDesign(cookieNum2, popup_cart_remove, popup_cart_add, map, popup_element_sold, popup_purchase, 'display');
         navigateArtwork("#next", "#previous");
@@ -181,13 +183,11 @@ makeFetchSynchronous().then((data) => {
                     });
                     alert(error);
                 }
-            ).finally(() => loader.remove())
-            ;
+            ).finally(() => loader.remove());
         }
     });
 
 });
-
 
 
 function myData() {
@@ -196,15 +196,14 @@ function myData() {
     getElement("#form-review").onsubmit = (event) => {
 
         event.preventDefault();
-        let  imageData = null;
+        let imageData = null;
         let imageName = null;
         if (window.uploadedFile) {
-            alert("yes")
-           imageData= window.uploadedFile.dataURL.split(",")[1];
-            imageName=window.uploadedFile.file.name;
+            imageData = window.uploadedFile.dataURL.split(",")[1];
+            imageName = window.uploadedFile.file.name;
         }
 
-        const rate =  getElement("#rate-num").value;
+        const rate = getElement("#rate-num").value;
         const headline = getElement("#headline").value;
         const comment = getElement("#comment").value;
         const productId = artworkID.substring(5);
@@ -219,13 +218,13 @@ function myData() {
         // console.log(artworkID)
         const loader = document.querySelector(".loading");
         loader.classList.remove("loading-checkout");
-        getElement(".while-waiting").style.display="none";
+        getElement(".while-waiting").style.display = "none";
         loader.classList.add("loader");
         fetch(`${apiBaseUrl}/product/review/save`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-IDENTIFIER': customerId.substring(customerId.length/2),
+                'X-IDENTIFIER': customerId.substring(customerId.length / 2),
                 //[csrfHeader]: csrfToken
                 'X-CSRF-TOKEN': document.querySelector(".csrf-token").value, //csrfToken,
 
@@ -327,12 +326,10 @@ async function displayReviews() {
 }
 
 
-
 function getRate() {
     const allStar = getAllElement(".star-blank");
     //console.log(allStar)
     let u = 0;
-
 
 
     for (let index = 0; index < allStar.length; index++) {
@@ -358,6 +355,7 @@ function getRate() {
     //return u;
 
 }
+
 // Function to handle file upload
 function handleFileUpload(event) {
     const file = event.target.files[0];
@@ -370,9 +368,9 @@ function handleFileUpload(event) {
 
         // Display image preview
         const reader = new FileReader();
-        reader.onload = function(e) {
-           // const preview = document.getElementById("imagePreview");
-          //  preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+        reader.onload = function (e) {
+            // const preview = document.getElementById("imagePreview");
+            //  preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
 
             // Store the data URL in the window.uploadedFile object
             window.uploadedFile.dataURL = e.target.result;
@@ -383,12 +381,11 @@ function handleFileUpload(event) {
 
 
 (function submitForm() {
-    getElement("#submit-review").onclick=()=>{
-        if(Number(getElement("#rate-num").value) <=0){
-            getElement(".start-rating-alert").style.display="block";
-        }
-        else{
-            getElement(".start-rating-alert").style.display="none";
+    getElement("#submit-review").onclick = () => {
+        if (Number(getElement("#rate-num").value) <= 0) {
+            getElement(".start-rating-alert").style.display = "block";
+        } else {
+            getElement(".start-rating-alert").style.display = "none";
         }
     }
     getRate();

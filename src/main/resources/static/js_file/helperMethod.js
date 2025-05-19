@@ -112,7 +112,9 @@ function removeItem(type, item_class, data) {
 
                     cartItem.remove();
                     if (getAllElement(`.${type}-list`).length<=1){
-                        location.reload();
+                        //location.reload();
+                        document.querySelector(`.empty-${type}-alert`).style.display="flex";
+                        document.querySelector(`.display-${type}-total-items`).style.display="none";
                     }
 
                 }

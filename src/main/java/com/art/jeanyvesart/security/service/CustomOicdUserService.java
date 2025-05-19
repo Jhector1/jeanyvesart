@@ -21,6 +21,7 @@ public class CustomOicdUserService extends OidcUserService {
 
     @Override
     public OidcUser loadUser(OidcUserRequest userRequest) {
+        System.out.println("Hello");
         OidcUser oAuth2User = super.loadUser(userRequest);
         log.info("response, {}", "Google try");
 

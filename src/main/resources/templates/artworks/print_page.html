@@ -8,17 +8,19 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Print | Jean Yves</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script th:src="@{/js_file/footer.js}" type="module" defer></script>
-    <script src="/js_file/loader.js" type="module" defer></script>
+<!--    <script th:src="@{/js_file/footer.js}" type="module" defer></script>-->
+<!--    <script src="/js_file/loader.js" type="module" defer></script>-->
     <!--  <script src="/js_file/artwork_header_tab.js" type="module" defer></script>-->
-    <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
+<!--      <link rel="stylesheet" href="/stylesheet/scss/styles.css" type="text/css">-->
+    <link rel="stylesheet" href="http://localhost:7272/product_generator.css" type="text/css">
+
 
     <style>
 
     </style>
 </head>
 <body>
-<article th:replace="~{productDisplayedTemplate.html :: product-template(category='Print')}"></article>
+<article th:replace="~{module/productDisplayedTemplate.html :: product-template(category='Print')}"></article>
 
 </body>
 </html>

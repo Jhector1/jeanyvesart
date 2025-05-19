@@ -18,11 +18,11 @@ public class Artwork extends MyProduct {
     public Artwork(long id,
                    String imageUrl,
                    String title,
-                   String price, String medium,String size,
-                   String description,    int quantity
-
-    ) {
-
+                   String price,
+                   String medium,
+                   String size,
+                   String description,
+                   int quantity) {
         super(id, imageUrl,
                 title,
                 price,
@@ -45,7 +45,7 @@ public class Artwork extends MyProduct {
                 price,
                 description,
                 quantity,
-                myReviews, medium, price
+                myReviews
         );
         this.medium = medium;
         this.size = size;

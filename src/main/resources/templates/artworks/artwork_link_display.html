@@ -34,8 +34,10 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Jean Yves Hector">
     <title>Artwork | Jean Yves</title>
-    <script src="/js_file/loader.js" type="module" defer></script>
-    <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost:7272/artwork_link_display.css" type="text/css">
+
+    <!--    <script src="/js_file/loader.js" type="module" defer></script>-->
+<!--    <link rel="stylesheet" href="/stylesheet/scss/styles.css" type="text/css">-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -44,17 +46,17 @@
     <link rel="manifest" href="/site.webmanifest">
 
     <title>Artwork | Jean Yves</title>
-    <script src="/js_file/footer.js" type="module" defer></script>
+<!--    <script src="/js_file/footer.js" type="module" defer></script>-->
     <script src="https://js.stripe.com/v3/"></script>
-    <script th:src="@{/js_file/artwork_link_display.js}" type="module" defer></script>
+    <script src="http://localhost:7272/artwork_link_display.bundle.js" type="module" defer></script>
 
 </head>
 <body>
 
 <header th:replace="~{header.html :: header-component}"></header>
-<div th:replace="~{dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>
+<div th:replace="~{module/dryTemplate.html :: spinner(message='One second...', dynamicClass='loader')}"></div>
 
-<div th:replace="~{dryTemplate.html :: spinner(message='Getting ready for checkout...', dynamicClass='loading-checkout')}"></div>
+<div th:replace="~{module/dryTemplate.html :: spinner(message='Getting ready for checkout...', dynamicClass='loading-checkout')}"></div>
 <input class="csrf-token" type="hidden"  th:value="${token}"/>
 
 <main style="position: static; background-color: white" class="artwork-details-info-popup">
@@ -83,7 +85,7 @@
                 </div>
             </div>
         </div>
-        <button id="next" class="btn btn-light fa-solid fa-chevron-right"></button>
+        <div id="next" class="btn btn-light fa-solid fa-chevron-right"></div>
 
     </article>
     <div class="artwork-purchase-and-review">
@@ -120,7 +122,6 @@
                         <button class="btn btn-light popup-cart popup-cart-add-action">Add to Cart</button>
                         <button class="btn btn-light popup-cart popup-cart-remove-action">Remove from Cart</button>
                         <button class="btn btn-light popup-sold-item">Sold</button>
-
                     </div>
                 </div>
             </div>
