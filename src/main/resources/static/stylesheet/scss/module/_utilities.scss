@@ -1,7 +1,11 @@
-
+@import "variables";
+@import "mixin";
 @import "mixins";
+@import "artwork_page_style";
+
 
 @import "header";
+@import "artwork_page_style";
 @import "authenticated/authenticated_nav";
 @import "social_media_link";
 
@@ -16,6 +20,7 @@
 
 //*************cart page design***********************
 @import "cart_page";
+
 
 @import "media_query";
 @import "about";

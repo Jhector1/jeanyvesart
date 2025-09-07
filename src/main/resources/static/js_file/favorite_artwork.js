@@ -133,7 +133,7 @@ offerForm.addEventListener('submit', async (event) => {
     setTimeout(() => {
         JsonRequest.post(`${apiBaseUrl}/sendemail`, {
             emailFrom: "jeanyveshector@gmail.com",
-            emailTo: "myart@jeanyveshector.com",
+            emailTo: getElement("#email").value,
             subject: "Offer for " + getElement(".offer-titre").innerHTML,
             message: "Client Email: " + getElement("#email").value
                 + "\nClient Phone Number: " + getElement("#phone-number").value

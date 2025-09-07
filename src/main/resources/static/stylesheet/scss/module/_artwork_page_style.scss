@@ -1,27 +1,4 @@
-//Mixins
-@mixin parent-arrow-state {
-  width: max-content;
-  position: sticky;
-  margin: auto;
-  z-index: 1;
 
-}
-@mixin arrow-hover {
-  cursor: pointer;
-  background-color: white;
-  color: $main-color;
-  box-shadow: $element-box-shadow;
-}
-@mixin arrow-state {
-  border: $border-less-opacity;
-  transition: -ms-scroll-snap-points-x 1s;
-
-  font-size: 3rem;
-  color: white;
-  transition: color ease-in 500ms;
-  padding: 1% 2%;
-  background-color: $main-color;
-}
 
 
 //--------------------------------------------------------------------------------
