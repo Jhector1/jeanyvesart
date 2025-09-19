@@ -1,0 +1,6 @@
+/* components/_popup_display.scss */
+.popup {
+  @extend %card;
+  position: fixed; inset: auto 1rem 1rem auto; width: min(420px, 92vw);
+  padding: 1rem; background: #fff;
+}

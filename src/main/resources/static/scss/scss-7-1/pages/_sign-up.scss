@@ -1,0 +1,8 @@
+/* pages/_sign-up.scss */
+.sign-up-in-body {
+  @include mask-background;
+  .sign-parent {
+    @include flex-display(flex-start, flex-start, 2rem);
+    width: 100vw; min-height: 100vh; padding: 2rem;
+  }
+}

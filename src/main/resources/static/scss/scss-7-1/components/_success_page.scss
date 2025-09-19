@@ -1,0 +1,6 @@
+/* components/_success_page.scss */
+.success-page {
+  @include flex-display(center, center, 1rem, wrap);
+  min-height: 60vh;
+  .card { @extend %card; padding: 1.5rem; }
+}

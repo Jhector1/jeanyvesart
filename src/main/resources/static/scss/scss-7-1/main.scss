@@ -1,0 +1,47 @@
+// abstracts
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'abstracts/placeholders';
+*{
+  border: red 1px solid;
+}
+// base
+//@import 'base/reset';
+//@import 'base/base';
+
+// layout
+//@import 'layout/header';
+//@import 'layout/footer';
+
+// components
+//@import 'components/popup_display';
+////@import 'components/popup_offer';
+//@import 'components/social_media_icon';
+//@import 'components/social_media_link';
+//@import 'components/success_page';
+
+// utilities
+//@import 'utilities/utilities';
+
+// pages
+@import 'pages/index_page_style';
+//@import 'pages/artwork_link_display';
+//@import 'pages/artwork_page_style';
+//@import 'pages/cart_page';
+//@import 'pages/message_contact_form';
+//@import 'pages/about';
+//@import 'pages/terms_and_service';
+//@import 'pages/reset_password';
+//@import 'pages/user_profile';
+//@import 'pages/sign-up';
+//@import 'pages/media_query';
+
+// vendors last
+/* in main.scss (or your bootstrap partials file) */
+
+@import "/Users/admin/IdeaProjects/jeanyveshectorversoriginal - Copy/node_modules/bootstrap/scss/carousel";
+
+@import "/Users/admin/IdeaProjects/jeanyveshectorversoriginal - Copy/node_modules/bootstrap/scss/transitions";
+
+
+@import url('vendors/bootstrap-utilities.css');

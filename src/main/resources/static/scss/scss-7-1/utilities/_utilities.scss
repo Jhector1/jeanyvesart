@@ -1,0 +1,6 @@
+/* utilities/_utilities.scss */
+.u-shadow   { box-shadow: $element-box-shadow; }
+.u-rounded  { border-radius: $radius-m; }
+.u-border   { border: $border-less-opacity; }
+.u-pill     { border-radius: 99899px; }
+.u-muted    { color: $color-text-muted; }

@@ -1,0 +1,16 @@
+/* pages/_about.scss */
+.about-content, .terms-and-service {
+  padding: 2rem 1.5rem;
+  margin: 1.5rem;
+  * {
+    color: $color-text-muted;
+    padding: .5rem;
+    line-height: 2rem;
+  }
+}
+.bio img {
+  width: 30rem; float: left; clear: bottom;
+  @include respond($max: 800px) {
+    width: 100%;
+  }
+}

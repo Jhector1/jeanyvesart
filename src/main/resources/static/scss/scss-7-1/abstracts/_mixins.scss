@@ -1,0 +1,77 @@
+// ===============================
+// abstracts/_mixins.scss
+// Global helpers/mixins to avoid repetition
+// ===============================
+
+// Flex helper (standardize API)
+// replaces legacy flex_display → flex-display
+@mixin flex-display($jc: flex-start, $ai: stretch, $gap: 0, $wrap: nowrap) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  gap: $gap;
+  flex-wrap: $wrap;
+}
+
+// Responsive helper
+@mixin respond($min: null, $max: null) {
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) { @content; }
+  } @else if $min != null {
+    @media (min-width: $min) { @content; }
+  } @else if $max != null {
+    @media (max-width: $max) { @content; }
+  } @else {
+    @content;
+  }
+}
+
+// Contact form design (fixes missing mixin in _message_contact_form.scss)
+@mixin contact-form-design($mode: static) {
+  @include flex-display(center, stretch, 1rem, wrap);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border: $border-less-opacity;
+  border-radius: $radius-m;
+  background: if($mode == static, #fff, rgba(255, 255, 255, .85));
+
+  .form-row { @include flex-display(space-between, stretch, 1rem, wrap); width: 100%; }
+  .form-field { flex: 1 1 300px; }
+  input, textarea, select {
+    width: 100%;
+    padding: .75rem 1rem;
+    border-radius: $radius-s;
+    border: 1px solid rgba(0,0,0,.12);
+    font-size: $fs-1;
+  }
+  button {
+    padding: .75rem 1.25rem;
+    border-radius: $radius-m;
+    border: none;
+    background: $color-primary;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+// Masked backdrop (fixes 'mask-background-mixin' naming)
+@mixin mask-background($color: rgba(0,0,0,.5), $blur: 5px) {
+  background-color: $color;
+  backdrop-filter: blur($blur);
+}
+
+// Arrow state demo (was referencing $border-less-opacity before it existed)
+@mixin arrow-state {
+  border: $border-less-opacity;
+  box-shadow: $element-box-shadow;
+  border-radius: $radius-m;
+}
+@mixin parent-arrow-state {
+  width: max-content;
+  position: sticky;
+  margin: auto;
+  z-index: 1;
+
+}

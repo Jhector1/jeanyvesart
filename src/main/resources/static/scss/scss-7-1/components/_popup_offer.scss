@@ -1,0 +1,13 @@
+/* components/_popup_offer.scss */
+.offer-overlay {
+  position: fixed; inset: 0; z-index: $z-modal;
+  @include mask-background(rgba(0,0,0,.45), 6px);
+  display: none;
+
+  &.open { display: block; }
+  .offer {
+    @extend %card;
+    max-width: 640px; margin: 10vh auto; padding: 1.5rem;
+    background: #fff;
+  }
+}

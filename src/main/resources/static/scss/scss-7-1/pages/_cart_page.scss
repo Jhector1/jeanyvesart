@@ -1,0 +1,6 @@
+/* pages/_cart_page.scss */
+.cart {
+  @include flex-display(space-between, flex-start, 2rem, wrap);
+  .items { flex: 2 1 520px; }
+  .summary { flex: 1 1 300px; position: sticky; top: 1rem; }
+}

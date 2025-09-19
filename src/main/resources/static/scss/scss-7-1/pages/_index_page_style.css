@@ -1,0 +1,32 @@
+/* pages/_index_page_style.scss */
+/* Example grid cards, mirror your existing structure */
+.more-design {
+  display: grid;
+  width: 100vw;
+  grid-template: repeat(2, 1fr)/repeat(3, 1fr);
+  place-items: center;
+  place-content: center;
+  background-color: white;
+  margin: 1rem auto; }
+
+.grid-image-items {
+  width: 30vw;
+  height: 30vw;
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  border: var(--border-less-opacity);
+  box-shadow: var(--element-box-shadow); }
+  .grid-image-items img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 300ms linear; }
+    .grid-image-items img:hover {
+      width: 120%; }
+
+/*# sourceMappingURL=_index_page_style.css.map */
