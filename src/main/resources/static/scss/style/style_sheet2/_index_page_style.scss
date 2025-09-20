@@ -239,3 +239,75 @@
   position: relative;
   overflow: hidden;
 }
+
+
+/* === home polish pack (non-breaking) — append at the end === */
+
+/* smoother hero entrance + GPU hint */
+.circular-design-model{
+  animation-fill-mode: both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* nicer easing for your slide animation */
+.circular-design-model-slide{
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* prettier dots */
+.tracer .locater{
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.2) inset, 0 2px 6px rgba(0,0,0,.2);
+}
+.tracer .locater:hover{ transform: scale(1.1); }
+
+/* circular cards: soften border + add subtle glow */
+.circular-img-wrapper{
+  border-color: rgba(0,128,0,.35);        /* keeps your green, just softer */
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  will-change: transform;
+  contain: layout paint;                   /* isolates hover effects */
+}
+.circular-img-wrapper img{
+  will-change: transform;
+  image-rendering: auto;
+  backface-visibility: hidden;
+}
+
+/* hover overlay: fade in smoothly (works with your display toggle) */
+.circular-img-wrapper:hover .circular-img-cover{
+  animation: coverFade .25s ease forwards;
+}
+@keyframes coverFade{ from{opacity:0} to{opacity:1} }
+
+/* grid section: spacing + soft lift on hover */
+.more-design{ gap: clamp(.75rem, 2vw, 1.25rem); }
+.grid-image-items{
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08), 0 2px 10px rgba(0,0,0,.06);
+  overflow: hidden;
+  will-change: transform;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.grid-image-items:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0,0,0,.12), 0 4px 14px rgba(0,0,0,.08);
+}
+.grid-image-items img{ will-change: transform; }
+
+/* quotes: nicer line-height + responsive size (replaces invalid max-font-size) */
+.quotes{
+  font-size: clamp(1rem, 4vw, 2rem);
+  line-height: 1.35;
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .circular-design-model,
+  .circular-design-model-slide,
+  .grid-image-items img{
+    animation: none !important;
+    transition: none !important;
+  }
+}

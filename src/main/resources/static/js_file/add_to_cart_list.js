@@ -1,102 +1,151 @@
-import {CookieClient} from "./allcookies.js";
+import { CookieClient } from "./allcookies.js";
 import {
     artwork_template_visitor_manager,
-    cartAddRemoveDesign, cartAddRemoveDesignIcon,
+    cartAddRemoveDesign,
+    cartAddRemoveDesignIcon,
     clearCookieBasket,
-
     getAllElement,
-    getElement, removeItem, slideNextPrevious, totalItemsPrice, visitArtwork,
+    getElement,
+    removeItem,
+    slideNextPrevious,
+    totalItemsPrice,
+    visitArtwork,
 } from "./helperMethod.js";
-import {checkCookie, deleteCookie} from "./anonymous_user_cookie.js";
-import {sharing} from "./social_media_share.js";
+import { checkCookie, deleteCookie } from "./anonymous_user_cookie.js";
+import { sharing } from "./social_media_share.js";
 
-(async () => {
-    const data = await new CookieClient().displayArtworkDataFromDB(".parent-cart-list", ".cart-list", ".cart-common-op", "cart");
-    removeItem("cart", ".remove-cart-item", data);
-    getElement(".clear-cart").onclick = () => {
-        if (confirm("This action will clear\nyour cart list"))
+/* --------------------------- tiny DOM/loader helpers --------------------------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-            clearCookieBasket("cart");
-    }
-    return data;
-})().then(data => {
-    const shareButton = getAllElement(".share-to-media");
-
-    let total = 0;
-    for (let price = 0; price < data.length; price++) {
-        total += Number(data[price].quantity) * Number(data[price].myProduct.price);
-        sharing(data[price].myProduct.title, data[price].myProduct.id, shareButton[price + 1]);
-    }
-    const total_item = getElement(".item-total");
-    total_item.innerHTML = `$${total}`;
-    CookieClient.displayDataLength(".cart-total-items", data);
-
-});
-function reloadLocationOnCardAdding(cart_remove, cart_add) {
-    for (let y = 0; y < cart_remove.length; y++) {
-        cart_remove[y].addEventListener('click', () => {
-            location.reload();
-        });
-        cart_add[y].addEventListener('click', () => {
-            location.reload();
-        });
-    }
+function showLoader(el) {
+    if (!el) return;
+    el.style.display = "flex";              // ensure visible even if CSS had display:none
+    el.classList.remove("loader--hidden");
+}
+function hideLoader(el) {
+    if (!el) return;
+    el.classList.add("loader--hidden");
+    el.addEventListener("transitionend", () => {
+        el.style.display = "none";
+    }, { once: true });
+}
+function hideAllLoaders() {
+    $$(".loader, .loading-checkout").forEach(hideLoader);
 }
 
-const stripe = Stripe(stripePublicKey);
+/* ------------------------------ main boot sequence ----------------------------- */
+(async function initCartPage() {
+    try {
+        // 1) Build the cart list from DB
+        const data = await new CookieClient().displayArtworkDataFromDB(
+            ".parent-cart-list",
+            ".cart-list",
+            ".cart-common-op",
+            "cart"
+        );
 
+        // 2) Attach remove-item handlers
+        removeItem("cart", ".remove-cart-item", data);
+
+        // 3) Clear Cart
+        const clearBtn = getElement(".clear-cart");
+        if (clearBtn) {
+            clearBtn.onclick = () => {
+                if (confirm("This action will clear\nyour cart list")) {
+                    clearCookieBasket("cart");
+                }
+            };
+        }
+
+        // 4) Totals + share buttons
+        let total = 0;
+        const shareButtons = getAllElement(".share-to-media"); // [0] may be a hidden template
+        for (let i = 0; i < data.length; i++) {
+            const row = data[i];
+            total += Number(row.quantity) * Number(row.myProduct.price);
+            if (shareButtons[i + 1]) {
+                sharing(row.myProduct.title, row.myProduct.id, shareButtons[i + 1]);
+            }
+        }
+        const totalEl = getElement(".item-total");
+        if (totalEl) totalEl.innerHTML = `$${total}`;
+        CookieClient.displayDataLength(".cart-total-items", data);
+
+        // 5) Extras on page
+        artwork_template_visitor_manager();
+        slideNextPrevious();
+    } catch (err) {
+        console.error(err);
+    } finally {
+        // Always hide any loader overlays after boot (success or fail)
+        hideAllLoaders();
+    }
+})();
+
+/* ------------------------------ stripe checkout ------------------------------ */
+// `stripePublicKey` is provided by the page (Thymeleaf inline script)
+let stripe = null;
+try {
+    if (typeof Stripe === "function" && typeof stripePublicKey === "string" && stripePublicKey) {
+        stripe = Stripe(stripePublicKey);
+    } else {
+        console.warn("Stripe not initialized: missing library or public key.");
+    }
+} catch (e) {
+    console.warn("Stripe initialization failed:", e);
+}
 
 const proceed_to_checkout = document.querySelector("#proceed-checkout-form");
-proceed_to_checkout.addEventListener('submit', async (event) => {
-    const loader = document.querySelector(".loading");
-    loader.classList.remove("loading-checkout");
-    loader.classList.add("loader");
-    event.preventDefault();
-    const customerId = checkCookie("user12345");
-    const response = await fetch(`${apiBaseUrl}/cart/artworks/${customerId}`);
-    const data = await response.json();
+if (proceed_to_checkout) {
+    proceed_to_checkout.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-    console.log(data);
-    fetch(`${apiBaseUrl}/cart/checkout/create-checkout-session`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            //'Content-Type': 'application/json' ,// Set the content type based on your API requirements
-            'X-IDENTIFIER': customerId.substring(customerId.length/2),
-            //[csrfHeader]: csrfToken
-            'X-CSRF-TOKEN': document.querySelector(".csrf-token").value, //csrfToken,
-        },
-        body: JSON.stringify({
-            cartProductList: data,
-            customerId: customerId,
+        // Show the dedicated checkout loader (fallback to global if needed)
+        const checkoutLoader = $(".loading-checkout") || $(".loader");
+        showLoader(checkoutLoader);
 
-        })
-    })
-        .then(function (response) {
-            console.log(response);
-            // console.log(response.text())
+        try {
+            if (!stripe) throw new Error("Payment is temporarily unavailable. Please try again later.");
 
-            if (!response.ok) {
-                throw new Error("Sorry something is wrong,please try again later");
-            }
-            return response.text();
-            // Handle the response from the server
-        }).then((sessionId) => {
+            const customerId = checkCookie("user12345");
 
-        stripe.redirectToCheckout({
-            sessionId: sessionId
-        });
+            const itemsRes = await fetch(`${apiBaseUrl}/cart/artworks/${customerId}`);
+            if (!itemsRes.ok) throw new Error("Unable to fetch cart items.");
+            const cartData = await itemsRes.json();
 
-    }).catch((error) => {
-            loader.classList.add("loader--hidden");
-
-            loader.addEventListener("transitionend", () => {
-                loader.remove()
+            const resp = await fetch(`${apiBaseUrl}/cart/checkout/create-checkout-session`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-IDENTIFIER": customerId.substring(customerId.length / 2),
+                    "X-CSRF-TOKEN": document.querySelector(".csrf-token").value,
+                },
+                body: JSON.stringify({ cartProductList: cartData, customerId }),
             });
+
+            if (!resp.ok) {
+                throw new Error("Sorry, something went wrong creating the checkout session. Please try again.");
+            }
+
+            const sessionId = await resp.text();
+
+            // Keep the loader visible while navigating to Stripe
+            const { error } = await stripe.redirectToCheckout({ sessionId });
+            if (error) throw error;
+        } catch (error) {
+            // Hide loader and report the error if anything fails
+            hideLoader(checkoutLoader);
             alert(error);
         }
-    ).finally(() => loader.remove())
-    ;
-});
-artwork_template_visitor_manager();
-slideNextPrevious();
+        // No finally: on success, we navigate away (we want loader to remain)
+    });
+}
+
+/* ------------------------------ optional helper ------------------------------ */
+function reloadLocationOnCardAdding(cart_remove, cart_add) {
+    for (let y = 0; y < cart_remove.length; y++) {
+        cart_remove[y].addEventListener("click", () => location.reload());
+        cart_add[y].addEventListener("click", () => location.reload());
+    }
+}

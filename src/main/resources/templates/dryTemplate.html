@@ -15,24 +15,29 @@
   <p style="color: red" class="quantity-error"></p>
 </section  >
 <section style="display: none" th:fragment="inventory-data"> <input type="hidden" class="inventory-data"/> </section>
-<div th:fragment="spinner(message, dynamicClass)" class="loading loader" th:class="'loading ' + ${dynamicClass}">
-    <div class="container mt-3">
+<th:block th:fragment="spinner (message, dynamicClass)">
+    <div class="loader-overlay"
+         th:classappend="' ' + ${dynamicClass}"
+         role="status"
+         aria-live="polite"
+         aria-busy="true">
+        <div class="loader-card">
+            <!-- Animated ring -->
+            <svg class="loader-ring" viewBox="0 0 50 50" aria-hidden="true">
+                <circle class="track" cx="25" cy="25" r="22"></circle>
+                <circle class="indicator" cx="25" cy="25" r="22"></circle>
+            </svg>
 
-        <div class="spinner-grow text-muted"></div>
-        <div class="spinner-grow text-primary"></div>
-        <div class="spinner-grow text-success"></div>
-        <div class="spinner-grow text-info"></div>
-        <div class="spinner-grow text-warning"></div>
-        <div class="spinner-grow text-danger"></div>
-        <div class="spinner-grow text-secondary"></div>
-        <div class="spinner-grow text-dark"></div>
-        <div class="spinner-grow text-light"></div>
+            <p class="loader-text" th:text="${message}">Loading…</p>
+
+            <!-- Subtle indeterminate bar -->
+            <div class="loader-bar" aria-hidden="true">
+                <div class="bar"></div>
+            </div>
+        </div>
     </div>
-<!--    <span th:if="${someVariable != null}" th:text="${someVariable}">Default Value</span>-->
-<!--    <span th:if="${someVariable == null}" th:text="'Default Value'">Default Value</span>-->
+</th:block>
 
-    <p th:text="${message}" class="while-waiting">One second...</p>
-</div>
 <div class="form-floating mb-3 mt-3"
      th:fragment="country-field(field_id)">
         <select class="form-select" name="country" th:id="${#strings.toLowerCase(field_id)}">

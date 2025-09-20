@@ -14,19 +14,27 @@
 <section th:fragment="contact-form" class="message-contact">
 
     <div class="loading loading-checkout">
-        <div class="container mt-3">
+        <div class="loader-overlay"
 
-            <div class="spinner-grow text-muted"></div>
-            <div class="spinner-grow text-primary"></div>
-            <div class="spinner-grow text-success"></div>
-            <div class="spinner-grow text-info"></div>
-            <div class="spinner-grow text-warning"></div>
-            <div class="spinner-grow text-danger"></div>
-            <div class="spinner-grow text-secondary"></div>
-            <div class="spinner-grow text-dark"></div>
-            <div class="spinner-grow text-light"></div>
+             role="status"
+             aria-live="polite"
+             aria-busy="true">
+            <div class="loader-card">
+                <!-- Animated ring -->
+                <svg class="loader-ring" viewBox="0 0 50 50" aria-hidden="true">
+                    <circle class="track" cx="25" cy="25" r="22"></circle>
+                    <circle class="indicator" cx="25" cy="25" r="22"></circle>
+                </svg>
+
+                <p class="loader-text" >Sending…</p>
+
+                <!-- Subtle indeterminate bar -->
+                <div class="loader-bar" aria-hidden="true">
+                    <div class="bar"></div>
+                </div>
+            </div>
         </div>
-        <p class="while-waiting">One second...</p>
+
     </div>
 
     <span id="message-cancel-button">&#x2715;</span>

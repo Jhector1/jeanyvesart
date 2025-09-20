@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACA,kCAAmC;EACjC,OAAO,EAAE,WAAW;EACpB,MAAM,EAAE,MAAM;EAEd,sCAAE;IAEA,KAAK,EAAE,OAAO;IACd,WAAW,EAAE,wBAAwB;IACrC,OAAO,EAAE,KAAK;IACd,WAAW,EAAE,MAAM;EAGnB,8CAAE;IAEA,eAAe,EAAE,MAAM;EAG7B,wCAAE;IACA,UAAU,EAAE,MAAM;EAElB,4CAAK;IACH,WAAW,EAAE,IAAI",
+"sources": ["_terms_and_service.scss"],
+"names": [],
+"file": "_terms_and_service.css"
+}

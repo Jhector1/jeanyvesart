@@ -1,5 +1,4 @@
 import {getAllElement, getElement} from "./helperMethod.js";
-
 class Footer extends HTMLElement {
     constructor() {
         super();

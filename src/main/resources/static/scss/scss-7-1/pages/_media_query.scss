@@ -1,5 +1,0 @@
-/* pages/_media_query.scss */
-.hero-title { font-size: $fs-175; }
-@include respond($max: 768px) {
-  .hero-title { font-size: $fs-125; }
-}

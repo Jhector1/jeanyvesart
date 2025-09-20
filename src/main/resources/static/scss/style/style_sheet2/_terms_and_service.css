@@ -1,0 +1,16 @@
+.about-content, .terms-and-service {
+  padding: 2rem 1.5rem;
+  margin: 1.5rem; }
+  .about-content *, .terms-and-service * {
+    color: #575757;
+    font-family: proxima-nova, sans-serif;
+    padding: .5rem;
+    line-height: 1.6rem; }
+  .about-content ul li, .terms-and-service ul li {
+    list-style-type: square; }
+  .about-content h1, .terms-and-service h1 {
+    text-align: center; }
+  .about-content span, .terms-and-service span {
+    font-weight: bold; }
+
+/*# sourceMappingURL=_terms_and_service.css.map */
