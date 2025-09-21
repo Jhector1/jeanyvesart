@@ -1,0 +1,145 @@
+@import "../style/style_sheet2/tokens";
+
+:root {
+  color-scheme: light dark;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-sans;
+  background: $bg;
+  color: $text;
+  line-height: 1.5;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.terms-and-service {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+h1 {
+  margin: 0 0 .75rem;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-weight: 700;
+}
+
+p { margin: 0 0 1rem; color: $muted; }
+
+.form {
+  margin-top: 1rem;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.field {
+  display: grid;
+  gap: .4rem;
+  margin-bottom: .9rem;
+
+  label {
+    font-size: .95rem;
+    color: $text;
+    font-weight: 600;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    width: 100%;
+    padding: .7rem .8rem;
+    border: 1px solid $border;
+    border-radius: .75rem;
+    background: #fff;
+    color: $text;
+    outline: none;
+    transition: border-color .15s $ease, box-shadow .15s $ease, transform .05s $ease;
+
+    &:focus {
+      border-color: darken($border, 10%);
+      box-shadow: 0 0 0 $ring rgba($accent, .18);
+    }
+
+    &:active { transform: translateY(0); }
+  }
+
+  &.checkbox {
+    label {
+      display: flex;
+      align-items: flex-start;
+      gap: .55rem;
+      font-weight: 500;
+      color: $text;
+
+      input[type="checkbox"] {
+        margin-top: .2rem;
+        inline-size: 1.05rem;
+        block-size: 1.05rem;
+        accent-color: $accent;
+      }
+    }
+  }
+
+  .error {
+    font-size: .85rem;
+    color: $error;
+  }
+}
+
+button[type="submit"] {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: .9rem;
+  padding: .7rem 1rem;
+  background: linear-gradient(135deg, $accent-deep, $accent);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .06s $ease, filter .2s $ease, box-shadow .2s $ease;
+  box-shadow: 0 6px 20px rgba(22,163,74,.25);
+
+  &:hover { filter: brightness(1.03); }
+  &:active { transform: translateY(1px); }
+  &:disabled { opacity: .6; cursor: not-allowed; }
+}
+
+#msg {
+  min-height: 1.25rem;
+  color: $muted;
+}
+
+@media (max-width: $bp-sm) {
+  .form { padding: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+@media (prefers-color-scheme: dark) {
+  html, body { background: #0b0e11; color: #e5e7eb; }
+  .form { background: #0f1317; border-color: rgba(255,255,255,.08); }
+  p { color: #9aa4af; }
+  input, select, textarea {
+    background: #11161b;
+    border-color: rgba(255,255,255,.08);
+    color: #e5e7eb;
+  }
+  button[type="submit"] {
+    box-shadow: 0 6px 20px rgba(22,163,74,.35);
+  }
+}

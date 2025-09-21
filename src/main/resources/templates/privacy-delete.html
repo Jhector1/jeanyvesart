@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Request Data Deletion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link th:href="@{/scss/stylesheet/privacy-delete.css}" rel="stylesheet">
+</head>
+<body>
+<main class="terms-and-service">
+  <h1>Request Deletion of Your Data</h1>
+  <p>Submit the form to request deletion of your account and personal data. We’ll email a confirmation link.</p>
+
+  <form id="delete-form" class="form" novalidate>
+    <div class="field">
+      <label>Email *</label>
+      <input type="email" name="email" required placeholder="you@example.com">
+    </div>
+    <div class="field">
+      <label>Full Name (optional)</label>
+      <input type="text" name="fullName" placeholder="John Doe">
+    </div>
+    <div class="field">
+      <label>Sign-in Provider (optional)</label>
+      <select name="provider">
+        <option value="" selected>— Select —</option>
+        <option>GOOGLE</option>
+        <option>FACEBOOK</option>
+        <option>APPLE</option>
+        <option>PASSWORD</option>
+        <option>OTHER</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Reason (optional)</label>
+      <textarea name="reason" rows="4" placeholder="Helpful details (e.g., order IDs)"></textarea>
+    </div>
+    <div class="field checkbox">
+      <label>
+        <input type="checkbox" name="confirm" required>
+        I confirm I want to delete my account and personal data associated with this email.
+      </label>
+    </div>
+
+    <button type="submit">Send Confirmation Email</button>
+
+    <p id="msg" style="margin-top:1rem;"></p>
+  </form>
+
+  <p style="margin-top:1rem;font-size:.9rem;">
+    Or email <a href="mailto:myart@jeanyveshector.com">myart@jeanyveshector.com</a> with subject “Data Deletion Request”.
+  </p>
+</main>
+
+<script>
+  // API base points to backend domain:
+  const API_BASE = 'http://localhost:9090';
+  // alert(API_BASE)
+
+  const form = document.getElementById('delete-form');
+  const msg  = document.getElementById('msg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.textContent = "";
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    data.confirm = !!data.confirm; // "on" -> true
+
+    try {
+      const res = await fetch(`${API_BASE}/api/privacy/delete`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        mode: 'cors'
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || `Error ${res.status}`);
+      }
+      const json = await res.json();
+      msg.textContent = `We sent a confirmation link to ${json.email || 'your email'}. Check your inbox.`;
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      msg.textContent = "Sorry, something went wrong. Please try again.";
+    }
+  });
+</script>
+</body>
+</html>

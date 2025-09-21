@@ -1,0 +1,25 @@
+// Color tokens
+$bg: #f6f7f9;
+$card: #ffffff;
+$text: #111;
+$muted: #6b7280;     // neutral-500
+$border: #e5e7eb;    // neutral-200
+$accent: #16a34a;    // green-600
+$accent-deep: #0a7b3e; // green-900
+$error: #dc2626;     // red-600
+
+// Typography
+$font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+
+// Spacing & radius
+$space: 1rem;
+$radius: 12px;
+$ring: 4px;
+$shadow: 0 8px 24px rgba(0,0,0,.06);
+
+// Media
+$bp-sm: 640px;
+$bp-md: 768px;
+
+// Transitions
+$ease: cubic-bezier(.2,.8,.2,1);

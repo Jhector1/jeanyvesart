@@ -1,0 +1,61 @@
+@import "../style/style_sheet2/tokens";
+
+:root { color-scheme: light dark; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-sans;
+  background: $bg;
+  color: $text;
+}
+
+.terms-and-service {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.card {
+  margin-top: 1rem;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+h1 {
+  margin: 0 0 .75rem;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+}
+
+p { margin: 0; color: $muted; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, $accent-deep, $accent);
+  box-shadow: 0 6px 18px rgba(22,163,74,.25);
+  margin-bottom: .75rem;
+
+  &::before {
+    content: "";
+    inline-size: .6rem;
+    block-size: .6rem;
+    border-radius: 50%;
+    background: #fff;
+    opacity: .85;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html, body { background: #0b0e11; color: #e5e7eb; }
+  .card { background: #0f1317; border-color: rgba(255,255,255,.08); }
+  p { color: #9aa4af; }
+}
