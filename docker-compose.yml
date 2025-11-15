@@ -1,0 +1,38 @@
+services:
+  client-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-client-app:latest
+    container_name: my-client-app
+    restart: unless-stopped
+    env_file:
+      - .env.client
+    environment:
+      # Port Spring Boot will listen on inside container
+      MY_CLIENT_PORT: 8081
+
+      # Stripe
+      STRIPE_PUBLIC_KEY: ${STRIPE_PUBLIC_KEY}
+      STRIPE_WEBHOOK_KEY: ${STRIPE_WEBHOOK_KEY}
+
+      # Google OAuth
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+
+      # Facebook OAuth
+      FACEBOOK_CLIENT_ID: ${FACEBOOK_CLIENT_ID}
+      FACEBOOK_CLIENT_SECRET: ${FACEBOOK_CLIENT_SECRET}
+
+      # URLs
+      CLIENT_BASE_URL: ${CLIENT_BASE_URL}
+      SERVER_BASE_URL: ${SERVER_BASE_URL}
+    networks:
+      - web
+    # Optional: for debugging directly
+    # ports:
+    #   - "8081:8081"
+
+networks:
+  web:
+    external: true   # same shared network you created with `docker network create web`
