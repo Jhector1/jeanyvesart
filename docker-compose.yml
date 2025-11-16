@@ -1,16 +1,16 @@
 services:
-  jeanyvesart:
+  jeanyvesart-app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: jeanyvesart:latest
-    container_name: jeanyvesart
+    image: jeanyvesart-app:latest
+    container_name: jeanyvesart-app
     restart: unless-stopped
     env_file:
       - .env
     environment:
       # Port Spring Boot will listen on inside container
-      MY_CLIENT_PORT: 8081
+      MY_CLIENT_PORT: 3001
 
       # Stripe
       STRIPE_PUBLIC_KEY: ${STRIPE_PUBLIC_KEY}
