@@ -1,13 +1,13 @@
 services:
-  client-app:
+  jeanyvesart:
     build:
       context: .
       dockerfile: Dockerfile
-    image: my-client-app:latest
-    container_name: my-client-app
+    image: jeanyvesart:latest
+    container_name: jeanyvesart
     restart: unless-stopped
     env_file:
-      - .env.client
+      - .env
     environment:
       # Port Spring Boot will listen on inside container
       MY_CLIENT_PORT: 8081
