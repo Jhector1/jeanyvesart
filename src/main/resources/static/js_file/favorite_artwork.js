@@ -117,81 +117,75 @@ import {JsonRequest} from "./json_request.js";
 });
 const offerForm = getElement(".offer-form");
 const loader = document.querySelector(".loading");
+const offerSubmitBtn = getElement("#offer-submit");
 
-offerForm.addEventListener('submit', async (event) => {
+const setOfferBusy = (busy) => {
+    offerForm.querySelectorAll("input, textarea, button, select").forEach(el => {
+        el.disabled = busy;
+    });
+
+    if (busy) {
+        offerSubmitBtn.classList.add("is-loading");
+        offerSubmitBtn.innerHTML =
+            `<span class="spinner-grow spinner-grow-sm" style="margin-right:8px"></span> Submitting…`;
+    } else {
+        offerSubmitBtn.classList.remove("is-loading");
+        offerSubmitBtn.textContent = "Submit your Offer";
+    }
+
+    if (loader) loader.classList.toggle("is-active", busy); // match the CSS from earlier
+};
+
+offerForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-    let textM = "submitting Your offer...";
 
-    getElement("#offer-submit").innerHTML = `<span style=" position: absolute; top:50%; right: 50%" class='spinner-grow spinner-grow-sm'></span> ${textM}`
-    getElement("#offer-submit").disabled = true;
-    getAllElement(".cancel").forEach(btn => btn.disabled = true);
-    loader.classList.remove("loading");
-    loader.classList.add("loader");
-    const customerId = getCookie("user12345");
-    setTimeout(() => {
-        JsonRequest.post(`${apiBaseUrl}/sendemail`, {
+    // ✅ Optional Turnstile token (recommended, see section below)
+    const turnstileToken =
+        document.querySelector('.offer-form input[name="cf-turnstile-response"]')?.value;
+
+    // If you add turnstile, enforce it:
+    // if (!turnstileToken) { alert("Complete security check."); return; }
+
+    if (offerSubmitBtn.disabled) return;
+
+    setOfferBusy(true);
+
+    try {
+        const response = await JsonRequest.post(`${apiBaseUrl}/sendemail`, {
             emailFrom: "jeanyveshector@gmail.com",
-            emailTo: "myart@jeanyveshector.com",
+            emailTo:getElement("#email").value,
             subject: "Offer for " + getElement(".offer-titre").innerHTML,
-            message: "Client Email: " + getElement("#email").value
-                + "\nClient Phone Number: " + getElement("#phone-number").value
-                + "\nClient offer: US$" + getElement("#offer").value
-                + "\nClient Message: " + getElement("#message-input").value
-                + "\n\n\nOffer Description:\n"
-                + "Title: " + getElement(".offer-titre").innerHTML
-                + "\nMedium: " + getElement(".offer-medium").innerHTML
-                + "\nSize: " + getElement(".offer-size").innerHTML
-                + "\nPrice: US$" + getElement(".offer-price").innerHTML
+            message:
+                "Client Email: " + getElement("#email").value +
+                "\nClient Phone Number: " + getElement("#phone-number").value +
+                "\nClient offer: US$" + getElement("#offer").value +
+                "\nClient Message: " + getElement("#message-input").value +
+                "\n\n\nOffer Description:\n" +
+                "Title: " + getElement(".offer-titre").innerHTML +
+                "\nMedium: " + getElement(".offer-medium").innerHTML +
+                "\nSize: " + getElement(".offer-size").innerHTML +
+                "\nPrice: US$" + getElement(".offer-price").innerHTML,
 
-        })
-            // fetch(`${apiBaseUrl}/sendemail`, {
-            //     method: 'POST',
-            //     headers: {
-            //         'X-IDENTIFIER': customerId.substring(customerId.length/2),
-            //         //[csrfHeader]: csrfToken
-            //         'X-CSRF-TOKEN': document.querySelector(".csrf-token").value, //csrfToken,
-            //
-            //     },
-            //     body: JSON.stringify({
-            //         emailFrom: "jeanyveshector@gmail.com",
-            //         emailTo: "Sygmalink@gmail.com",
-            //         subject: "Offer for " + getElement(".offer-titre").innerHTML,
-            //         message: "Client Email: " + getElement("#email").value
-            //             + "\nClient Phone Number: " + getElement("#phone-number").value
-            //             + "\nClient offer: US$" + getElement("#offer").value
-            //             + "\nClient Message: " + getElement("#message-input").value
-            //             + "\n\n\nOffer Description:\n"
-            //             + "Title: " + getElement(".offer-titre").innerHTML
-            //             + "\nMedium: " + getElement(".offer-medium").innerHTML
-            //             + "\nSize: " + getElement(".offer-size").innerHTML
-            //             + "\nPrice: US$" + getElement(".offer-price").innerHTML
-            //
-            //     })
-            // })
-            .then(function (response) {
+            // ✅ if your backend supports it
+            turnstileToken,
+        });
 
-                if (response.ok) {
-                    getElement(".mask-background").style.display = "none";
-                    alert("Your offer has been sent successfully, \nsomeone will contact you for negotiation");
-                } else {
-                    alert("Fail to send request, please try again")
-                }
-                console.log(response);
-            }).catch(error => alert("Fail to send request, please try again"))
-            .finally(final => {
-                    loader.classList.add("loader--hidden");
-                    loader.addEventListener("transitionend", () => {
-                        loader.remove();
-                    });
-                    textM = "Submit your Offer";
-                    getAllElement(".cancel").forEach(btn => btn.disabled = false);
-                    getElement("#offer-submit").disabled = false;
-                    getElement("#offer-submit").innerHTML = `${textM}`;
+        // reset Turnstile if present
+        if (window.turnstile) window.turnstile.reset();
 
-                    offerForm.reset();
-                }
-            )
-    }, 1000);
+        if (response.ok) {
+            getElement(".mask-background").style.display = "none";
+            offerForm.reset();
+            alert("Your offer has been sent successfully.");
+        } else {
+            alert("Failed to send offer. Please try again.");
+        }
+    } catch (e) {
+        if (window.turnstile) window.turnstile.reset();
+        alert("Failed to send request, please try again.");
+    } finally {
+        setOfferBusy(false);
+    }
 });
 
 

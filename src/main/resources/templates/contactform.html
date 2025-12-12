@@ -44,6 +44,8 @@
             email, as soon as I get your message. Thanks.
 
         </p></div>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
     <form id="email-form">
         <div class="first-last-parent">
             <div style="width: 100%" class="form-floating mb-3 mt-3">
@@ -77,18 +79,25 @@
         <!--        <label for="message-textarea">-->
         <!--            <div class="form-floating mb-3 mt-3">-->
         <!--                <textarea class="form-control" id="message-textarea" cols="43" rows="36" name="text"-->
-        <!--                          placeholder="Comment goes here"></textarea>-->
+        <!--      Ï                    placeholder="Comment goes here"></textarea>-->
         <!--                <label for="message-textarea">Comments</label>-->
         <!--            </div>-->
 
         <!--        </label>-->
 
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAACGL8ZCLdL7t-RSU"></div>
 
         <div class="submit-message-parent">
-            <input type="submit" id="submit-message" value="Send Message" class="btn btn-secondary btn-lg"></div>
+            <button type="submit" id="submit-message" class="btn btn-secondary btn-lg submit-btn">
+                <span class="btn-spinner" aria-hidden="true"></span>
+                <span class="btn-label">Send Message</span>
+            </button>
+        </div>
 
     </form>
 
 </section>
+
 </body>
+
 </html>

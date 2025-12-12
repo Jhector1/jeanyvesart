@@ -24,6 +24,7 @@
 <!--    <script src="/js_file/social_media_share.js" type="module" defer></script>-->
 
     <script th:src="@{/js_file/model/sendEmail.js}" type="module" defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 </head>
 <body>
@@ -96,7 +97,10 @@
                     <strong>Enter your message</strong>
                     <textarea rows="10" cols="30" id="message-input"></textarea>
                 </label>
+
                 <button class="btn btn-light" id="offer-submit" style="position:relative" type="submit">Submit your Offer</button>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAACGL8ZCLdL7t-RSU"></div>
+
             </aside>
         </div>
     </div>

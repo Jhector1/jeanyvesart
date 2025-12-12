@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @SessionAttributes({"enlightenment","green_energy", "jackets", "stripePublicKey", "renaissance", "little_black_angels", "healing_plants"})
 
-
+//773
 
 @RequestMapping("/artworks")
 public class ArtworkController {

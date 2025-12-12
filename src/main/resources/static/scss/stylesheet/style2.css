@@ -8749,6 +8749,75 @@ input[type=number] {
     right: 0;
     margin: 10% auto; } }
 
+/* --- Card look --- */
+#email-form.contact-card {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06); }
+
+/* Better spacing between groups */
+#email-form .mb-3,
+#email-form .mt-3 {
+  margin-top: 14px !important;
+  margin-bottom: 14px !important; }
+
+.first-last-parent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px; }
+
+@media (max-width: 640px) {
+  .first-last-parent {
+    grid-template-columns: 1fr; } }
+/* Inputs look nicer */
+#email-form .form-control,
+#email-form textarea,
+#email-form input[type="file"] {
+  border-radius: 12px; }
+
+/* Disabled state */
+#email-form :is(input, textarea, button, select):disabled {
+  opacity: .65;
+  cursor: not-allowed; }
+
+/* --- Submit button loading spinner --- */
+.submit-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative; }
+
+/* hidden by default */
+.submit-btn .btn-spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: spin .8s linear infinite; }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg); } }
+/* show spinner when loading */
+.submit-btn.is-loading .btn-spinner {
+  display: inline-block; }
+
+/* --- Your full-page overlay: keep it in DOM and toggle --- */
+.loading {
+  display: none;
+  /* hidden by default */ }
+
+.loading.is-active {
+  display: block; }
+
 .grand-parent-wishlist {
   display: flex;
   justify-content: space-evenly;
